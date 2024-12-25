@@ -1,18 +1,28 @@
 {
   "name": "assignment",
   "version": "1.0.0",
-  "description": "",
+  "description": "QA Automation ",
   "main": "index.js",
   "scripts": {
+    "test:addEmployee": "cucumber-js --tags '@AddEmployee'",
+    "test:searchEmployee": "cucumber-js --tags '@SearchEmployee'",
     "test": "cucumber-js test"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@cucumber/cucumber": "^11.1.0",
-    "@playwright/test": "^1.49.0",
+    "@cucumber/cucumber": "^11.1.1",
+    "@cucumber/messages": "^27.0.2",
+    "@playwright/test": "^1.49.1",
     "@types/node": "^22.10.1",
-    "ts-node": "^10.9.2"
+    "cucumber-html-reporter": "^6.0.0",
+    "dotenv": "^16.4.7",
+    "playwright": "^1.49.1",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.7.2"
+  },
+  "dependencies": {
+    "install": "^0.13.0"
   }
 }
