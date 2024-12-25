@@ -19,10 +19,10 @@ Before(async function () {
   console.log('User is logged in');
 });
 
-// After(async function () {
-//   await page.close();
-//   await bCtx.close();
-//   await browser.close();
-// });
+After(async function () {
+  await page.close();
+  await bCtx.close();
+  await browser.close();
+});
 
 export { page };
