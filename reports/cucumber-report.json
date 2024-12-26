@@ -1,0 +1,142 @@
+[
+  {
+    "description": "  As an admin user\n  User wants to search for a candidate in the recruitment system\n  So that the user can view candidate details and confirm their status",
+    "elements": [
+      {
+        "description": "",
+        "id": "search-candidate;successfully-searching-for-a-candidate",
+        "keyword": "Scenario",
+        "line": 10,
+        "name": "Successfully searching for a candidate",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 6871703099
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 8,
+            "name": "User navigates to the \"Recruitment\" module",
+            "match": {
+              "location": "src\\tests\\ui-tests\\steps\\searchCandidate.ts:9"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1783006099
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 11,
+            "name": "User select \"-- Select --\" from the \"Job Title\" dropdown",
+            "match": {
+              "location": "src\\tests\\ui-tests\\steps\\searchCandidate.ts:17"
+            },
+            "result": {
+              "status": "failed",
+              "duration": 30009844099,
+              "error_message": "locator.click: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('//label[text()=\"Job Title\"]/following-sibling::div//div[@class=\"oxd-select-text\"]')\u001b[22m\n\n    at RecruitmentModule.selectDropdownOption (D:\\Erandhi\\University Lectures\\L04S01\\IS 3440 [IT Quality Assuarance]\\IS3440_GroupAssignment\\Repo\\ITQA-Group-14\\src\\tests\\ui-tests\\pages\\recruitmentmodule.ts:18:27)\n    at World.<anonymous> (D:\\Erandhi\\University Lectures\\L04S01\\IS 3440 [IT Quality Assuarance]\\IS3440_GroupAssignment\\Repo\\ITQA-Group-14\\src\\tests\\ui-tests\\steps\\searchCandidate.ts:20:29)"
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 12,
+            "name": "User select \"Payroll Administrator\" from the \"Vacancy\" dropdown",
+            "match": {
+              "location": "src\\tests\\ui-tests\\steps\\searchCandidate.ts:17"
+            },
+            "result": {
+              "status": "skipped",
+              "duration": 0
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 13,
+            "name": "User select \"Dilshan Perera\" from the \"Hiring Manager\" dropdown",
+            "match": {
+              "location": "src\\tests\\ui-tests\\steps\\searchCandidate.ts:17"
+            },
+            "result": {
+              "status": "skipped",
+              "duration": 0
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 14,
+            "name": "User select \"Application Initiated\" from the \"Status\" dropdown",
+            "match": {
+              "location": "src\\tests\\ui-tests\\steps\\searchCandidate.ts:17"
+            },
+            "result": {
+              "status": "skipped",
+              "duration": 0
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 15,
+            "name": "User click on the Search button",
+            "match": {
+              "location": "src\\tests\\ui-tests\\steps\\searchCandidate.ts:24"
+            },
+            "result": {
+              "status": "skipped",
+              "duration": 0
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 16,
+            "name": "User should see the list of candidates matching the selected criteria",
+            "match": {
+              "location": "src\\tests\\ui-tests\\steps\\searchCandidate.ts:28"
+            },
+            "result": {
+              "status": "skipped",
+              "duration": 0
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 419460399
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@SearchCandidate",
+            "line": 1
+          }
+        ],
+        "type": "scenario"
+      }
+    ],
+    "id": "search-candidate",
+    "line": 2,
+    "keyword": "Feature",
+    "name": "Search Candidate",
+    "tags": [
+      {
+        "name": "@SearchCandidate",
+        "line": 1
+      }
+    ],
+    "uri": "src\\tests\\ui-tests\\features\\searchCandidate.feature"
+  }
+]

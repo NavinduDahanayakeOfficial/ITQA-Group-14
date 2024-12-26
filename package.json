@@ -7,7 +7,8 @@
     "test": "cucumber-js",
     "test:addEmployee": "cucumber-js --tags '@AddEmployee'",
     "test:searchEmployee": "cucumber-js --tags '@SearchEmployee'",
-    "test:deleteEmployee": "cucumber-js --tags '@DeleteEmployee'"
+    "test:deleteEmployee": "cucumber-js --tags '@DeleteEmployee'",
+    "test:searchCandidate": "cucumber-js --tags '@SearchCandidate'"
   },
   "keywords": [],
   "author": "",

@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<testsuite name="Cucumber" time="39.119" tests="1" skipped="0" failures="1" errors="0">
+  <testcase classname="Search Candidate" name="Successfully searching for a candidate" time="39.094">
+    <failure type="TimeoutError" message="locator.click: Timeout 30000ms exceeded.&#xA;Call log:&#xA;[2m  - waiting for locator('//label[text()=&quot;Job Title&quot;]/following-sibling::div//div[@class=&quot;oxd-select-text&quot;]')[22m&#xA;"><![CDATA[    at RecruitmentModule.selectDropdownOption (D:\Erandhi\University Lectures\L04S01\IS 3440 [IT Quality Assuarance]\IS3440_GroupAssignment\Repo\ITQA-Group-14\src\tests\ui-tests\pages\recruitmentmodule.ts:18:27)
+    at World.<anonymous> (D:\Erandhi\University Lectures\L04S01\IS 3440 [IT Quality Assuarance]\IS3440_GroupAssignment\Repo\ITQA-Group-14\src\tests\ui-tests\steps\searchCandidate.ts:20:29)]]></failure>
+    <system-out><![CDATA[Given User navigates to the "Recruitment" module............................passed
+When User select "-- Select --" from the "Job Title" dropdown...............failed
+And User select "Payroll Administrator" from the "Vacancy" dropdown.........skipped
+And User select "Dilshan Perera" from the "Hiring Manager" dropdown.........skipped
+And User select "Application Initiated" from the "Status" dropdown..........skipped
+And User click on the Search button.........................................skipped
+Then User should see the list of candidates matching the selected criteria..skipped]]></system-out>
+  </testcase>
+</testsuite>
