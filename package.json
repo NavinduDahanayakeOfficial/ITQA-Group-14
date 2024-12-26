@@ -4,9 +4,10 @@
   "description": "QA Automation ",
   "main": "index.js",
   "scripts": {
+    "test": "cucumber-js",
     "test:addEmployee": "cucumber-js --tags '@AddEmployee'",
     "test:searchEmployee": "cucumber-js --tags '@SearchEmployee'",
-    "test": "cucumber-js test"
+    "test:deleteEmployee": "cucumber-js --tags '@DeleteEmployee'"
   },
   "keywords": [],
   "author": "",

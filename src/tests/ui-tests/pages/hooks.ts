@@ -1,6 +1,7 @@
 import { Before, After, setDefaultTimeout } from '@cucumber/cucumber';
 import { Browser, BrowserContext, chromium, Page } from 'playwright';
 import { LoginPage } from './login';
+import { Logger } from '../utils/logger';
 
 let browser: Browser;
 let bCtx: BrowserContext;
@@ -13,10 +14,9 @@ Before(async function () {
   bCtx = await browser.newContext({ viewport: null, javaScriptEnabled: true });
   page = await bCtx.newPage();
 
-  // Perform login once for all scenarios
   const loginpage = new LoginPage(page);
   await loginpage.Login();
-  console.log('User is logged in');
+  Logger.info('User is logged in');
 });
 
 After(async function () {

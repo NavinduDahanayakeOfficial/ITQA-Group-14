@@ -12,5 +12,5 @@ Feature: Add New Employee
     And User fills in the employee details
     And User clicks Save button
     And User should see the employee profile
-    Then User get the success toast message
+    Then Verifies the employee profile is correct
 

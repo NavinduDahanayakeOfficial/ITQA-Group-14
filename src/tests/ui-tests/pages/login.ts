@@ -1,31 +1,28 @@
 import { Locator, Page} from 'playwright';
+import { BasePage } from './base.page';
+import { config } from '../utils/env';
+import { Logger } from '../utils/logger';
+export class LoginPage extends BasePage {
 
-export class LoginPage {
-
-  readonly page: Page;
-  readonly userName: Locator;
-  readonly password: Locator;
-  readonly loginBtn: Locator;
+  private readonly userName: Locator;
+  private readonly password: Locator;
+  private readonly loginBtn: Locator;
 
   constructor(page: Page) {
-    this.page = page;
+    super(page);
     this.userName = this.page.locator('//input[@name="username"]');
     this.password = this.page.locator('//input[@type="password"]');
     this.loginBtn = this.page.locator('//button[normalize-space()="Login"]');  }
 
-  async Login() {
-    await this.page.goto('https://opensource-demo.orangehrmlive.com/web/index.php/auth/login', { waitUntil: 'load' });
-    console.log('Navigated to the login page');
+  async Login(username = config.credentials.admin.username, password = config.credentials.admin.password) {
+    await this.page.goto(`${config.baseUrl}/auth/login`);
+    Logger.info('Navigated to the login page');
   
-    const userName = 'Admin';
-    const userPassword = 'admin123';
-  
-    await this.userName.fill(userName);
-    console.log('Entered Email');
-    await this.password.fill(userPassword);
-    console.log('Entered Password');
-    await this.loginBtn.click();
-    console.log('Clicked on Login Button');
+    await this.fill(this.userName, username, 'username');
+    Logger.info('Entered Email');
+    await this.fill(this.password, password, 'password');
+    Logger.info('Entered Password');
+    await this.click(this.loginBtn, 'login button');
   }
 }
 
