@@ -5,7 +5,7 @@ Feature: Search Employee
   So that user can view their details and confirm their existence
 
   Background:
-  Given User navigates to the "PIM" module
+    Given User navigates to the "PIM" module
 
   Scenario: Successfully searching for an employee
     Given User enters the employee name in the search field
