@@ -16,11 +16,11 @@ export class LeaveModule extends BasePage {
 
     // Locators for the leave module
     this.applyLeaveButton = this.page.locator('//a[normalize-space()="Apply"]');
-    this.leaveTypeDropdown = this.page.locator('//div[contains(@class, "oxd-select-wrapper")]'); // Replace with the correct path
-    this.fromDateField = this.page.locator('(//div[contains(@class, "oxd-date-input")]//input)[1]'); // Replace with the correct path
-    this.toDateField = this.page.locator('(//div[contains(@class, "oxd-date-input")]//input)[2]'); // Replace with the correct path
-    this.commentsField = this.page.locator('//textarea[contains(@class, "oxd-textarea")]'); // Replace with the correct path
-    this.applyButton = this.page.locator('//button[normalize-space()="Apply"]'); // Replace with the correct path
+    this.leaveTypeDropdown = this.page.locator('//div[contains(@class, "oxd-select-wrapper")]');
+    this.fromDateField = this.page.locator('(//div[contains(@class, "oxd-date-input")]//input)[1]');
+    this.toDateField = this.page.locator('(//div[contains(@class, "oxd-date-input")]//input)[2]');
+    this.commentsField = this.page.locator('//textarea[contains(@class, "oxd-textarea")]');
+    this.applyButton = this.page.locator('//button[normalize-space()="Apply"]');
   }
 
   // Navigate to the Leave module
@@ -34,13 +34,12 @@ export class LeaveModule extends BasePage {
     await this.click(this.applyLeaveButton, "Apply Leave button");
   }
 
-  // Fill leave details
   // Select an option from a dropdown
   async selectDropdown() {
     await this.click(this.leaveTypeDropdown, "Leave Type dropdown");
-    await this.page.waitForSelector('.oxd-select-dropdown .oxd-select-option', { state: 'visible' });
+    await this.page.waitForSelector(".oxd-select-dropdown .oxd-select-option", { state: "visible" });
     await this.page.waitForTimeout(1000);
-    await this.page.locator('.oxd-select-dropdown .oxd-select-option').nth(1).click();
+    await this.page.locator(".oxd-select-dropdown .oxd-select-option").nth(1).click();
   }
 
   async selectFromDate(date: string) {
@@ -64,5 +63,4 @@ export class LeaveModule extends BasePage {
   async clickApplyButton() {
     await this.click(this.applyButton, "Apply button");
   }
-
 }
