@@ -1,59 +1,98 @@
 [
   {
-    "description": "  As an admin user\n  User wants to search for a candidate in the recruitment system\n  So that the user can view candidate details and confirm their status",
+    "description": "  As an admin user\n  User want to add a new employee to the system\n  So that their profile is stored and displayed correctly",
     "elements": [
       {
         "description": "",
-        "id": "search-candidate;successfully-searching-for-a-candidate",
+        "id": "add-new-employee;successfully-adding-a-new-employee",
         "keyword": "Scenario",
         "line": 10,
-        "name": "Successfully searching for a candidate",
+        "name": "Successfully adding a new employee",
         "steps": [
           {
             "keyword": "Before",
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 7270480800
+              "duration": 7495772900
             }
           },
           {
             "arguments": [],
             "keyword": "Given ",
             "line": 8,
-            "name": "User navigates to the \"Recruitment\" module",
+            "name": "User navigates to the \"PIM\" module",
             "match": {
-              "location": "src\\tests\\ui-tests\\steps\\searchCandidate.ts:9"
+              "location": "src\\tests\\ui-tests\\steps\\addNewEmployee.ts:11"
             },
             "result": {
               "status": "passed",
-              "duration": 2011323200
+              "duration": 1713649500
             }
           },
           {
             "arguments": [],
             "keyword": "When ",
             "line": 11,
-            "name": "User select a option from the Job Title dropdown",
+            "name": "User clicks on \"Add Employee\"",
             "match": {
-              "location": "src\\tests\\ui-tests\\steps\\searchCandidate.ts:17"
+              "location": "src\\tests\\ui-tests\\steps\\addNewEmployee.ts:16"
             },
             "result": {
               "status": "passed",
-              "duration": 958812399
+              "duration": 1166335600
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 12,
+            "name": "User fills in the employee details",
+            "match": {
+              "location": "src\\tests\\ui-tests\\steps\\addNewEmployee.ts:21"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 567214200
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 13,
+            "name": "User clicks Save button",
+            "match": {
+              "location": "src\\tests\\ui-tests\\steps\\addNewEmployee.ts:26"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 5065631999
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 14,
+            "name": "User should see the employee profile",
+            "match": {
+              "location": "src\\tests\\ui-tests\\steps\\addNewEmployee.ts:30"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 10057997900
             }
           },
           {
             "arguments": [],
             "keyword": "Then ",
-            "line": 16,
-            "name": "User should see the list of candidates matching the selected criteria",
+            "line": 15,
+            "name": "Verifies the employee profile is correct",
             "match": {
-              "location": "src\\tests\\ui-tests\\steps\\searchCandidate.ts:25"
+              "location": "src\\tests\\ui-tests\\steps\\addNewEmployee.ts:35"
             },
             "result": {
               "status": "passed",
-              "duration": 7026013799
+              "duration": 5033389899
             }
           },
           {
@@ -61,29 +100,29 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 926231800
+              "duration": 1021103699
             }
           }
         ],
         "tags": [
           {
-            "name": "@SearchCandidate",
+            "name": "@AddEmployee",
             "line": 1
           }
         ],
         "type": "scenario"
       }
     ],
-    "id": "search-candidate",
+    "id": "add-new-employee",
     "line": 2,
     "keyword": "Feature",
-    "name": "Search Candidate",
+    "name": "Add New Employee",
     "tags": [
       {
-        "name": "@SearchCandidate",
+        "name": "@AddEmployee",
         "line": 1
       }
     ],
-    "uri": "src\\tests\\ui-tests\\features\\searchCandidate.feature"
+    "uri": "src\\tests\\ui-tests\\features\\addNewEmployee.feature"
   }
 ]

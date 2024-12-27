@@ -1,8 +1,11 @@
 <?xml version="1.0"?>
-<testsuite name="Cucumber" time="18.223" tests="1" skipped="0" failures="0" errors="0">
-  <testcase classname="Search Candidate" name="Successfully searching for a candidate" time="18.202">
-    <system-out><![CDATA[Given User navigates to the "Recruitment" module............................passed
-When User select a option from the Job Title dropdown.......................passed
-Then User should see the list of candidates matching the selected criteria..passed]]></system-out>
+<testsuite name="Cucumber" time="32.158" tests="1" skipped="0" failures="0" errors="0">
+  <testcase classname="Add New Employee" name="Successfully adding a new employee" time="32.138">
+    <system-out><![CDATA[Given User navigates to the "PIM" module....................................passed
+When User clicks on "Add Employee"..........................................passed
+And User fills in the employee details......................................passed
+And User clicks Save button.................................................passed
+And User should see the employee profile....................................passed
+Then Verifies the employee profile is correct...............................passed]]></system-out>
   </testcase>
 </testsuite>
