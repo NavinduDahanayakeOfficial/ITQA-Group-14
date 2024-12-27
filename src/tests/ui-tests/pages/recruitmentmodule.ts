@@ -4,13 +4,9 @@ import { Logger } from "../utils/logger";
 
 export class RecruitmentModule extends BasePage {
   readonly jobTitleDropdown: Locator;
-  //   readonly vacancyDropDown: Locator;
-  //   readonly hiringManagerDropDown: Locator;
-  //   readonly statusDropdown: Locator;
-  //   readonly jobTitleOption: Locator;
-  //   readonly vacancy: Locator;
-  //   readonly hiringManager: Locator;
-  //   readonly status: Locator;
+  readonly vacancyDropdown: Locator;
+  readonly hiringManagerDropdown: Locator;
+  readonly statusDropdown: Locator;
   readonly searchBtn: Locator;
   readonly results: Locator;
   readonly addCandidate: Locator;
@@ -24,32 +20,20 @@ export class RecruitmentModule extends BasePage {
   constructor(page: Page) {
     super(page);
     this.jobTitleDropdown = this.page.locator(
-      '//*[@id="app"]/div[1]/div[2]/div[2]/div/div[1]/div[2]/form/div[1]/div/div[1]/div/div[2]/div/div/div[1]'
+      '(//div[contains(@class, "oxd-select-wrapper")])[1]'
     );
-    // this.jobTitleOption = this.page.locator(
-    //   '.oxd-select-dropdown.--position-bottom > div.oxd-select-option:nth-of-type(17) > span'
-    // );
-    // this.vacancyDropDown = this.page.locator(
-    //   "/html[1]/body[1]/div[1]/div[1]/div[2]/div[2]/div[1]/div[1]/div[2]/form[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[1]/div[1]/div[1]"
-    // );
-    // this.vacancy = this.page.locator(
-    //   '//div[@class="oxd-select-text-input"][normalize-space()="Payroll Administrator"]'
-    // );
-    // this.hiringManagerDropDown = this.page.locator(
-    //   "/html[1]/body[1]/div[1]/div[1]/div[2]/div[2]/div[1]/div[1]/div[2]/form[1]/div[1]/div[1]/div[3]/div[1]/div[2]/div[1]/div[1]/div[1]"
-    // );
-    // this.hiringManager = this.page.locator(
-    //   "/html[1]/body[1]/div[1]/div[1]/div[2]/div[2]/div[1]/div[1]/div[2]/form[1]/div[1]/div[1]/div[3]/div[1]/div[2]/div[1]/div[1]/div[1]"
-    // );
-    // this.statusDropdown = this.page.locator(
-    //   "/html[1]/body[1]/div[1]/div[1]/div[2]/div[2]/div[1]/div[1]/div[2]/form[1]/div[1]/div[1]/div[4]/div[1]/div[2]/div[1]/div[1]/div[1]"
-    // );
-    // this.status = this.page.locator(
-    //   "/html[1]/body[1]/div[1]/div[1]/div[2]/div[2]/div[1]/div[1]/div[2]/form[1]/div[1]/div[1]/div[4]/div[1]/div[2]/div[1]/div[1]/div[1]"
-    // );
+    this.vacancyDropdown = this.page.locator(
+      '(//div[contains(@class, "oxd-select-wrapper")])[2]'
+    );
+    this.hiringManagerDropdown = this.page.locator(
+      '(//div[contains(@class, "oxd-select-wrapper")])[3]'
+    );
+    this.statusDropdown = this.page.locator(
+      '(//div[contains(@class, "oxd-select-wrapper")])[4]'
+    );
     this.searchBtn = this.page.locator('//button[@type="submit"]');
     this.results = this.page.locator(
-      '//*[@id="app"]/div[1]/div[2]/div[2]/div/div[2]/div[3]/div'
+      '//*[@id="app"]/div[1]/div[2]/div[2]/div/div[2]/div[2]'
     );
     this.addCandidate = this.page.locator('//button[normalize-space()="Add"]');
     this.firstName = this.page.locator('//input[@placeholder="First Name"]');
@@ -65,12 +49,53 @@ export class RecruitmentModule extends BasePage {
       '//*[@id="app"]/div[1]/div[2]/div[2]/div[1]/form/div[1]/div[1]/div/div[2]/p'
     );
   }
+
   async selectJobTitle() {
-    // Open the Job Title dropdown
-    await this.jobTitleDropdown.click();
-    Logger.info("Drop down selected");
-    // Select the specific Job Title option
-    // await this.jobTitleOption.click();
+    await this.click(this.jobTitleDropdown, "Job Title Dropdown");
+    await this.page.waitForSelector(".oxd-select-dropdown .oxd-select-option", {
+      state: "visible",
+    });
+    await this.page.waitForTimeout(1000);
+    await this.page
+      .locator(".oxd-select-dropdown .oxd-select-option")
+      .nth(0)
+      .click();
+  }
+
+  async selectVacancy() {
+    await this.click(this.vacancyDropdown, "Vacancy Dropdown");
+    await this.page.waitForSelector(".oxd-select-dropdown .oxd-select-option", {
+      state: "visible",
+    });
+    await this.page.waitForTimeout(1000);
+    await this.page
+      .locator(".oxd-select-dropdown .oxd-select-option")
+      .nth(2)
+      .click();
+  }
+
+  async selectHiringManager() {
+    await this.click(this.hiringManagerDropdown, "Hiring Manager Dropdown");
+    await this.page.waitForSelector(".oxd-select-dropdown .oxd-select-option", {
+      state: "visible",
+    });
+    await this.page.waitForTimeout(1000);
+    await this.page
+      .locator(".oxd-select-dropdown .oxd-select-option")
+      .nth(3)
+      .click();
+  }
+
+  async selectStatus() {
+    await this.click(this.statusDropdown, "Status Dropdown");
+    await this.page.waitForSelector(".oxd-select-dropdown .oxd-select-option", {
+      state: "visible",
+    });
+    await this.page.waitForTimeout(1000);
+    await this.page
+      .locator(".oxd-select-dropdown .oxd-select-option")
+      .nth(1)
+      .click();
   }
 
   async clickSearchButton() {
@@ -83,25 +108,30 @@ export class RecruitmentModule extends BasePage {
   }
 
   async clickAddCandidate() {
-    await this.click(this.addCandidate, 'Add Candidate Button');
-}
+    await this.click(this.addCandidate, "Add Candidate Button");
+  }
 
-async fillCandidateDetails(fname: string, mname: string, lname: string, email: string) {
+  async fillCandidateDetails(
+    fname: string,
+    mname: string,
+    lname: string,
+    email: string
+  ) {
     await this.firstName.fill(fname);
-    await this.middletName.fill(mname); 
+    await this.middletName.fill(mname);
     await this.lastName.fill(lname);
     await this.email.fill(email);
   }
 
-async clickSaveButton() {
-   await this.page.waitForTimeout(5000);
-   await this.click(this.saveBtn, 'Save Button');
-}
+  async clickSaveButton() {
+    await this.page.waitForTimeout(5000);
+    await this.click(this.saveBtn, "Save Button");
+  }
 
-async getCandidateName() {
+  async getCandidateName() {
     await this.page.waitForTimeout(20000);
     const nameEmp = await this.candidateName.innerText();
-    Logger.info('Employee Name: ' + nameEmp);
+    Logger.info("Employee Name: " + nameEmp);
     return nameEmp;
-}
+  }
 }
