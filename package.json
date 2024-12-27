@@ -17,6 +17,7 @@
     "@cucumber/messages": "^27.0.2",
     "@playwright/test": "^1.49.1",
     "@types/node": "^22.10.1",
+    "allure-cucumberjs": "^3.0.7",
     "cucumber-html-reporter": "^6.0.0",
     "dotenv": "^16.4.7",
     "playwright": "^1.49.1",

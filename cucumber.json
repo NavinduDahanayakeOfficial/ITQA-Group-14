@@ -1,6 +1,7 @@
 {
     "default": {
         "formatOptions": {
+            "resultsDir": "allure-results",
             "snippetInterface": "async-await"
         },
         "paths": [
@@ -14,9 +15,8 @@
             "ts-node/register"
         ],
         "format": [
-            "json:./reports/cucumber-report.json",
-            "junit:./reports/cucumber-report.xml",
-            "html:./reports/cucumber-report.html"
+            "html:./reports/cucumber-report.html",
+            "allure-cucumberjs/reporter"
         ]
     }
 }
