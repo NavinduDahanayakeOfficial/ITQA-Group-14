@@ -15,7 +15,7 @@ export class HomePage extends BasePage {
     await this.click(this.pimModule, "PIM Module");
   }
 
-  async clickleaveModule() {
+  async clickLeaveModule() {
     await this.click(this.leaveModule, "Leave Module");
   }
 }

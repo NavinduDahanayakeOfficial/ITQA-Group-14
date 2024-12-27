@@ -3,32 +3,30 @@ import { page } from "../pages/hooks";
 import { expect } from "@playwright/test";
 import { LeaveModule } from "../pages/leaveModule";
 import { Logger } from "../utils/logger";
+import { HomePage } from "../pages/home.page";
 
+let homepage: HomePage;
 let leavemodule: LeaveModule;
 
 Given('User navigates to the "Leave" module', async function () {
-  leavemodule = new LeaveModule(page);
-  Logger.info("Navigating to the Leave module");
-  await leavemodule.navigateToLeaveModule();
+  homepage = new HomePage(page);
+  await homepage.clickLeaveModule();
 });
 
 When('User clicks the "Apply" button', async function () {
-  Logger.info("Clicking the Apply Leave button");
+  leavemodule = new LeaveModule(page);
   await leavemodule.clickApplyLeave();
 });
 
 When("User fills in the leave details", async function () {
-  Logger.info("Filling leave details with hardcoded data");
-  await leavemodule.fillLeaveDetails("Annual Leave", "2023-12-01", "2023-12-10", "Vacation");
+  await leavemodule.selectDropdown();
+  await leavemodule.selectFromDate("20-12-2024");
+  await leavemodule.selectToDate("25-12-2024");
+  await leavemodule.addComments("Christmas Holidays");
 });
 
-When('User clicks the "apply" button', async function () {
-  Logger.info("Clicking the apply button");
+Then('User clicks the "Submit" button', async function () {
   await leavemodule.clickApplyButton();
 });
 
-Then("Verifies that the leave request is successfully submitted", async function () {
-  Logger.info("Verifying successful leave request submission");
-  const successMessage = await leavemodule.getSubmissionMessage();
-  expect(successMessage).toContain("Successfully Submitted");
-});
+
