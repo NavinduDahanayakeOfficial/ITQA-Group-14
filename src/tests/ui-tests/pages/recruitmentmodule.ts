@@ -70,7 +70,7 @@ export class RecruitmentModule extends BasePage {
     await this.page.waitForTimeout(1000);
     await this.page
       .locator(".oxd-select-dropdown .oxd-select-option")
-      .nth(2)
+      .nth(3)
       .click();
   }
 
@@ -82,7 +82,7 @@ export class RecruitmentModule extends BasePage {
     await this.page.waitForTimeout(1000);
     await this.page
       .locator(".oxd-select-dropdown .oxd-select-option")
-      .nth(3)
+      .nth(1)
       .click();
   }
 

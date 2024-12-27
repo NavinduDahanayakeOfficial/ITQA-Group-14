@@ -2,6 +2,7 @@ import { Given, When, Then } from "@cucumber/cucumber";
 import { RecruitmentModule } from "../pages/recruitmentmodule";
 import { HomePage } from "../pages/home.page";
 import { page } from "../pages/hooks";
+import { Logger } from '../utils/logger';
 
 let recruitmentModule: RecruitmentModule;
 let homepage: HomePage;
@@ -35,6 +36,7 @@ When("User click on the Search button", async () => {
 Then(
   "User should see the list of candidates matching the selected criteria",
   async () => {
-    await recruitmentModule.getSearchResults();
+    const results = await recruitmentModule.getSearchResults();
+    Logger.info('Results: ' + results);
   }
 );

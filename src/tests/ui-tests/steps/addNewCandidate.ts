@@ -28,6 +28,6 @@ When('User clicks Save button to save candidate', async function () {
 });
 
 When('User should see the candidate profile', async function () {
-  await recruitmentModule.getCandidateName();
-  Logger.info('Candidate profile is displayed');
+  const candidateName = await recruitmentModule.getCandidateName();
+  Logger.info('Candidate profile is displayed: ' + candidateName);
 });
