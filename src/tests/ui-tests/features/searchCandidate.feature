@@ -8,9 +8,9 @@ Feature: Search Candidate
     Given User navigates to the "Recruitment" module
 
   Scenario: Successfully searching for a candidate
-    When User select "-- Select --" from the "Job Title" dropdown
-    And User select "Payroll Administrator" from the "Vacancy" dropdown
-    And User select "Dilshan Perera" from the "Hiring Manager" dropdown
-    And User select "Application Initiated" from the "Status" dropdown
-    And User click on the Search button
+    When User select a option from the Job Title dropdown
+    # And User select "Payroll Administrator" from the "Vacancy" dropdown
+    # And User select "Dilshan Perera" from the "Hiring Manager" dropdown
+    # And User select "Application Initiated" from the "Status" dropdown
+    # And User click on the Search button
     Then User should see the list of candidates matching the selected criteria

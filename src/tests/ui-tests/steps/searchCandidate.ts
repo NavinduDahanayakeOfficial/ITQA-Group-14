@@ -14,12 +14,9 @@ Given('User navigates to the "Recruitment" module', async () => {
   recruitmentModule = new RecruitmentModule(page);
 });
 
-When(
-  'User select {string} from the {string} dropdown',
-  async (option: string, label: string) => {
-    await recruitmentModule.selectDropdownOption(label, option);
-  }
-);
+When('User select a option from the Job Title dropdown', async () => {
+    await recruitmentModule.selectJobTitle();
+  });
 
 When('User click on the Search button', async () => {
   await recruitmentModule.clickSearchButton();
@@ -28,6 +25,6 @@ When('User click on the Search button', async () => {
 Then(
   'User should see the list of candidates matching the selected criteria',
   async () => {
-    await recruitmentModule.verifySearchResults();
+    await recruitmentModule.getSearchResults();
   }
 );

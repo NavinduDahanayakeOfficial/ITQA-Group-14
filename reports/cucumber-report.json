@@ -14,7 +14,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 6871703099
+              "duration": 7270480800
             }
           },
           {
@@ -27,73 +27,20 @@
             },
             "result": {
               "status": "passed",
-              "duration": 1783006099
+              "duration": 2011323200
             }
           },
           {
             "arguments": [],
             "keyword": "When ",
             "line": 11,
-            "name": "User select \"-- Select --\" from the \"Job Title\" dropdown",
+            "name": "User select a option from the Job Title dropdown",
             "match": {
               "location": "src\\tests\\ui-tests\\steps\\searchCandidate.ts:17"
             },
             "result": {
-              "status": "failed",
-              "duration": 30009844099,
-              "error_message": "locator.click: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('//label[text()=\"Job Title\"]/following-sibling::div//div[@class=\"oxd-select-text\"]')\u001b[22m\n\n    at RecruitmentModule.selectDropdownOption (D:\\Erandhi\\University Lectures\\L04S01\\IS 3440 [IT Quality Assuarance]\\IS3440_GroupAssignment\\Repo\\ITQA-Group-14\\src\\tests\\ui-tests\\pages\\recruitmentmodule.ts:18:27)\n    at World.<anonymous> (D:\\Erandhi\\University Lectures\\L04S01\\IS 3440 [IT Quality Assuarance]\\IS3440_GroupAssignment\\Repo\\ITQA-Group-14\\src\\tests\\ui-tests\\steps\\searchCandidate.ts:20:29)"
-            }
-          },
-          {
-            "arguments": [],
-            "keyword": "And ",
-            "line": 12,
-            "name": "User select \"Payroll Administrator\" from the \"Vacancy\" dropdown",
-            "match": {
-              "location": "src\\tests\\ui-tests\\steps\\searchCandidate.ts:17"
-            },
-            "result": {
-              "status": "skipped",
-              "duration": 0
-            }
-          },
-          {
-            "arguments": [],
-            "keyword": "And ",
-            "line": 13,
-            "name": "User select \"Dilshan Perera\" from the \"Hiring Manager\" dropdown",
-            "match": {
-              "location": "src\\tests\\ui-tests\\steps\\searchCandidate.ts:17"
-            },
-            "result": {
-              "status": "skipped",
-              "duration": 0
-            }
-          },
-          {
-            "arguments": [],
-            "keyword": "And ",
-            "line": 14,
-            "name": "User select \"Application Initiated\" from the \"Status\" dropdown",
-            "match": {
-              "location": "src\\tests\\ui-tests\\steps\\searchCandidate.ts:17"
-            },
-            "result": {
-              "status": "skipped",
-              "duration": 0
-            }
-          },
-          {
-            "arguments": [],
-            "keyword": "And ",
-            "line": 15,
-            "name": "User click on the Search button",
-            "match": {
-              "location": "src\\tests\\ui-tests\\steps\\searchCandidate.ts:24"
-            },
-            "result": {
-              "status": "skipped",
-              "duration": 0
+              "status": "passed",
+              "duration": 958812399
             }
           },
           {
@@ -102,11 +49,11 @@
             "line": 16,
             "name": "User should see the list of candidates matching the selected criteria",
             "match": {
-              "location": "src\\tests\\ui-tests\\steps\\searchCandidate.ts:28"
+              "location": "src\\tests\\ui-tests\\steps\\searchCandidate.ts:25"
             },
             "result": {
-              "status": "skipped",
-              "duration": 0
+              "status": "passed",
+              "duration": 7026013799
             }
           },
           {
@@ -114,7 +61,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 419460399
+              "duration": 926231800
             }
           }
         ],
