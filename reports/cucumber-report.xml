@@ -1,11 +1,11 @@
 <?xml version="1.0"?>
-<testsuite name="Cucumber" time="32.045" tests="1" skipped="0" failures="0" errors="0">
-  <testcase classname="Add New Employee" name="Successfully adding a new employee" time="32.022">
+<testsuite name="Cucumber" time="34.642" tests="1" skipped="0" failures="0" errors="0">
+  <testcase classname="Delete Employee" name="Successfully deleting an employee" time="34.62">
     <system-out><![CDATA[Given User navigates to the "PIM" module....................................passed
-When User clicks on "Add Employee"..........................................passed
-And User fills in the employee details......................................passed
-And User clicks Save button.................................................passed
-And User should see the employee profile....................................passed
-Then Verifies the employee profile is correct...............................passed]]></system-out>
+And User enters the employee name in the search field.......................passed
+Then User clicks the "Search" button........................................passed
+Given User selects the employee from the search results.....................passed
+And User clicks the "Delete" button and confirms the deletion...............passed
+Then User should no longer see the employee profile in the search results...passed]]></system-out>
   </testcase>
 </testsuite>

@@ -1,20 +1,20 @@
 [
   {
-    "description": "  As an admin user\n  User want to add a new employee to the system\n  So that their profile is stored and displayed correctly",
+    "description": "  As an admin user\n  User wants to delete an employee from the system\n  So that the employee profile is removed successfully",
     "elements": [
       {
         "description": "",
-        "id": "add-new-employee;successfully-adding-a-new-employee",
+        "id": "delete-employee;successfully-deleting-an-employee",
         "keyword": "Scenario",
-        "line": 10,
-        "name": "Successfully adding a new employee",
+        "line": 12,
+        "name": "Successfully deleting an employee",
         "steps": [
           {
             "keyword": "Before",
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 6660022200
+              "duration": 6065295500
             }
           },
           {
@@ -27,72 +27,72 @@
             },
             "result": {
               "status": "passed",
-              "duration": 2483890100
-            }
-          },
-          {
-            "arguments": [],
-            "keyword": "When ",
-            "line": 11,
-            "name": "User clicks on \"Add Employee\"",
-            "match": {
-              "location": "src\\tests\\ui-tests\\steps\\addNewEmployee.ts:16"
-            },
-            "result": {
-              "status": "passed",
-              "duration": 1073114900
+              "duration": 1966263599
             }
           },
           {
             "arguments": [],
             "keyword": "And ",
-            "line": 12,
-            "name": "User fills in the employee details",
+            "line": 9,
+            "name": "User enters the employee name in the search field",
             "match": {
-              "location": "src\\tests\\ui-tests\\steps\\addNewEmployee.ts:21"
+              "location": "src\\tests\\ui-tests\\steps\\searchEmployee.ts:9"
             },
             "result": {
               "status": "passed",
-              "duration": 594867500
+              "duration": 476082499
             }
           },
           {
             "arguments": [],
-            "keyword": "And ",
+            "keyword": "Then ",
+            "line": 10,
+            "name": "User clicks the \"Search\" button",
+            "match": {
+              "location": "src\\tests\\ui-tests\\steps\\searchEmployee.ts:16"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 5072762599
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
             "line": 13,
-            "name": "User clicks Save button",
+            "name": "User selects the employee from the search results",
             "match": {
-              "location": "src\\tests\\ui-tests\\steps\\addNewEmployee.ts:26"
+              "location": "src\\tests\\ui-tests\\steps\\deleteEmployee.ts:9"
             },
             "result": {
               "status": "passed",
-              "duration": 5072699599
+              "duration": 5060912099
             }
           },
           {
             "arguments": [],
             "keyword": "And ",
             "line": 14,
-            "name": "User should see the employee profile",
+            "name": "User clicks the \"Delete\" button and confirms the deletion",
             "match": {
-              "location": "src\\tests\\ui-tests\\steps\\addNewEmployee.ts:30"
+              "location": "src\\tests\\ui-tests\\steps\\deleteEmployee.ts:14"
             },
             "result": {
               "status": "passed",
-              "duration": 10097907299
+              "duration": 10115557100
             }
           },
           {
             "arguments": [],
             "keyword": "Then ",
             "line": 15,
-            "name": "Verifies the employee profile is correct",
+            "name": "User should no longer see the employee profile in the search results",
             "match": {
-              "location": "src\\tests\\ui-tests\\steps\\addNewEmployee.ts:35"
+              "location": "src\\tests\\ui-tests\\steps\\deleteEmployee.ts:18"
             },
             "result": {
               "status": "passed",
-              "duration": 5036486000
+              "duration": 5021772399
             }
           },
           {
@@ -100,29 +100,29 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 987920900
+              "duration": 825716600
             }
           }
         ],
         "tags": [
           {
-            "name": "@AddEmployee",
+            "name": "@DeleteEmployee",
             "line": 1
           }
         ],
         "type": "scenario"
       }
     ],
-    "id": "add-new-employee",
+    "id": "delete-employee",
     "line": 2,
     "keyword": "Feature",
-    "name": "Add New Employee",
+    "name": "Delete Employee",
     "tags": [
       {
-        "name": "@AddEmployee",
+        "name": "@DeleteEmployee",
         "line": 1
       }
     ],
-    "uri": "src\\tests\\ui-tests\\features\\addNewEmployee.feature"
+    "uri": "src\\tests\\ui-tests\\features\\deleteEmployee.feature"
   }
 ]
