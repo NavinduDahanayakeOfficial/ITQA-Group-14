@@ -1,16 +1,21 @@
-import { Locator, Page} from 'playwright';
-import { BasePage } from './base.page';
+import { Locator, Page } from "playwright";
+import { BasePage } from "./base.page";
 
 export class HomePage extends BasePage {
+  readonly pimModule: Locator;
+  readonly leaveModule: Locator;
 
-    readonly pimModule: Locator;
+  constructor(page: Page) {
+    super(page);
+    this.pimModule = this.page.locator('//a[normalize-space()="PIM"]');
+    this.leaveModule = this.page.locator('//a[normalize-space()="Leave"]');
+  }
 
-    constructor(page: Page) {
-        super(page);
-        this.pimModule = this.page.locator('//a[normalize-space()="PIM"]');
-    }
+  async clickPimModule() {
+    await this.click(this.pimModule, "PIM Module");
+  }
 
-    async clickPimModule() {
-        await this.click(this.pimModule, 'PIM Module');
-    }
+  async clickleaveModule() {
+    await this.click(this.leaveModule, "Leave Module");
+  }
 }
