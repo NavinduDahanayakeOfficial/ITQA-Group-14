@@ -16,7 +16,7 @@ export class LeaveModule extends BasePage {
 
     // Locators for the leave module
     this.applyLeaveButton = this.page.locator('//a[normalize-space()="Apply"]');
-    this.leaveTypeDropdown = this.page.locator('.oxd-select-wrapper'); // Replace with the correct path
+    this.leaveTypeDropdown = this.page.locator('//div[contains(@class, "oxd-select-wrapper")]'); // Replace with the correct path
     this.fromDateField = this.page.locator('(//div[contains(@class, "oxd-date-input")]//input)[1]'); // Replace with the correct path
     this.toDateField = this.page.locator('(//div[contains(@class, "oxd-date-input")]//input)[2]'); // Replace with the correct path
     this.commentsField = this.page.locator('//textarea[contains(@class, "oxd-textarea")]'); // Replace with the correct path
