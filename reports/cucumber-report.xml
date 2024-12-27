@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
-<testsuite name="Cucumber" time="32.158" tests="1" skipped="0" failures="0" errors="0">
-  <testcase classname="Add New Employee" name="Successfully adding a new employee" time="32.138">
+<testsuite name="Cucumber" time="32.045" tests="1" skipped="0" failures="0" errors="0">
+  <testcase classname="Add New Employee" name="Successfully adding a new employee" time="32.022">
     <system-out><![CDATA[Given User navigates to the "PIM" module....................................passed
 When User clicks on "Add Employee"..........................................passed
 And User fills in the employee details......................................passed
