@@ -10,7 +10,7 @@
         ],
         "dryRun": false,
         "require": [
-            "src/tests/ui-tests/steps/**/.ts",
+            "src/tests/ui-tests/steps/**/*.ts",
             "src/tests/api-tests/steps/**/*.ts"
         ],
         "requireModule": [
