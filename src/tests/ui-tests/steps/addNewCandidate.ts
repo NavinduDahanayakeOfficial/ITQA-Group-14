@@ -1,17 +1,9 @@
 import { Given, When, Then } from '@cucumber/cucumber';
 import { page } from '../pages/hooks';
-import { expect } from '@playwright/test';
-import { HomePage } from '../pages/home.page';
 import { RecruitmentModule } from '../pages/recruitmentmodule';
 import { Logger } from '../utils/logger';
 
-let homepage: HomePage;
 let recruitmentModule: RecruitmentModule;
-
-// Given('User navigates to the "PIM" module', async function () {
-//   homepage = new HomePage(page);
-//   await homepage.clickPimModule();
-// });
 
 When('User clicks on "Add" button', async function () {
     recruitmentModule = new RecruitmentModule(page);

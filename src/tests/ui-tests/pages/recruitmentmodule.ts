@@ -7,15 +7,18 @@ export class RecruitmentModule extends BasePage {
   readonly vacancyDropdown: Locator;
   readonly hiringManagerDropdown: Locator;
   readonly statusDropdown: Locator;
-  readonly searchBtn: Locator;
+  readonly searchButton: Locator;
   readonly results: Locator;
   readonly addCandidate: Locator;
   readonly firstName: Locator;
   readonly middletName: Locator;
   readonly email: Locator;
   readonly lastName: Locator;
-  readonly saveBtn: Locator;
+  readonly saveButton: Locator;
   readonly candidateName: Locator;
+  readonly deleteButton: Locator;
+  readonly confirmButton: Locator;
+  readonly successMessage: Locator;
 
   constructor(page: Page) {
     super(page);
@@ -31,7 +34,7 @@ export class RecruitmentModule extends BasePage {
     this.statusDropdown = this.page.locator(
       '(//div[contains(@class, "oxd-select-wrapper")])[4]'
     );
-    this.searchBtn = this.page.locator('//button[@type="submit"]');
+    this.searchButton = this.page.locator('//button[@type="submit"]');
     this.results = this.page.locator(
       '//*[@id="app"]/div[1]/div[2]/div[2]/div/div[2]/div[2]'
     );
@@ -42,12 +45,19 @@ export class RecruitmentModule extends BasePage {
     this.email = this.page.locator(
       '//*[@id="app"]/div[1]/div[2]/div[2]/div/div/form/div[3]/div/div[1]/div/div[2]/input'
     );
-    this.saveBtn = this.page.locator(
+    this.saveButton = this.page.locator(
       '//button[@type="submit" and text()=" Save "]'
     );
     this.candidateName = this.page.locator(
       '//*[@id="app"]/div[1]/div[2]/div[2]/div[1]/form/div[1]/div[1]/div/div[2]/p'
     );
+    this.deleteButton = this.page.locator(
+      '//div[@role="table"]//div[1]//div[1]//div[7]//div[1]//button[2]//i[1]'
+    );
+    this.confirmButton = this.page.locator(
+      '//button[normalize-space()="Yes, Delete"]'
+    );
+    this.successMessage = this.page.locator('//p[@class="oxd-text oxd-text--p oxd-text--toast-message oxd-toast-content-text"]')
   }
 
   async selectJobTitle() {
@@ -100,7 +110,7 @@ export class RecruitmentModule extends BasePage {
 
   async clickSearchButton() {
     await this.page.waitForTimeout(5000);
-    await this.click(this.searchBtn, "Search button");
+    await this.click(this.searchButton, "Search Button");
   }
   async getSearchResults() {
     await this.page.waitForTimeout(7000);
@@ -125,13 +135,26 @@ export class RecruitmentModule extends BasePage {
 
   async clickSaveButton() {
     await this.page.waitForTimeout(5000);
-    await this.click(this.saveBtn, "Save Button");
+    await this.click(this.saveButton, "Save Button");
   }
 
   async getCandidateName() {
     await this.page.waitForTimeout(20000);
-    const nameEmp = await this.candidateName.innerText();
-    Logger.info("Employee Name: " + nameEmp);
-    return nameEmp;
+    const candidateName = await this.candidateName.innerText();
+    Logger.info("Employee Name: " + candidateName);
+    return candidateName;
+  }
+
+  async deleteCandidate() {
+    await this.page.waitForTimeout(5000);
+    await this.click(this.deleteButton, "Delete Button");
+    await this.page.waitForTimeout(5000);
+    await this.click(this.confirmButton, "Delete Confirmation Button");
+  }
+
+  async getSuccessMessage() {
+    const message = this.successMessage.textContent();
+    await this.page.waitForTimeout(5000);
+    return message;
   }
 }
