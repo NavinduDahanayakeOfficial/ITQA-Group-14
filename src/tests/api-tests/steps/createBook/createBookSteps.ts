@@ -15,6 +15,7 @@ When("I create a new book", async function () {
 });
 
 Then("the book should be created successfully", function () {
+   expect(response).toBeDefined();
    expect(response.status).toBe(201);
    expect(response.data).toHaveProperty("id");
    expect(response.data.title).toBe(bookDetails.title);
