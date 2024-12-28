@@ -17,9 +17,14 @@ When("I create a new book", async function () {
 Then("the book should be created successfully", function () {
    expect(response).toBeDefined();
    expect(response.status).toBe(201);
+
+   if(response.data){
    expect(response.data).toHaveProperty("id");
    expect(response.data.title).toBe(bookDetails.title);
    expect(response.data.author).toBe(bookDetails.author);
+   } else {
+      throw new Error("Response data is undefined");
+   }
 });
 
 Then("the book should not be created", async function () {
