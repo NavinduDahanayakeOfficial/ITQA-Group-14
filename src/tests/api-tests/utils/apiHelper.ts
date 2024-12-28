@@ -15,7 +15,7 @@ export class ApiHelper {
       const context = await request.newContext();
 
       try {
-         const response =  await context.get(`${this.baseUrl}${endpoint}`, {
+         const response = await context.get(`${this.baseUrl}${endpoint}`, {
             headers: {
                Authorization: this.authHeader,
             },
@@ -52,17 +52,19 @@ export class ApiHelper {
 
          const responseData = {
             status: response.status(),
-            data: await response.json(),
+            data:
+               response.status() === 201
+                  ? await response.json()
+                  : await response.text(),
          };
 
          return responseData;
       } catch (error: any) {
-         if (error.response) {
-            return {
-               status: error.response.status(),
-               error: await error.response.json(),
-            };
-         }
+         console.log("API Error:", error);
+         return {
+            status: error.response?.status(),
+            error: (await error.response?.text()) || error.message,
+         };
       } finally {
          await context.dispose();
       }
