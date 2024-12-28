@@ -31,7 +31,7 @@ export class ApiHelper {
       const context = await request.newContext();
 
       try {
-         const response =  await context.post(`${this.baseUrl}${endpoint}`, {
+         const response = await context.post(`${this.baseUrl}${endpoint}`, {
             headers: {
                Authorization: this.authHeader,
                "Content-Type": "application/json",
@@ -42,16 +42,65 @@ export class ApiHelper {
          const responseData = {
             status: response.status(),
             data: await response.json(),
-         }
+         };
 
          return responseData;
-
       } catch (error: any) {
-         if(error.response){
+         if (error.response) {
             return {
                status: error.response.status(),
                error: await error.response.json(),
-            }
+            };
+         }
+      } finally {
+         await context.dispose();
+      }
+   }
+
+   async put(endpoint: string, data: any) {
+      const context = await request.newContext();
+
+      try {
+         const response = await context.put(`${this.baseUrl}${endpoint}`, {
+            headers: {
+               Authorization: this.authHeader,
+               "Content-Type": "application/json",
+            },
+            data: data,
+         });
+
+         const responseData = {
+            status: response.status(),
+            data: await response.json(),
+         };
+
+         return responseData;
+      } catch (error: any) {
+         if (error.response) {
+            return {
+               status: error.response.status(),
+               error: await error.response.json(),
+            };
+         }
+      } finally {
+         await context.dispose();
+      }
+   }
+
+   async delete(endpoint: string) {
+      const context = await request.newContext();
+      try {
+         const response = await context.delete(`${this.baseUrl}${endpoint}`, {
+            headers: {
+               Authorization: this.authHeader,
+            },
+         });
+      } catch (error: any) {
+         if (error.response) {
+            return {
+               status: error.response.status(),
+               error: await error.response.json(),
+            };
          }
       } finally {
          await context.dispose();
