@@ -10,6 +10,7 @@ export class ClaimModule extends BasePage {
    readonly remarksField: Locator ;
    readonly currencyTypeDropdown: Locator;
    readonly claimSuccessMessage: Locator; 
+   readonly assignClaimButton: Locator;
 
 
    constructor(page: Page) {
@@ -19,13 +20,18 @@ export class ClaimModule extends BasePage {
     this.currencyTypeDropdown = this.page.locator('//*[@id="app"]/div[1]/div[2]/div[2]/div/div/form/div[1]/div/div[2]/div/div[2]/div/div');
     this.createButton = this.page.locator('//button[normalize-space()="Create"]');
     this.remarksField = this.page.locator('//*[@id="app"]/div[1]/div[2]/div[2]/div/div/form/div[2]/div/div/div/div[2]/textarea');
-    this.claimSuccessMessage = this.page.locator('//div[contains(@class, "success-message")]');  
+    this.claimSuccessMessage = this.page.locator('//div[contains(@class, "success-message")]'); 
+    this.assignClaimButton = this.page.locator('//a[normalize-space()="Assign Claim"]'); 
 
    }
 
    async clickSubmitClaim() {
       await this.click(this.submitClaimButton, "Submit Claim button");
    }
+
+   async clickAssignClaim() {
+    await this.click(this.assignClaimButton, "Assign Claim button");
+ }
 
    async selectEventDropdown() {
     Logger.info("Selecting Event Type dropdown");
