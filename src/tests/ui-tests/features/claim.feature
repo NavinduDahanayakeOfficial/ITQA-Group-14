@@ -9,3 +9,4 @@ Feature: Submit a claim
     When User clicks on "Submit Claim"
     When User fills in the Claim details
     Then User clicks the "Create" button
+    Then User verifies the claim submission success

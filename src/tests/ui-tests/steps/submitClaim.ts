@@ -3,6 +3,8 @@ import { page } from "../pages/hooks";
 import { HomePage } from "../pages/home.page";
 import { ClaimModule } from "../pages/claimmodule";
 import { Logger } from "../../../utils/logger";
+import { expect } from "@playwright/test";
+
 
 let homepage: HomePage;
 let claimmodule: ClaimModule;
@@ -27,8 +29,16 @@ When("User fills in the Claim details", async function () {
     Logger.info("Remarks added");
 });
 
-  
-  Then('User clicks the "Create" button', async function () {
+When('User clicks the "Create" button', async function () {
     Logger.info('Clicking the "Create" button');
     await claimmodule.clickCreateButton();
-  });
+    await page.waitForTimeout(2000);  
+ });
+
+  Then('User verifies the claim submission success', async function () {
+    Logger.info('Verifying claim submission success');
+    const successMessage = await claimmodule.verifyClaimSuccess();
+    Logger.info('Claim submission success message: ' + successMessage);
+    expect(successMessage).toContain('Claim successfully submitted');
+ });
+ 

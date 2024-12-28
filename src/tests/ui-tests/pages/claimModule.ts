@@ -9,6 +9,7 @@ export class ClaimModule extends BasePage {
    readonly createButton: Locator;
    readonly remarksField: Locator ;
    readonly currencyTypeDropdown: Locator;
+   readonly claimSuccessMessage: Locator; 
 
 
    constructor(page: Page) {
@@ -18,7 +19,7 @@ export class ClaimModule extends BasePage {
     this.currencyTypeDropdown = this.page.locator('//*[@id="app"]/div[1]/div[2]/div[2]/div/div/form/div[1]/div/div[2]/div/div[2]/div/div');
     this.createButton = this.page.locator('//button[normalize-space()="Create"]');
     this.remarksField = this.page.locator('//*[@id="app"]/div[1]/div[2]/div[2]/div/div/form/div[2]/div/div/div/div[2]/textarea');
-       
+    this.claimSuccessMessage = this.page.locator('//div[contains(@class, "success-message")]');  
 
    }
 
@@ -66,4 +67,15 @@ export class ClaimModule extends BasePage {
   async clickCreateButton() {
     await this.click(this.createButton, "Create button");
   }
+
+  async verifyClaimSuccess() {
+    await this.claimSuccessMessage.waitFor({ state: "visible", timeout: 5000 });
+    const successMessageText = await this.claimSuccessMessage.innerText();
+    Logger.info("Claim success message: " + successMessageText);
+    return successMessageText;
+ }
+ 
+ 
+
+
 }
