@@ -1,7 +1,7 @@
 import { Given, When, Then } from "@cucumber/cucumber";
 import { apiHelper } from "../common/authSteps";
 import { expect } from "playwright/test";
-import { Logger } from "../../../ui-tests/utils/logger";
+import { Logger } from "../../../../utils/logger";
 
 let response: any;
 
