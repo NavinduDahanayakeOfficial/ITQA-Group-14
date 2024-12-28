@@ -27,12 +27,11 @@ export class ApiHelper {
 
          return responseData;
       } catch (error: any) {
-         if (error.response) {
-            return {
-               status: error.response.status(),
-               error: await error.response.json(),
-            };
-         }
+        console.log("API Error:", error);
+        return {
+           status: error.response?.status(),
+           error: (await error.response?.text()) || error.message,
+        };
       } finally {
          await context.dispose();
       }
