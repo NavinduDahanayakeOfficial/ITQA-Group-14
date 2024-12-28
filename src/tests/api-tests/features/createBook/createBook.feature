@@ -9,9 +9,8 @@ Feature: Create a Book
     Given I have the following book details:
       | title   | author   |
       | <title> | <author> |
-    When I send a POST request to "/api/books"
-    Then the response status code should be 201
-    And the book should be created successfully
+    When I create a new book 
+    Then the book should be created successfully
 
     Examples:
       | userType | title | author  |
@@ -23,8 +22,8 @@ Feature: Create a Book
     Given I have the following book details:
       | title   | author   |
       | <title> | <author> |
-    When I send a POST request to "/api/books"
-    Then the response status code should be 400
+    When I create a new book
+    Then the book should not be created
 
     Examples:
       | title | author  |

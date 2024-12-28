@@ -3,31 +3,24 @@ import { Given, When, Then } from "@cucumber/cucumber";
 import { apiHelper } from "../common/authSteps";
 import { expect } from "playwright/test";
 
-
 let bookDetails: Book;
 let response: any;
-
 
 Given("I have the following book details:", function (dataTable) {
    bookDetails = dataTable.hashes()[0] as Book;
 });
 
-When("I send a POST request to {string}", async function (endpoint: string) {
-   response = await apiHelper.post(endpoint, bookDetails);
+When("I create a new book", async function () {
+   response = await apiHelper.post("/api/books", bookDetails);
 });
 
-Then("the response status code should be 201", async function(){
-    expect(response.status).toBe(201);
-})
-
-Then("the book should be created successfully", async function () {
-   const data = response.data;
-   expect(data).toHaveProperty("id");
-   expect(data.title).toBe(bookDetails.title);
-   expect(data.author).toBe(bookDetails.author);
+Then("the book should be created successfully", function () {
+   expect(response.status).toBe(201);
+   expect(response.data).toHaveProperty("id");
+   expect(response.data.title).toBe(bookDetails.title);
+   expect(response.data.author).toBe(bookDetails.author);
 });
 
-
-Then ("the response status code should be 400", async function(){
-    expect(response.status).toBe(400);
-})
+Then("the book should not be created", async function () {
+   expect(response.status).toBe(400);
+});
