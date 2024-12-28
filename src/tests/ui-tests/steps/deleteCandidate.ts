@@ -1,7 +1,7 @@
 import { Given, When, Then } from '@cucumber/cucumber';
 import { page } from '../pages/hooks';
 import { RecruitmentModule } from '../pages/recruitmentmodule';
-import { Logger } from '../utils/logger';
+import { Logger } from '../../../utils/logger';
 
 let recruitmentModule: RecruitmentModule;
 

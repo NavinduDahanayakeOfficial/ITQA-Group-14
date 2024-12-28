@@ -2,7 +2,7 @@ import { Given, When, Then } from "@cucumber/cucumber";
 import { RecruitmentModule } from "../pages/recruitmentmodule";
 import { HomePage } from "../pages/home.page";
 import { page } from "../pages/hooks";
-import { Logger } from '../utils/logger';
+import { Logger } from '../../../utils/logger';
 
 let recruitmentModule: RecruitmentModule;
 let homepage: HomePage;

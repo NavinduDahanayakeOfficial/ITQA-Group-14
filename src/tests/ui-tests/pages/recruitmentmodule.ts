@@ -1,6 +1,6 @@
 import { Locator, Page } from "playwright";
 import { BasePage } from "./base.page";
-import { Logger } from "../utils/logger";
+import { Logger } from "../../../utils/logger";
 
 export class RecruitmentModule extends BasePage {
   readonly jobTitleDropdown: Locator;
