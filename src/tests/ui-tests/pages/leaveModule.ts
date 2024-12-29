@@ -10,6 +10,9 @@ export class LeaveModule extends BasePage {
   readonly toDateField: Locator;
   readonly commentsField: Locator;
   readonly applyButton: Locator;
+  readonly employeeNameField: Locator;
+  readonly assignLeaveButton: Locator;
+  readonly assignButton: Locator;
 
   constructor(page: Page) {
     super(page);
@@ -21,6 +24,9 @@ export class LeaveModule extends BasePage {
     this.toDateField = this.page.locator('(//div[contains(@class, "oxd-date-input")]//input)[2]');
     this.commentsField = this.page.locator('//textarea[contains(@class, "oxd-textarea")]');
     this.applyButton = this.page.locator('//button[normalize-space()="Apply"]');
+    this.employeeNameField = page.locator("//input[@placeholder='Type for hints...']");
+    this.assignLeaveButton = page.locator('//a[normalize-space()="Assign Leave"]');
+    this.assignButton = page.locator("//button[@type='submit']");
   }
 
   // Navigate to the Leave module
@@ -62,5 +68,19 @@ export class LeaveModule extends BasePage {
   // Click the 'Apply' button
   async clickApplyButton() {
     await this.click(this.applyButton, "Apply button");
+  }
+  async enterEmployeeName(name: string) {
+    await this.page.waitForTimeout(2000);
+    await this.employeeNameField.fill(name);
+  }
+
+  async clickAssignLeave() {
+    await this.page.waitForTimeout(2000);
+    await this.assignLeaveButton.click();
+  }
+
+  async clickAssignButton() {
+    await this.page.waitForTimeout(2000);
+    await this.assignButton.click();
   }
 }

@@ -23,8 +23,8 @@ When('User clicks the "Apply" button', async function () {
 When("User fills in the leave details", async function () {
   Logger.info("Filling in the leave details");
   await leavemodule.selectDropdown();
-  await leavemodule.selectFromDate("20-12-2024");
-  await leavemodule.selectToDate("25-12-2024");
+  await leavemodule.selectFromDate("2024-20-12");
+  await leavemodule.selectToDate("2024-25-12");
   await leavemodule.addComments("Christmas Holidays");
 });
 
