@@ -8,12 +8,6 @@ import { HomePage } from "../pages/home.page";
 let homepage: HomePage;
 let leavemodule: LeaveModule;
 
-// Given('User navigates to the "Leave" module', async function () {
-//   Logger.info('Navigating to the "Leave" module');
-//   homepage = new HomePage(page);
-//   await homepage.clickLeaveModule();
-// });
-
 When('User clicks the "Assign Leave" button', async function () {
   Logger.info('Clicking the "Assign Leave" button');
   leavemodule = new LeaveModule(page);
