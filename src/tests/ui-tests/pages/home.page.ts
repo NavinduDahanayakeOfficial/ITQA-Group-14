@@ -5,12 +5,14 @@ export class HomePage extends BasePage {
 
     readonly pimModule: Locator;
     readonly claimModule: Locator;
+    readonly myInfoModule: Locator;
     readonly recruitModule: Locator;
 
     constructor(page: Page) {
         super(page);
         this.pimModule = this.page.locator('//a[normalize-space()="PIM"]');
         this.claimModule = this.page.locator('//a[normalize-space()="Claim"]');
+        this.myInfoModule = this.page.locator('//a[normalize-space()="My Info"]');
         this.recruitModule= this.page.locator('//a[normalize-space()="Recruitment"]');
     }
 
