@@ -1,17 +1,25 @@
 {
     "default": {
         "formatOptions": {
+            "resultsDir": "allure-results",
             "snippetInterface": "async-await"
         },
         "paths": [
-            "src/test/features/"
+            "src/tests/ui-tests/features/**/*.feature",
+            "src/tests/api-tests/features/**/*.feature"
         ],
-        "dryRun": true,
+        "dryRun": false,
         "require": [
-            "src/test/steps/**/*.ts"
+            "src/tests/ui-tests/steps/**/*.ts",
+            "src/tests/api-tests/steps/**/*.ts"
         ],
         "requireModule": [
             "ts-node/register"
+        ],
+        "format": [
+            "progress-bar",
+            "html:./reports/cucumber-report.html",
+            "allure-cucumberjs/reporter"
         ]
     }
 }
