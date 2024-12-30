@@ -5,10 +5,10 @@
   "main": "index.js",
   "scripts": {
     "test": "cucumber-js",
-    "test:addEmployee": "cucumber-js --tags '@AddEmployee'",
-    "test:searchEmployee": "cucumber-js --tags '@SearchEmployee'",
-    "test:deleteEmployee": "cucumber-js --tags '@DeleteEmployee'",
-    "test:fetchAllBooks": "cucumber-js --tags '@FetchAllBooks'"
+    "test:addEmployee": "cucumber-js --tags '@UI and @AddEmployee'",
+    "test:searchEmployee": "cucumber-js --tags '@UI and @SearchEmployee'",
+    "test:deleteEmployee": "cucumber-js --tags '@UI and @DeleteEmployee'",
+    "test:fetchAllBooks": "cucumber-js --tags '@API and @GetAllBooks'"
   },
   "keywords": [],
   "author": "",
