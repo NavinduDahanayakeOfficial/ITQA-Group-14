@@ -1,3 +1,4 @@
+@API
 @GetAllBooks
 Feature: Get All Books
   As a library user or admin
@@ -5,7 +6,7 @@ Feature: Get All Books
   So that I can view available books in the system
 
   Background:
-    Given I am authenticated as "admin"
+    Given I am authenticated as "user"
 
   Scenario: Successfully fetching the list of books
     When I fetch the list of books
