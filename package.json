@@ -8,7 +8,10 @@
     "test:addEmployee": "cucumber-js --tags '@AddEmployee'",
     "test:searchEmployee": "cucumber-js --tags '@SearchEmployee'",
     "test:deleteEmployee": "cucumber-js --tags '@DeleteEmployee'",
-    "test:addKPI": "cucumber-js --tags '@AddKPI'"
+    "test:addKPI": "cucumber-js --tags '@AddKPI'",
+    "test:deleteKPI": "cucumber-js --tags '@DeleteKPI'",
+    "test:cancelAddKPI": "cucumber-js --tags '@cancelAddKPI'"
+    
   },
   "keywords": [],
   "author": "",

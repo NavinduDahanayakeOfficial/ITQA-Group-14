@@ -11,6 +11,11 @@ export class PerfomanceModule extends BasePage {
     readonly jobTitleDropdown: Locator;
     readonly saveBtn: Locator;
     readonly kpiSection: Locator;
+    readonly kpifeatureBox: Locator;
+    readonly kpiDeleteBtn: Locator;
+    readonly deleteconfirmBtn: Locator;
+    readonly cancelBtn: Locator;
+    
 
     constructor(page: Page) {
         super(page);
@@ -22,6 +27,13 @@ export class PerfomanceModule extends BasePage {
         this.jobTitleDropdown = this.page.locator('//div[@class="oxd-select-text-input"]');
         this.saveBtn = this.page.locator('//button[@type="submit"]');
         this.kpiSection = this.page.locator('//h5[@class="oxd-text oxd-text--h5 oxd-table-filter-title"]');
+        this.kpifeatureBox = this.page.locator('//div[@role="table"]//div[1]//div[1]//div[1]//div[1]//div[1]//label[1]//span[1]//i[1]');
+        this.kpiDeleteBtn = this.page.locator('//div[@role="table"]//div[1]//div[1]//div[7]//div[1]//button[2]//i[1]');
+        this.deleteconfirmBtn = this.page.locator('//button[normalize-space()="Yes, Delete"]');
+        this.cancelBtn = this.page.locator('//button[normalize-space()="Cancel"]');
+        
+        
+
 
     }
 
@@ -55,5 +67,20 @@ async selectJobTitle() {
         await this.page.waitForTimeout(2000);
       return await this.kpiSection.innerText();
     }
+    async clickKPIFeatureBox() {
+        await this.click(this.kpifeatureBox, 'Select KPI feature');
+    }
 
+    async clickDeleteKPIBtn() {
+        await this.click(this.kpiDeleteBtn, 'Clicked Delete KPI Button');
+    }
+    async clickDeleteConfirmBtn() {
+        await this.click(this.deleteconfirmBtn, 'Clicked Delete Confirm Button');
+
+    }
+    async clickCancelBtn() {
+        await this.click(this.cancelBtn, 'Clicked Cancel Button');
+   
+
+    }
 }
