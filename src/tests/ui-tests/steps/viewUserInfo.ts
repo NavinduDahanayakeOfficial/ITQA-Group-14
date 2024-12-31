@@ -4,7 +4,7 @@ import {
    EmergencyContactsSection,
    MyInfoSideMenu,
    PersonalInfoSection,
-} from "./../pages/myInfoModule";
+} from "../pages/myInfoModule";
 import { Given, When, Then } from "@cucumber/cucumber";
 import { expect } from "@playwright/test";
 
@@ -54,8 +54,11 @@ Then(
       personalInfoSection = new PersonalInfoSection(page);
       const sectionHeader = await personalInfoSection.getSectionHeader();
       Logger.info("Section header is: " + sectionHeader);
+      const currentUrl = page.url();
+      Logger.info("Current URL: " + currentUrl);
 
       expect(sectionHeader).toBe("Personal Details");
+      expect(currentUrl).toContain("viewPersonalDetails");
    }
 );
 
@@ -66,29 +69,40 @@ When("User clicks on the {string} section", async function (section: string) {
 
 Then("User should see the {string} section", async function (section: string) {
    let sectionHeader;
+   let currentUrl = page.url();
+   Logger.info("Current URL: " + currentUrl);
    switch (section) {
       case "Personal Details":
-         personalInfoSection = new PersonalInfoSection(page);
-         sectionHeader = await personalInfoSection.getSectionHeader();
-         expect(sectionHeader).toBe("Personal Details");
+         expect(currentUrl).toContain("viewPersonalDetails");
          break;
       case "Contact Details":
-         contactDetailsSection = new ContactDetailsSection(page);
-         sectionHeader = await contactDetailsSection.getSectionHeader();
-         expect(sectionHeader).toBe("Contact Details");
+         expect(currentUrl).toContain("contactDetails");
          break;
       case "Emergency Contacts":
-         emergencyContactsSection = new EmergencyContactsSection(page);
-         sectionHeader = await emergencyContactsSection.getSectionHeader();
-         console.log("sectionHeader", sectionHeader);
-         expect(sectionHeader).toBe("Assigned Emergency Contacts");
+         expect(currentUrl).toContain("viewEmergencyContacts");
          break;
       case "Dependents":
-         dependentsSection = new DependentsSection(page);
-         sectionHeader = await dependentsSection.getSectionHeader();
-         expect(sectionHeader).toBe("Assigned Dependents");
+         expect(currentUrl).toContain("viewDependents");
+         break;
+      case "Immigration":
+         expect(currentUrl).toContain("viewImmigration");
+         break;
+      case "Job":
+         expect(currentUrl).toContain("viewJob");
+         break;
+      case "Salary":
+         expect(currentUrl).toContain("viewSalary");
+         break;
+      case "Report-to":
+         expect(currentUrl).toContain("viewReportToDetails");
+         break;
+      case "Qualifications":
+         expect(currentUrl).toContain("viewQualifications");
+         break;
+      case "Memberships":
+         expect(currentUrl).toContain("viewMemberships");
          break;
       default:
-         throw new Error(`Section ${section} not found`);
+         throw new Error(`Section ${section} not found in the switch case`);
    }
 });

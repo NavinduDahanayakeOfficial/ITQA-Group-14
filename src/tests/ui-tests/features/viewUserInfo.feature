@@ -21,5 +21,17 @@ Feature: View User Info
     Then User should see the "Emergency Contacts" section
     When User clicks on the "Dependents" section
     Then User should see the "Dependents" section
+    When User clicks on the "Immigration" section
+    Then User should see the "Immigration" section
+    When User clicks on the "Job" section
+    Then User should see the "Job" section
+    When User clicks on the "Salary" section
+    Then User should see the "Salary" section
+    When User clicks on the "Report-to" section
+    Then User should see the "Report-to" section
+    When User clicks on the "Qualifications" section
+    Then User should see the "Qualifications" section
+    When User clicks on the "Memberships" section
+    Then User should see the "Memberships" section
     When User clicks on the "Personal Details" section
     Then User should see the "Personal Details" section

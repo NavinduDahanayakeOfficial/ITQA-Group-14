@@ -43,29 +43,39 @@ export class MyInfoSideMenu extends BasePage {
       super(page);
       this.sections = {
          personaldetails: this.page.locator(
-            "//a[normalize-space()='Personal Details']"
+            "//a[normalize-space(text())='Personal Details']"
          ),
          contactdetails: this.page.locator(
-            "//a[normalize-space()='Contact Details']"
+            "//a[normalize-space(text())='Contact Details']"
          ),
          emergencycontacts: this.page.locator(
-            "//a[normalize-space()='Emergency Contacts']"
+            "//a[normalize-space(text())='Emergency Contacts']"
          ),
-         dependents: this.page.locator("//a[normalize-space()='Dependents']"),
-         immigration: this.page.locator("//a[normalize-space()='Immigration']"),
-         job: this.page.locator("//a[normalize-space()='Job']"),
-         salary: this.page.locator("//a[normalize-space()='Salary']"),
-         reportTo: this.page.locator("//a[normalize-space()='Report-to']"),
+         dependents: this.page.locator(
+            "//a[normalize-space(text())='Dependents']"
+         ),
+         immigration: this.page.locator(
+            "//a[normalize-space(text())='Immigration']"
+         ),
+         job: this.page.locator("//a[normalize-space(text())='Job']"),
+         salary: this.page.locator("//a[normalize-space(text())='Salary']"),
+         reportto: this.page.locator(
+            "//a[normalize-space(text())='Report-to']"
+         ),
          qualifications: this.page.locator(
-            "//a[normalize-space()='Qualifications']"
+            "//a[normalize-space(text())='Qualifications']"
          ),
-         memberships: this.page.locator("//a[normalize-space()='Memberships']"),
+         memberships: this.page.locator(
+            "//a[normalize-space(text())='Memberships']"
+         ),
       };
    }
 
    async goToSection(section: string) {
       const locator =
-         this.sections[section.trim().toLowerCase().replace(" ", "")];
+         this.sections[
+            section.trim().toLowerCase().replace(" ", "").replace("-", "")
+         ];
       if (locator) {
          await this.click(locator, section);
          Logger.info(`Navigated to the ${section} section`);
@@ -113,9 +123,12 @@ export class PersonalInfoSection extends BasePage {
          "(//input[@placeholder='yyyy-dd-mm'])[1]"
       );
 
-
-      this.nationalityDropDownBtn = page.locator("(//div[@class='oxd-select-wrapper'])[1]");
-      this.maritalStatusDropDownBtn = page.locator("(//div[@class='oxd-select-wra[[er'])[2]");
+      this.nationalityDropDownBtn = page.locator(
+         "(//div[@class='oxd-select-wrapper'])[1]"
+      );
+      this.maritalStatusDropDownBtn = page.locator(
+         "(//div[@class='oxd-select-wra[[er'])[2]"
+      );
 
       this.saveBtn = page.locator("(//button[@type='submit'])[1]");
    }
