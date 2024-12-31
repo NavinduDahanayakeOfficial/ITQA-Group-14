@@ -95,10 +95,11 @@ export class PersonalInfoSection extends BasePage {
    readonly otherId: Locator;
    readonly licenseNumber: Locator;
    readonly licenseExpiry: Locator;
-   // readonly nationality: Locator;
-   // readonly maritalStatus: Locator;
-   // readonly dateOfBirth: Locator;
-   // readonly gender: Locator;
+   readonly nationality: Locator;
+   readonly maritalStatus: Locator;
+   readonly dateOfBirth: Locator;
+   readonly genderMale: Locator;
+   readonly genderFemale: Locator;
 
    readonly nationalityDropDownBtn: Locator;
    readonly maritalStatusDropDownBtn: Locator;
@@ -117,11 +118,22 @@ export class PersonalInfoSection extends BasePage {
          "(//label[normalize-space(text())='Other Id']/following::input)[1]"
       );
       this.licenseNumber = page.locator(
-         "(//label[normalize-space(text())='Driver's License Number']/following::input)[1]"
+         "(//input[@class='oxd-input oxd-input--active'])[3]"
       );
       this.licenseExpiry = page.locator(
          "(//input[@placeholder='yyyy-dd-mm'])[1]"
       );
+      this.nationality = page.locator(
+         "(//div[@class='oxd-select-text-input'])[1]"
+      );
+      this.maritalStatus = page.locator(
+         "(//div[@class='oxd-select-text-input'])[2]"
+      );
+      this.dateOfBirth = page.locator(
+         "(//input[@placeholder='yyyy-dd-mm'])[2]"
+      );
+      this.genderMale = page.locator("(//input[@type='radio'])[1]");
+      this.genderFemale = page.locator("(//input[@type='radio'])[2]");
 
       this.nationalityDropDownBtn = page.locator(
          "(//div[@class='oxd-select-wrapper'])[1]"
@@ -138,6 +150,35 @@ export class PersonalInfoSection extends BasePage {
       const sectionHeader = await this.sectionHeader.innerText();
       Logger.info(`Section Header: ${sectionHeader}`);
       return sectionHeader;
+   }
+
+   async getPersonalInfo() {
+      await this.page.waitForSelector("//h6[text()='Personal Details']");
+      const firstName = await this.firstName.inputValue();
+      const middleName = await this.middleName.inputValue();
+      const lastName = await this.lastName.inputValue();
+      const employeeId = await this.employeeId.inputValue();
+      const otherId = await this.otherId.inputValue();
+      const licenseNumber = await this.licenseNumber.inputValue();
+      const licenseExpiry = await this.licenseExpiry.inputValue();
+      const nationality = await this.nationality.innerText();
+      const maritalStatus = await this.maritalStatus.innerText();
+      const dateOfBirth = await this.dateOfBirth.inputValue();
+      const gender = (await this.genderMale.isChecked()) ? "Male" : "Female";
+
+      return {
+         firstName,
+         middleName,
+         lastName,
+         employeeId,
+         otherId,
+         licenseNumber,
+         licenseExpiry,
+         nationality,
+         maritalStatus,
+         dateOfBirth,
+         gender,
+      };
    }
 }
 

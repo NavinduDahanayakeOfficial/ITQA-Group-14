@@ -106,3 +106,10 @@ Then("User should see the {string} section", async function (section: string) {
          throw new Error(`Section ${section} not found in the switch case`);
    }
 });
+
+Then("User should be able to view personal details", async function () {
+   console.log("User should be able to view personal details");
+   const personalInfo = await personalInfoSection.getPersonalInfo();
+   Logger.info("Personal Info: " + JSON.stringify(personalInfo));
+   expect(personalInfo).not.toBe(null);
+});

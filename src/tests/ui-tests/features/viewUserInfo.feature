@@ -11,6 +11,7 @@ Feature: View User Info
     Given User on the "My Info" page
     Then User should see the name and profile picture
     And User should be in the "Personal Details" section by default
+    And User should be able to view personal details
 
   Scenario: Successfully switching between sections
     Given User on the "My Info" page
