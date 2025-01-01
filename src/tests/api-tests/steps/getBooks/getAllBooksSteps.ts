@@ -24,5 +24,7 @@ Then("the API should return a list of books", function () {
          expect(book).toHaveProperty("title");
          expect(book).toHaveProperty("author");
       });
+   } else {
+      Logger.info("No books available in the response");
    }
 });

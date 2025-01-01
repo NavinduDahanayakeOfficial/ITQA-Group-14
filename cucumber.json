@@ -18,6 +18,7 @@
         ],
         "format": [
             "progress-bar",
+            "spec",
             "html:./reports/cucumber-report.html",
             "allure-cucumberjs/reporter"
         ]
