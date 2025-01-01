@@ -10,7 +10,7 @@ When('I have the following book ID: {int}', async function (id: number) {
    Logger.info("Request Sent");
 });
 
-Then('the book details should be not be displayed successfully with {int} status code', async function (status: number) {
+Then('the book details should be displayed successfully with {int} status code', async function (status: number) {
    expect(response.status).toBeDefined();
    Logger.info("Status code should be 200.");
    Logger.info("Status code: " + response.status);
