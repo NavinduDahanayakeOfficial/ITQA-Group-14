@@ -17,7 +17,8 @@
     "test:deleteCandidate": "cucumber-js --tags '@DeleteCandidate'",
     "test:addKPI": "cucumber-js --tags '@AddKPI'",
     "test:deleteKPI": "cucumber-js --tags '@DeleteKPI'",
-    "test:cancelAddKPI": "cucumber-js --tags '@cancelAddKPI'"
+    "test:cancelAddKPI": "cucumber-js --tags '@cancelAddKPI'",
+    "test:duplicateAndIdValidationSteps": "cucumber-js --tags '@API and @CreateBookAdditional'"
   },
   "keywords": [],
   "author": "",

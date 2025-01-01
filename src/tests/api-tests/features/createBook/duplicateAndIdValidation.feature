@@ -1,3 +1,4 @@
+@API
 @CreateBookAdditional
 Feature: Validate behavior for ID inclusion and duplicate entries
   As a library admin
