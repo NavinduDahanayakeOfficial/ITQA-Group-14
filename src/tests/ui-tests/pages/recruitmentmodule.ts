@@ -3,9 +3,6 @@ import { BasePage } from "./base.page";
 import { Logger } from "../../../utils/logger";
 
 export class RecruitmentModule extends BasePage {
-  readonly jobTitleDropdown: Locator;
-  readonly vacancyDropdown: Locator;
-  readonly hiringManagerDropdown: Locator;
   readonly statusDropdown: Locator;
   readonly searchButton: Locator;
   readonly results: Locator;
@@ -22,15 +19,6 @@ export class RecruitmentModule extends BasePage {
 
   constructor(page: Page) {
     super(page);
-    this.jobTitleDropdown = this.page.locator(
-      '(//div[contains(@class, "oxd-select-wrapper")])[1]'
-    );
-    this.vacancyDropdown = this.page.locator(
-      '(//div[contains(@class, "oxd-select-wrapper")])[2]'
-    );
-    this.hiringManagerDropdown = this.page.locator(
-      '(//div[contains(@class, "oxd-select-wrapper")])[3]'
-    );
     this.statusDropdown = this.page.locator(
       '(//div[contains(@class, "oxd-select-wrapper")])[4]'
     );
@@ -60,42 +48,6 @@ export class RecruitmentModule extends BasePage {
     this.successMessage = this.page.locator('//p[@class="oxd-text oxd-text--p oxd-text--toast-message oxd-toast-content-text"]')
   }
 
-  async selectJobTitle() {
-    await this.click(this.jobTitleDropdown, "Job Title Dropdown");
-    await this.page.waitForSelector(".oxd-select-dropdown .oxd-select-option", {
-      state: "visible",
-    });
-    await this.page.waitForTimeout(1000);
-    await this.page
-      .locator(".oxd-select-dropdown .oxd-select-option")
-      .nth(0)
-      .click();
-  }
-
-  async selectVacancy() {
-    await this.click(this.vacancyDropdown, "Vacancy Dropdown");
-    await this.page.waitForSelector(".oxd-select-dropdown .oxd-select-option", {
-      state: "visible",
-    });
-    await this.page.waitForTimeout(1000);
-    await this.page
-      .locator(".oxd-select-dropdown .oxd-select-option")
-      .nth(3)
-      .click();
-  }
-
-  async selectHiringManager() {
-    await this.click(this.hiringManagerDropdown, "Hiring Manager Dropdown");
-    await this.page.waitForSelector(".oxd-select-dropdown .oxd-select-option", {
-      state: "visible",
-    });
-    await this.page.waitForTimeout(1000);
-    await this.page
-      .locator(".oxd-select-dropdown .oxd-select-option")
-      .nth(1)
-      .click();
-  }
-
   async selectStatus() {
     await this.click(this.statusDropdown, "Status Dropdown");
     await this.page.waitForSelector(".oxd-select-dropdown .oxd-select-option", {
@@ -104,7 +56,7 @@ export class RecruitmentModule extends BasePage {
     await this.page.waitForTimeout(1000);
     await this.page
       .locator(".oxd-select-dropdown .oxd-select-option")
-      .nth(1)
+      .nth(2)
       .click();
   }
 
@@ -114,6 +66,7 @@ export class RecruitmentModule extends BasePage {
   }
   async getSearchResults() {
     await this.page.waitForTimeout(7000);
+    await this.results.scrollIntoViewIfNeeded();
     return await this.results.innerText();
   }
 
@@ -125,21 +78,26 @@ export class RecruitmentModule extends BasePage {
     fname: string,
     mname: string,
     lname: string,
-    email: string
+    email: string,
   ) {
     await this.firstName.fill(fname);
+    await this.page.waitForTimeout(2000);
     await this.middletName.fill(mname);
+    await this.page.waitForTimeout(2000);
     await this.lastName.fill(lname);
+    await this.page.waitForTimeout(2000);
     await this.email.fill(email);
+    await this.page.waitForTimeout(2000);
   }
 
   async clickSaveButton() {
     await this.page.waitForTimeout(5000);
+    await this.saveButton.scrollIntoViewIfNeeded();
     await this.click(this.saveButton, "Save Button");
   }
 
   async getCandidateName() {
-    await this.page.waitForTimeout(20000);
+    await this.page.waitForTimeout(10000);
     const candidateName = await this.candidateName.innerText();
     Logger.info("Employee Name: " + candidateName);
     return candidateName;
@@ -147,7 +105,11 @@ export class RecruitmentModule extends BasePage {
 
   async deleteCandidate() {
     await this.page.waitForTimeout(5000);
+    await this.deleteButton.scrollIntoViewIfNeeded();
     await this.click(this.deleteButton, "Delete Button");
+  }
+
+  async confirmDelete(){
     await this.page.waitForTimeout(5000);
     await this.click(this.confirmButton, "Delete Confirmation Button");
   }
