@@ -1,3 +1,4 @@
+@UI
 @AssignClaim
 Feature: Assign a claim
 

@@ -1,3 +1,4 @@
+@UI
 @SubmitClaim
 Feature: Submit a claim
 
