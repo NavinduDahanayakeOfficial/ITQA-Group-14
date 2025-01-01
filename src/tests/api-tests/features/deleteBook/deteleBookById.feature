@@ -1,4 +1,4 @@
-@Validate404NonExistentBook
+@DeleteBookById
 Feature: Validate 404 for Non-Existent Book ID
   As an admin
   I want to receive a 404 response when attempting to delete a non-existent book
