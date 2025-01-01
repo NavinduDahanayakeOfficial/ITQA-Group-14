@@ -28,8 +28,6 @@ export class ApiHelper {
             data: await response.json(),
          };
 
-         Logger.info(`Response Body: ${JSON.stringify(responseData.data, null, 2)}`);
-
          return responseData;
       } catch (error: any) {
          return {
@@ -102,7 +100,7 @@ export class ApiHelper {
          await context.dispose();
       }
    }
-
+   
    async delete(endpoint: string) {
       const context = await request.newContext();
 
@@ -113,11 +111,18 @@ export class ApiHelper {
                Authorization: this.authHeader,
             },
          });
+         const responseData = {
+            status: response.status(),
+            data: await response.json(),
+         };
+
+         return responseData;
       } catch (error: any) {
          return {
             status: response?.status(),
             error: await response?.text(),
          };
+
       } finally {
          await context.dispose();
       }

@@ -16,7 +16,8 @@
     "test:getBookByIdUser": "cucumber-js --tags '@API and @GetBookByID'",
     "test:addKPI": "cucumber-js --tags '@AddKPI'",
     "test:deleteKPI": "cucumber-js --tags '@DeleteKPI'",
-    "test:cancelAddKPI": "cucumber-js --tags '@cancelAddKPI'"
+    "test:cancelAddKPI": "cucumber-js --tags '@cancelAddKPI'",
+    "test:deleteBook": "cucumber-js --tags '@API and @DeleteBook'"
   },
   "keywords": [],
   "author": "",
