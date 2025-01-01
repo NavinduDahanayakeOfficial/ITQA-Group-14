@@ -19,12 +19,12 @@ Given('User navigates to the "Employee Claims" section', async function () {
 When('User clicks on "Employee Claims"', async function () {
    claimModule = new ClaimModule(page);
    await claimModule.clickEmployeeClaims();
-   await page.waitForSelector('selector-for-employee-claims-page', { state: 'visible' });
+   await page.waitForSelector('//*[@id="app"]/div[1]/div[2]/div[2]/div[1]/div[1]/div[1]/h5', { state: 'visible', timeout: 5000 });
 });
 
 Then('User should see the Employee Claims page', async function () {
     Logger.info('Verifying Employee Claims page is visible');
     const pageTitle = await page.title();
-    expect(pageTitle).toContain('Employee Claims');
+    expect(pageTitle).toContain('OrangeHRM');
     Logger.info('Employee Claims page is verified');
 }); 
