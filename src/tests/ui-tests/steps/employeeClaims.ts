@@ -42,8 +42,16 @@ Then('User should see the Employee Claims page', async function () {
 });
 
 Then('User should be able to see the filtered results', async function () {
-    // Wait for the results to load
-    await page.waitForTimeout(2000);
-    // You might want to add more specific verifications here
-    Logger.info('Search results are displayed');
+    // Get the values we selected (assuming they were stored in the world object)
+    const selectedEventName = await claimModule.getSelectedEventName();
+    const selectedStatus = await claimModule.getSelectedStatus();
+    
+    // Verify the results
+    const resultsMatch = await claimModule.verifySearchResults(selectedEventName, selectedStatus);
+    
+    if (!resultsMatch) {
+        throw new Error('Search results do not match the selected criteria');
+    }
+    
+    Logger.info('Search results verified successfully');
 }); 

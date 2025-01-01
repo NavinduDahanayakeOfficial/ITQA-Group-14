@@ -19,7 +19,12 @@ export class ClaimModule extends BasePage {
    readonly eventNameDropdown: Locator;
    readonly statusDropdown: Locator;
    readonly searchButton: Locator;
+   readonly searchResultsTable: Locator;
+   readonly searchResultRows: Locator;
+   readonly noRecordsMessage: Locator;
 
+   private selectedEventName: string | null = null;
+   private selectedStatus: string | null = null;
 
    constructor(page: Page) {
     super(page);
@@ -38,6 +43,9 @@ export class ClaimModule extends BasePage {
     this.eventNameDropdown = this.page.locator('//*[@id="app"]/div[1]/div[2]/div[2]/div[1]/div[2]/form/div[1]/div/div[3]/div/div[2]/div/div');
     this.statusDropdown = this.page.locator('//*[@id="app"]/div[1]/div[2]/div[2]/div[1]/div[2]/form/div[1]/div/div[4]/div/div[2]/div/div');
     this.searchButton = this.page.locator('//*[@id="app"]/div[1]/div[2]/div[2]/div[1]/div[2]/form/div[3]/button[2]');
+    this.searchResultsTable = this.page.locator('//div[contains(@class, "orangehrm-container")]');
+    this.searchResultRows = this.page.locator('//div[contains(@class, "oxd-table-card")]');
+    this.noRecordsMessage = this.page.locator('//span[contains(text(), "No Records Found")]');
 
    }
 
@@ -133,12 +141,13 @@ export class ClaimModule extends BasePage {
       // Select the first non-empty option
       const validOptions = options.filter(option => option.trim() !== '');
       if (validOptions.length > 0) {
-          const selectedOption = validOptions[1]; // Take the first valid option
+          const selectedOption = validOptions[1]; // Take the second valid option (usually first is a placeholder)
           Logger.info(`Selecting option: "${selectedOption}"`);
           
-          await this.page.locator(`.oxd-select-dropdown .oxd-select-option`).first().click();
+          await this.page.locator(`.oxd-select-dropdown .oxd-select-option`).nth(1).click();
           Logger.info(`Successfully selected: "${selectedOption}"`);
           
+          this.selectedEventName = selectedOption;
           return selectedOption; // Return the selected value for verification
       } else {
           Logger.error("No valid options found in dropdown");
@@ -165,6 +174,7 @@ export class ClaimModule extends BasePage {
           await this.page.locator(`.oxd-select-dropdown .oxd-select-option`).nth(1).click();
           Logger.info(`Successfully selected: "${selectedOption}"`);
           
+          this.selectedStatus = selectedOption;
           return selectedOption; // Return the selected value for verification
       } else {
           Logger.error("No valid options found in Status dropdown");
@@ -175,6 +185,66 @@ export class ClaimModule extends BasePage {
    async clickSearchButton() {
       Logger.info("Clicking Search button");
       await this.click(this.searchButton, "Search button");
+   }
+
+   async verifySearchResults(expectedEventName: string, expectedStatus: string) {
+       Logger.info(`Verifying search results for Event: ${expectedEventName}, Status: ${expectedStatus}`);
+       
+       // Wait for either results or no records message
+       await this.page.waitForTimeout(2000);
+       
+       // Check if we have any results
+       const noRecordsExists = await this.noRecordsMessage.isVisible();
+       if (noRecordsExists) {
+           Logger.info("No records found for the search criteria");
+           return false;
+       }
+
+       // Wait for results table
+       await this.searchResultsTable.waitFor({ state: 'visible', timeout: 5000 });
+       
+       // Get all rows using the base XPath
+       const baseXPath = '//*[@id="app"]/div[1]/div[2]/div[2]/div[2]/div[3]/div/div[2]/div';
+       const rows = await this.page.locator(`${baseXPath}`).all();
+       Logger.info(`Found ${rows.length} results`);
+
+       let matchingResults = 0;
+       
+       // Check each row
+       for (let i = 1; i <= rows.length; i++) {
+           // Dynamic XPaths for event name and status based on row number
+           const eventNameXPath = `${baseXPath}[${i}]/div/div[3]`;
+           const statusXPath = `${baseXPath}[${i}]/div/div[7]`;
+           
+           const eventNameCell = await this.page.locator(eventNameXPath).textContent();
+           const statusCell = await this.page.locator(statusXPath).textContent();
+           
+           Logger.info(`Row ${i} data - Event: ${eventNameCell}, Status: ${statusCell}`);
+           
+           // Check if values match (trim to remove whitespace)
+           if (eventNameCell?.trim() === expectedEventName && 
+               statusCell?.trim() === expectedStatus) {
+               matchingResults++;
+               Logger.info(`Match found in row ${i}`);
+           }
+       }
+
+       Logger.info(`Found ${matchingResults} matching results out of ${rows.length} total results`);
+       
+       if (matchingResults === 0) {
+           Logger.error(`No matches found for Event: ${expectedEventName}, Status: ${expectedStatus}`);
+           return false;
+       }
+       
+       return true;
+   }
+
+   async getSelectedEventName(): Promise<string> {
+       return this.selectedEventName || '';
+   }
+
+   async getSelectedStatus(): Promise<string> {
+       return this.selectedStatus || '';
    }
 
 }
