@@ -42,8 +42,8 @@ export class ApiHelper {
       }
    }
 
-   async post(endpoint: string, data: any) {
-      const context = await request.newContext();
+  async post(endpoint: string, data: any) {
+    const context = await request.newContext();
 
       let response;
       try {
@@ -55,13 +55,13 @@ export class ApiHelper {
             data: data,
          });
 
-         const responseData = {
-            status: response.status(),
-            data:
-               response.status() === 201
-                  ? await response.json()
-                  : await response.text(),
-         };
+      const responseData = {
+        status: response.status(),
+        data:
+          response.status() === 201
+            ? await response.json()
+            : await response.text(),
+      };
 
          return responseData;
       } catch (error: any) {
@@ -74,8 +74,8 @@ export class ApiHelper {
       }
    }
 
-   async put(endpoint: string, data: any) {
-      const context = await request.newContext();
+  async put(endpoint: string, data: any) {
+    const context = await request.newContext();
 
       let response;
       try {
@@ -87,10 +87,10 @@ export class ApiHelper {
             data: data,
          });
 
-         const responseData = {
-            status: response.status(),
-            data: await response.json(),
-         };
+      const responseData = {
+        status: response.status(),
+        data: await response.json(),
+      };
 
          return responseData;
       } catch (error: any) {
