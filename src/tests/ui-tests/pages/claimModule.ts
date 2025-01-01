@@ -16,6 +16,9 @@ export class ClaimModule extends BasePage {
    readonly assignCurrencyDropdown: Locator;
    readonly assignRemarksField: Locator;
    readonly employeeClaimsButton: Locator;
+   readonly eventNameDropdown: Locator;
+   readonly statusDropdown: Locator;
+   readonly searchButton: Locator;
 
 
    constructor(page: Page) {
@@ -32,6 +35,9 @@ export class ClaimModule extends BasePage {
     this.assignCurrencyDropdown = this.page.locator('//*[@id="app"]/div[1]/div[2]/div[2]/div/div/form/div[2]/div/div[2]/div/div[2]/div/div');
     this.assignRemarksField = this.page.locator('//*[@id="app"]/div[1]/div[2]/div[2]/div/div/form/div[3]/div/div/div/div[2]/textarea');
     this.employeeClaimsButton = this.page.locator('//*[@id="app"]/div[1]/div[1]/header/div[2]/nav/ul/li[4]/a');
+    this.eventNameDropdown = this.page.locator('//*[@id="app"]/div[1]/div[2]/div[2]/div[1]/div[2]/form/div[1]/div/div[3]/div/div[2]/div/div');
+    this.statusDropdown = this.page.locator('//*[@id="app"]/div[1]/div[2]/div[2]/div[1]/div[2]/form/div[1]/div/div[4]/div/div[2]/div/div');
+    this.searchButton = this.page.locator('//*[@id="app"]/div[1]/div[2]/div[2]/div[1]/div[2]/form/div[3]/button[2]');
 
    }
 
@@ -112,6 +118,63 @@ export class ClaimModule extends BasePage {
    async addAssignRemarks(remarks: string) {
        Logger.info("Adding assign remarks");
        await this.assignRemarksField.fill(remarks);
+   }
+
+   async selectEventName(eventName: string) {
+      Logger.info(`Attempting to select Event Name: ${eventName}`);
+      await this.click(this.eventNameDropdown, "Event Name dropdown");
+      await this.page.waitForSelector(".oxd-select-dropdown .oxd-select-option", { state: "visible", timeout: 5000 });
+      await this.page.waitForTimeout(1000);
+      
+      // Get all available options
+      const options = await this.page.locator(".oxd-select-dropdown .oxd-select-option").allTextContents();
+      Logger.info("Available dropdown options: " + JSON.stringify(options));
+
+      // Select the first non-empty option
+      const validOptions = options.filter(option => option.trim() !== '');
+      if (validOptions.length > 0) {
+          const selectedOption = validOptions[1]; // Take the first valid option
+          Logger.info(`Selecting option: "${selectedOption}"`);
+          
+          await this.page.locator(`.oxd-select-dropdown .oxd-select-option`).first().click();
+          Logger.info(`Successfully selected: "${selectedOption}"`);
+          
+          return selectedOption; // Return the selected value for verification
+      } else {
+          Logger.error("No valid options found in dropdown");
+          throw new Error("No valid options available in Event Name dropdown");
+      }
+   }
+
+   async selectStatus(status: string) {
+      Logger.info(`Attempting to select Status: ${status}`);
+      await this.click(this.statusDropdown, "Status dropdown");
+      await this.page.waitForSelector(".oxd-select-dropdown .oxd-select-option", { state: "visible", timeout: 5000 });
+      await this.page.waitForTimeout(1000);
+      
+      // Get all available options
+      const options = await this.page.locator(".oxd-select-dropdown .oxd-select-option").allTextContents();
+      Logger.info("Available dropdown options: " + JSON.stringify(options));
+
+      // Select the first non-empty option
+      const validOptions = options.filter(option => option.trim() !== '');
+      if (validOptions.length > 0) {
+          const selectedOption = validOptions[1]; // Take the second valid option (usually first is a placeholder)
+          Logger.info(`Selecting option: "${selectedOption}"`);
+          
+          await this.page.locator(`.oxd-select-dropdown .oxd-select-option`).nth(1).click();
+          Logger.info(`Successfully selected: "${selectedOption}"`);
+          
+          return selectedOption; // Return the selected value for verification
+      } else {
+          Logger.error("No valid options found in Status dropdown");
+          throw new Error("No valid options available in Status dropdown");
+      }
+   }
+
+   async clickSearchButton() {
+      Logger.info("Clicking Search button");
+      await this.click(this.searchButton, "Search button");
    }
 
 }
