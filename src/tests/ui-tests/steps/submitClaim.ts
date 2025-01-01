@@ -1,7 +1,7 @@
 import { Given, When, Then } from "@cucumber/cucumber";
 import { page } from "../pages/hooks";
 import { HomePage } from "../pages/home.page";
-import { ClaimModule } from "../pages/claimmodule";
+import { ClaimModule } from "../pages/claimModule";
 import { Logger } from "../../../utils/logger";
 import { expect } from "@playwright/test";
 
