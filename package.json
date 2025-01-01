@@ -13,8 +13,7 @@
     "test:searchCandidate": "cucumber-js --tags '@UI and @SearchCandidate'",
     "test:addCandidate": "cucumber-js --tags '@UI and @AddCandidate'",
     "test:deleteCandidate": "cucumber-js --tags '@UI and @DeleteCandidate'",
-    "test:getBookByIdUser": "cucumber-js --tags '@API and @GetBookByIDAdmin'",
-    "test:getBookByIdAdmin": "cucumber-js --tags '@API and @GetBookByIDUser'",
+    "test:getBookByIdUser": "cucumber-js --tags '@API and @GetBookByID'",
     "test:addKPI": "cucumber-js --tags '@AddKPI'",
     "test:deleteKPI": "cucumber-js --tags '@DeleteKPI'",
     "test:cancelAddKPI": "cucumber-js --tags '@cancelAddKPI'"
