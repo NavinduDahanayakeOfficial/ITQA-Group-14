@@ -9,7 +9,7 @@ let page: Page;
 
 setDefaultTimeout(60 * 1000);
 
-Before(async function () {
+Before({ tags: "@UI" }, async function () {
    browser = await chromium.launch({
       headless: false,
       args: ["--start-maximized"],
@@ -22,10 +22,10 @@ Before(async function () {
    Logger.info("User is logged in");
 });
 
-After(async function () {
-   await page.close();
-   await bCtx.close();
-   await browser.close();
+After({ tags: "@UI" },async function () {
+   await page?.close();
+   await bCtx?.close();
+   await browser?.close();
 });
 
 export { page };
