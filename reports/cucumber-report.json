@@ -1,0 +1,102 @@
+[
+  {
+    "description": "  As an admin user\n  User wants to search for an employee in the system\n  So that user can view their details and confirm their existence",
+    "elements": [
+      {
+        "description": "",
+        "id": "search-employee;successfully-searching-for-an-employee",
+        "keyword": "Scenario",
+        "line": 10,
+        "name": "Successfully searching for an employee",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 5742476000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 8,
+            "name": "User navigates to the \"PIM\" module",
+            "match": {
+              "location": "src\\tests\\ui-tests\\steps\\addNewEmployee.ts:11"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1563538999
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 11,
+            "name": "User enters the employee name in the search field",
+            "match": {
+              "location": "src\\tests\\ui-tests\\steps\\searchEmployee.ts:9"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 388859499
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 12,
+            "name": "User clicks the \"Search\" button",
+            "match": {
+              "location": "src\\tests\\ui-tests\\steps\\searchEmployee.ts:16"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 5044403099
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 13,
+            "name": "User should see the search results displaying the correct employee",
+            "match": {
+              "location": "src\\tests\\ui-tests\\steps\\searchEmployee.ts:20"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 7025325400
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 558940100
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@SearchEmployee",
+            "line": 1
+          }
+        ],
+        "type": "scenario"
+      }
+    ],
+    "id": "search-employee",
+    "line": 2,
+    "keyword": "Feature",
+    "name": "Search Employee",
+    "tags": [
+      {
+        "name": "@SearchEmployee",
+        "line": 1
+      }
+    ],
+    "uri": "src\\tests\\ui-tests\\features\\searchEmployee.feature"
+  }
+]
