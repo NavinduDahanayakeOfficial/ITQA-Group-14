@@ -6,3 +6,6 @@ node_modules/
 /reports/
 /allure-results/
 /package-lock.json
+/report/cucumber-report.json
+/report/cucumber-report.html
+/report/cucumber-report.xml
