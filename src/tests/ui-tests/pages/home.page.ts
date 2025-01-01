@@ -5,12 +5,15 @@ export class HomePage extends BasePage {
    readonly pimModule: Locator;
    readonly myInfoModule: Locator;
    readonly recruitModule: Locator;
+    readonly performanceModule: Locator;
 
    constructor(page: Page) {
       super(page);
       this.pimModule = this.page.locator('//a[normalize-space()="PIM"]');
       this.recruitModule = this.page.locator('//a[normalize-space()="Recruitment"]');
       this.myInfoModule = this.page.locator('//a[normalize-space()="My Info"]');
+        this.performanceModule = this.page.locator('//a[normalize-space()="Performance"]');
+    
    }
 
    async clickPimModule() {
@@ -24,4 +27,8 @@ export class HomePage extends BasePage {
    async clickMyInfoModule() {
       await this.click(this.myInfoModule, "My Info Module");
    }
+    
+    async clickPerformanceModule() {
+        await this.click(this.performanceModule, 'Performance Module');
+    }
 }
