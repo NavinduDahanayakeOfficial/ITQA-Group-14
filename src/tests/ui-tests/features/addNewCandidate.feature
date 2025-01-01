@@ -1,3 +1,4 @@
+@UI
 @AddCandidate 
 Feature: Add New Candidate
   As an admin user

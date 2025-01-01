@@ -1,3 +1,4 @@
+@UI
 @DeleteCandidate
 Feature: Delete Candidate
   As an admin user
