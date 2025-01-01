@@ -5,21 +5,19 @@
   "main": "index.js",
   "scripts": {
     "test": "cucumber-js",
-    "test:addEmployee": "cucumber-js --tags '@AddEmployee'",
-    "test:searchEmployee": "cucumber-js --tags '@SearchEmployee'",
+    "test:addEmployee": "cucumber-js --tags '@UI and @AddEmployee'",
+    "test:searchEmployee": "cucumber-js --tags '@UI and @SearchEmployee'",
     "test:submitClaim": "cucumber-js --tags '@SubmitClaim'",
     "test:assignClaim": "cucumber-js --tags '@AssignClaim'",
-    "test:deleteEmployee": "cucumber-js --tags '@DeleteEmployee'",
+    "test:deleteEmployee": "cucumber-js --tags '@UI and @DeleteEmployee'",
+    "test:fetchAllBooks": "cucumber-js --tags '@API and @GetAllBooks'",
+    "test:fetchEmptyBooks": "cucumber-js --tags '@API and @GetEmptyBooks'",
     "test:searchCandidate": "cucumber-js --tags '@SearchCandidate'",
     "test:addCandidate": "cucumber-js --tags '@ADdCandidate'",
     "test:deleteCandidate": "cucumber-js --tags '@DeleteCandidate'",
-       "test:createBookSteps": "cucumber-js --tags '@CreateBook'",
-        "test:duplicateAndIdValidationSteps": "cucumber-js --tags '@CreateBookAdditional'",
-
     "test:addKPI": "cucumber-js --tags '@AddKPI'",
     "test:deleteKPI": "cucumber-js --tags '@DeleteKPI'",
     "test:cancelAddKPI": "cucumber-js --tags '@cancelAddKPI'"
-    
   },
   "keywords": [],
   "author": "",
