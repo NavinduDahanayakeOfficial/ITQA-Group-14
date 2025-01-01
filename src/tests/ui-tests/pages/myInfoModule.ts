@@ -103,7 +103,7 @@ export class PersonalInfoSection extends BasePage {
 
    readonly nationalityDropDownBtn: Locator;
    readonly maritalStatusDropDownBtn: Locator;
-   readonly saveBtn: Locator;
+   readonly mainSaveBtn: Locator;
 
    constructor(page: Page) {
       super(page);
@@ -118,7 +118,7 @@ export class PersonalInfoSection extends BasePage {
          "(//label[normalize-space(text())='Other Id']/following::input)[1]"
       );
       this.licenseNumber = page.locator(
-         "(//input[@class='oxd-input oxd-input--active'])[3]"
+         '(//label[normalize-space(text())="Driver\'s License Number"]/following::input)[1]'
       );
       this.licenseExpiry = page.locator(
          "(//input[@placeholder='yyyy-dd-mm'])[1]"
@@ -139,10 +139,10 @@ export class PersonalInfoSection extends BasePage {
          "(//div[@class='oxd-select-wrapper'])[1]"
       );
       this.maritalStatusDropDownBtn = page.locator(
-         "(//div[@class='oxd-select-wra[[er'])[2]"
+         "(//div[@class='oxd-select-wrapper'])[2]"
       );
 
-      this.saveBtn = page.locator("(//button[@type='submit'])[1]");
+      this.mainSaveBtn = page.locator("(//button[@type='submit'])[1]");
    }
 
    async getSectionHeader() {
@@ -154,6 +154,7 @@ export class PersonalInfoSection extends BasePage {
 
    async getPersonalInfo() {
       await this.page.waitForSelector("//h6[text()='Personal Details']");
+      await this.page.waitForSelector("//input[@placeholder='First Name']");
       const firstName = await this.firstName.inputValue();
       const middleName = await this.middleName.inputValue();
       const lastName = await this.lastName.inputValue();
@@ -179,6 +180,101 @@ export class PersonalInfoSection extends BasePage {
          dateOfBirth,
          gender,
       };
+   }
+
+   async fillPersonalInfo(personalInfo: PersonalInfo) {
+      await this.page.waitForSelector("//h6[text()='Personal Details']");
+      await this.page.waitForSelector("//input[@placeholder='First Name']");
+      await this.page.waitForTimeout(1000);
+      await this.firstName.fill(personalInfo.firstName);
+      await this.page.waitForTimeout(1000);
+      await this.middleName.fill(personalInfo.middleName);
+      await this.page.waitForTimeout(1000);
+      await this.lastName.fill(personalInfo.lastName);
+      await this.page.waitForTimeout(1000);
+      await this.employeeId.fill(personalInfo.employeeId);
+      await this.page.waitForTimeout(1000);
+      await this.otherId.fill(personalInfo.otherId);
+      await this.page.waitForTimeout(1000);
+      await this.licenseNumber.fill(personalInfo.licenseNumber);
+      await this.page.waitForTimeout(1000);
+      await this.licenseExpiry.fill(personalInfo.licenseExpiry);
+      await this.page.waitForTimeout(1000);
+      await this.selectNationality(personalInfo.nationality);
+      await this.page.waitForTimeout(10000);
+      await this.selectMaritalStatus(personalInfo.maritalStatus);
+      await this.page.waitForTimeout(1000);
+      await this.dateOfBirth.fill(personalInfo.dateOfBirth);
+      await this.page.waitForTimeout(1000);
+      await this.selectGender();
+   }
+
+   async selectNationality(nationality: string) {
+      const currentNationality = await this.nationality.innerText();
+
+      if (
+         currentNationality !== nationality ||
+         currentNationality === "-- Select --"
+      ) {
+         await this.nationalityDropDownBtn.click();
+         await this.page.waitForSelector(".oxd-select-dropdown", {
+            state: "visible",
+            timeout: 5000,
+         });
+         await this.page.waitForTimeout(1000);
+
+         const options = this.page.locator(
+            ".oxd-select-dropdown .oxd-select-option"
+         );
+         const count = await options.count();
+
+         for (let i = 0; i < count; i++) {
+            const text = await options.nth(i).textContent();
+            if (text?.includes(nationality)) {
+               await options.nth(i).click();
+               break;
+            }
+         }
+      }
+   }
+
+   async selectMaritalStatus(maritalStatus: string) {
+      const currentMaritalStatus = await this.maritalStatus.innerText();
+      if (
+         currentMaritalStatus !== maritalStatus ||
+         currentMaritalStatus === "-- Select --"
+      ) {
+         await this.maritalStatusDropDownBtn.click();
+         await this.page.waitForSelector(".oxd-select-dropdown", {
+            state: "visible",
+            timeout: 5000,
+         });
+         await this.page.waitForTimeout(1000);
+
+         const options = this.page.locator(
+            ".oxd-select-dropdown .oxd-select-option"
+         );
+         const count = await options.count();
+
+         for (let i = 0; i < count; i++) {
+            const text = await options.nth(i).textContent();
+            if (text?.includes(maritalStatus)) {
+               await options.nth(i).click();
+               break;
+            }
+         }
+      }
+   }
+
+   async selectGender() {
+      const currentGender = (await this.genderMale.isChecked())
+         ? "Male"
+         : "Female";
+      console.log(currentGender);
+   }
+
+   async savePersonalInfo() {
+      await this.mainSaveBtn.click();
    }
 }
 
@@ -232,4 +328,18 @@ export class DependentsSection extends BasePage {
       Logger.info(`Section Header: ${sectionHeader}`);
       return sectionHeader;
    }
+}
+
+interface PersonalInfo {
+   firstName: string;
+   middleName: string;
+   lastName: string;
+   employeeId: string;
+   otherId: string;
+   licenseNumber: string;
+   licenseExpiry: string;
+   nationality: string;
+   maritalStatus: string;
+   dateOfBirth: string;
+   gender: string;
 }
