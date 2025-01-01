@@ -1,3 +1,4 @@
+@UI
 @cancelAddKPI
 Feature: Cancel Add Key Performance Indicators 
   As an admin user,

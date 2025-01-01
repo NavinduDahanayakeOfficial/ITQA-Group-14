@@ -1,3 +1,4 @@
+@UI
 @UpdateUserPersonalDetails
 Feature: Update User Personal Details
     As an admin user

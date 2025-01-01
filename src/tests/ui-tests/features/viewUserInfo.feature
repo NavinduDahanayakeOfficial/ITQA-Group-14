@@ -1,3 +1,4 @@
+@UI
 @ViewUserInfo
 Feature: View User Info
     As an admin user
