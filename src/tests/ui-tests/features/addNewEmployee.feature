@@ -1,4 +1,3 @@
-@UI
 @AddEmployee 
 Feature: Add New Employee
   As an admin user
