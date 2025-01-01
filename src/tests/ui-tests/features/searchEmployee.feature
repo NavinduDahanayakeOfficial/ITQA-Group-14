@@ -1,3 +1,4 @@
+@UI
 @SearchEmployee
 Feature: Search Employee
   As an admin user

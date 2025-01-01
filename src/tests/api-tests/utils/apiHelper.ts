@@ -1,5 +1,6 @@
 import { request } from "playwright";
 import { config } from "../../../utils/environment";
+import { Logger } from "../../../utils/logger";
 
 export class ApiHelper {
    private baseUrl: string = config.baseUrls.api;
@@ -27,6 +28,8 @@ export class ApiHelper {
             data: await response.json(),
          };
 
+         Logger.info(`Response Body: ${JSON.stringify(responseData.data, null, 2)}`);
+
          return responseData;
       } catch (error: any) {
          return {
@@ -39,8 +42,8 @@ export class ApiHelper {
       }
    }
 
-   async post(endpoint: string, data: any) {
-      const context = await request.newContext();
+  async post(endpoint: string, data: any) {
+    const context = await request.newContext();
 
       let response;
       try {
@@ -52,13 +55,13 @@ export class ApiHelper {
             data: data,
          });
 
-         const responseData = {
-            status: response.status(),
-            data:
-               response.status() === 201
-                  ? await response.json()
-                  : await response.text(),
-         };
+      const responseData = {
+        status: response.status(),
+        data:
+          response.status() === 201
+            ? await response.json()
+            : await response.text(),
+      };
 
          return responseData;
       } catch (error: any) {
@@ -71,8 +74,8 @@ export class ApiHelper {
       }
    }
 
-   async put(endpoint: string, data: any) {
-      const context = await request.newContext();
+  async put(endpoint: string, data: any) {
+    const context = await request.newContext();
 
       let response;
       try {
@@ -84,10 +87,10 @@ export class ApiHelper {
             data: data,
          });
 
-         const responseData = {
-            status: response.status(),
-            data: await response.json(),
-         };
+      const responseData = {
+        status: response.status(),
+        data: await response.json(),
+      };
 
          return responseData;
       } catch (error: any) {

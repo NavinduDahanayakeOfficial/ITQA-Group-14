@@ -1,3 +1,4 @@
+@API
 @CreateBook
 Feature: Create a Book
   As a library user or admin
