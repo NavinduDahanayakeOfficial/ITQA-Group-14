@@ -98,8 +98,8 @@ export class PersonalInfoSection extends BasePage {
    readonly nationality: Locator;
    readonly maritalStatus: Locator;
    readonly dateOfBirth: Locator;
-   readonly genderMale: Locator;
-   readonly genderFemale: Locator;
+   readonly genderMaleRadioBtn: Locator;
+   readonly genderFemaleRadioBtn: Locator;
 
    readonly nationalityDropDownBtn: Locator;
    readonly maritalStatusDropDownBtn: Locator;
@@ -134,16 +134,16 @@ export class PersonalInfoSection extends BasePage {
       this.dateOfBirth = page.locator(
          "(//input[@placeholder='yyyy-dd-mm'])[2]"
       );
-      this.genderMale = page.locator(
+      this.genderMaleRadioBtn = page.locator(
          "(//input[@type='radio']/following-sibling::span)[1]"
       );
-      this.genderFemale = page.locator("(//input[@type='radio'])[2]");
+      this.genderFemaleRadioBtn = page.locator("(//input[@type='radio'])[2]");
 
       this.nationalityDropDownBtn = page.locator(
          "(//div[@class='oxd-select-wrapper'])[1]"
       );
       this.maritalStatusDropDownBtn = page.locator(
-         "(//input[@type='radio']/following-sibling::span)[2]"
+         "(//div[@class='oxd-select-wrapper'])[2]"
       );
 
       this.mainSaveBtn = page.locator("(//button[@type='submit'])[1]");
@@ -173,9 +173,11 @@ export class PersonalInfoSection extends BasePage {
       const nationality = await this.nationality.innerText();
       const maritalStatus = await this.maritalStatus.innerText();
       const dateOfBirth = await this.dateOfBirth.inputValue();
-      const gender = (await this.genderMale.isChecked()) ? "Male" : "Female";
+      const gender = (await this.genderMaleRadioBtn.isChecked())
+         ? "Male"
+         : "Female";
 
-      return {
+      const personalInfo: PersonalInfo = {
          firstName,
          middleName,
          lastName,
@@ -188,104 +190,91 @@ export class PersonalInfoSection extends BasePage {
          dateOfBirth,
          gender,
       };
+
+      return personalInfo;
    }
 
    async fillPersonalInfo(personalInfo: PersonalInfo) {
       await this.page.waitForSelector("//h6[text()='Personal Details']");
       await this.page.waitForSelector("//input[@placeholder='First Name']");
-      await this.page.waitForTimeout(1000);
+
+      
       await this.firstName.fill(personalInfo.firstName);
-      await this.page.waitForTimeout(1000);
       await this.middleName.fill(personalInfo.middleName);
-      await this.page.waitForTimeout(1000);
       await this.lastName.fill(personalInfo.lastName);
-      await this.page.waitForTimeout(1000);
       await this.employeeId.fill(personalInfo.employeeId);
-      await this.page.waitForTimeout(1000);
       await this.otherId.fill(personalInfo.otherId);
-      await this.page.waitForTimeout(1000);
       await this.licenseNumber.fill(personalInfo.licenseNumber);
-      await this.page.waitForTimeout(1000);
       await this.licenseExpiry.fill(personalInfo.licenseExpiry);
-      await this.page.waitForTimeout(1000);
       await this.selectNationality(personalInfo.nationality);
-      await this.page.waitForTimeout(1000);
       await this.selectMaritalStatus(personalInfo.maritalStatus);
-      await this.page.waitForTimeout(1000);
       await this.dateOfBirth.fill(personalInfo.dateOfBirth);
-      await this.page.waitForTimeout(1000);
       await this.selectGender(personalInfo.gender);
    }
 
-   async selectNationality(nationality: string) {
-      const currentNationality = await this.nationality.innerText();
+   async selectFromDropdown(
+      dropdownButton: Locator,
+      currentValue: Locator,
+      newValue: string,
+      description: string
+   ) {
+      const currentText = await currentValue.innerText();
 
-      if (
-         currentNationality !== nationality ||
-         currentNationality === "-- Select --"
-      ) {
-         await this.nationalityDropDownBtn.click();
-         await this.page.waitForSelector(".oxd-select-dropdown", {
-            state: "visible",
-            timeout: 5000,
-         });
-         await this.page.waitForTimeout(1000);
+      if (currentText !== newValue || currentText === "-- Select --") {
+         await this.click(dropdownButton, `${description} dropdown`);
 
+         const dropdown = this.page.locator(".oxd-select-dropdown");
+         await dropdown.waitFor({ state: "visible" });
+
+         // Get all options and find the matching one
          const options = this.page.locator(
             ".oxd-select-dropdown .oxd-select-option"
          );
-         const count = await options.count();
+         await options.first().waitFor({ state: "visible" }); // Wait for options to be loaded
 
-         for (let i = 0; i < count; i++) {
-            const text = await options.nth(i).textContent();
-            if (text?.includes(nationality)) {
-               await options.nth(i).click();
-               break;
-            }
-         }
+         const optionLocator = options.filter({ hasText: newValue });
+         await optionLocator.click();
+
+         // Wait for dropdown to close
+         await dropdown.waitFor({ state: "hidden" });
+
+         Logger.info(`Selected ${newValue} for ${description}`);
+      } else {
+         Logger.info(`${description} already set to ${newValue}`);
       }
+   }
+
+   async selectNationality(nationality: string) {
+      await this.selectFromDropdown(
+         this.nationalityDropDownBtn,
+         this.nationality,
+         nationality,
+         "Nationality"
+      );
    }
 
    async selectMaritalStatus(maritalStatus: string) {
-      const currentMaritalStatus = await this.maritalStatus.innerText();
-      if (
-         currentMaritalStatus !== maritalStatus ||
-         currentMaritalStatus === "-- Select --"
-      ) {
-         await this.maritalStatusDropDownBtn.click();
-         await this.page.waitForSelector(".oxd-select-dropdown", {
-            state: "visible",
-            timeout: 5000,
-         });
-         await this.page.waitForTimeout(1000);
-
-         const options = this.page.locator(
-            ".oxd-select-dropdown .oxd-select-option"
-         );
-         const count = await options.count();
-
-         for (let i = 0; i < count; i++) {
-            const text = await options.nth(i).textContent();
-            if (text?.includes(maritalStatus)) {
-               await options.nth(i).click();
-               break;
-            }
-         }
-      }
+      await this.selectFromDropdown(
+         this.maritalStatusDropDownBtn,
+         this.maritalStatus,
+         maritalStatus,
+         "Marital Status"
+      );
    }
 
    async selectGender(gender: string) {
-      const currentGender = (await this.genderMale.isChecked())
+      await this.page.waitForSelector("(//input[@type='radio'])[1]");
+      await this.page.waitForSelector("(//input[@type='radio'])[2]");
+      const currentGender = (await this.genderMaleRadioBtn.isChecked())
          ? "Male"
          : "Female";
       if (currentGender !== gender) {
          if (gender === "Male") {
-            await this.genderMale.check();
+            await this.genderMaleRadioBtn.check();
          } else {
-            await this.genderFemale.check();
+            await this.genderFemaleRadioBtn.check();
          }
       }
-      await this.page.waitForTimeout(1000);
    }
 
    async savePersonalInfo() {
@@ -355,6 +344,7 @@ export class DependentsSection extends BasePage {
 }
 
 interface PersonalInfo {
+
    firstName: string;
    middleName: string;
    lastName: string;

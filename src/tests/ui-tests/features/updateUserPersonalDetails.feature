@@ -11,6 +11,9 @@ Feature: Update User Personal Details
   Scenario: Successfully updating user personal details
     When User enter the new personal details
       | firstName | middleName | lastName | employeeId | otherId | licenseNumber | licenseExpiry | nationality | maritalStatus | dateOfBirth | gender |
-      | John      | William    | Doe      |     444110 |  123456 |       2000304 |    2022-12-31 | American    | Single        |  1990-01-15 | Male   |
+      | John      | William    | Doe      |     444110 |  123456 |       2000304 |    2022-31-12 | American    | Single        |  1990-15-01 | Male   |
     And User clicks on the Save button
     Then User should see the success message "Successfully Updated"
+    And User should see the updated personal details
+
+    
