@@ -15,7 +15,9 @@
     "test:deleteCandidate": "cucumber-js --tags '@DeleteCandidate'",
     "test:addKPI": "cucumber-js --tags '@AddKPI'",
     "test:deleteKPI": "cucumber-js --tags '@DeleteKPI'",
-    "test:cancelAddKPI": "cucumber-js --tags '@cancelAddKPI'"
+    "test:cancelAddKPI": "cucumber-js --tags '@cancelAddKPI'",
+    "test:applyLeave": "cucumber-js --tags '@LeaveApplication'",
+    "test:assignLeave": "cucumber-js --tags '@LeaveAssign'"
   },
   "keywords": [],
   "author": "",
