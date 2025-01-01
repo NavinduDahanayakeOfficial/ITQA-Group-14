@@ -7,6 +7,8 @@
     "test": "cucumber-js",
     "test:addEmployee": "cucumber-js --tags '@UI and @AddEmployee'",
     "test:searchEmployee": "cucumber-js --tags '@UI and @SearchEmployee'",
+    "test:submitClaim": "cucumber-js --tags @UI and @SubmitClaim'",
+    "test:assignClaim": "cucumber-js --tags '@UI and @AssignClaim'",
     "test:deleteEmployee": "cucumber-js --tags '@UI and @DeleteEmployee'",
     "test:fetchAllBooks": "cucumber-js --tags '@API and @GetAllBooks'",
     "test:fetchEmptyBooks": "cucumber-js --tags '@API and @GetEmptyBooks'",
@@ -16,7 +18,11 @@
     "test:getBookByIdUser": "cucumber-js --tags '@API and @GetBookByID'",
     "test:addKPI": "cucumber-js --tags '@AddKPI'",
     "test:deleteKPI": "cucumber-js --tags '@DeleteKPI'",
-    "test:cancelAddKPI": "cucumber-js --tags '@cancelAddKPI'"
+    "test:cancelAddKPI": "cucumber-js --tags '@cancelAddKPI'",
+    "test:duplicateAndIdValidationSteps": "cucumber-js --tags '@API and @CreateBookAdditional'",
+    "test:employeeClaims": "cucumber-js --tags '@UI and @EmployeeClaims'"
+    "test:applyLeave": "cucumber-js --tags '@LeaveApplication'",
+    "test:assignLeave": "cucumber-js --tags '@LeaveAssign'"
   },
   "keywords": [],
   "author": "",

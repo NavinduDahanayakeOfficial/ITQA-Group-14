@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<testsuite name="Cucumber" time="20.34" tests="1" skipped="0" failures="0" errors="0">
+  <testcase classname="Search Employee" name="Successfully searching for an employee" time="20.33">
+    <system-out><![CDATA[Given User navigates to the "PIM" module....................................passed
+Given User enters the employee name in the search field.....................passed
+When User clicks the "Search" button........................................passed
+Then User should see the search results displaying the correct employee.....passed]]></system-out>
+  </testcase>
+</testsuite>
