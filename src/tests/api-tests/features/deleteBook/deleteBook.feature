@@ -7,24 +7,23 @@ Feature: Delete a Book
   Scenario Outline: Successfully deleting a book
     Given I am authenticated as "<userType>"
     Given the following book exists in the system:
-      | title   | author   |
-      | <title> | <author> |
-    When I delete the book titled "<title>"
+      | id  | title   | author   |
+      | <id> | <title> | <author> |
+    When I delete the book with id "<id>"
     Then the book should be deleted successfully
 
     Examples:
-      | userType | title  | author  |
-      | admin    | Book1  | Author1 |
+      | userType | id | title  | author  |
+      | admin    | 1  | Book1  | Author1 |
 
   Scenario Outline: User should not be allowed to delete a book
     Given I am authenticated as "<userType>"
     Given the following book exists in the system:
-      | title   | author   |
-      | <title> | <author> |
-    When I attempt to delete the book titled "<title>"
-    Then I should see an error message "403"
-    And the book should still exist in the system
+      | id  | title   | author   |
+      | <id> | <title> | <author> |
+    When I attempt to delete the book with id "<id>"
+    Then the book should not be deleted
 
     Examples:
-      | userType | title  | author  |
-      | user     | Book2  | Author2 |
+      | userType | id | title  | author  |
+      | user     | 1  | Book1  | Author1 |

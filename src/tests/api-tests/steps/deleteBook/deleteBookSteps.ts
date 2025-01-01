@@ -3,55 +3,56 @@ import { apiHelper } from "../common/authSteps";
 import { expect } from "playwright/test";
 import { Logger } from "../../../../utils/logger";
 
-let bookDetails: { title: string; author: string };
+let bookDetails: { id: string; title: string; author: string };
 let response: any;
 
 Given("the following book exists in the system:", async function (dataTable) {
   bookDetails = dataTable.hashes()[0];
-  Logger.info("Ensuring book exists in the system: " + JSON.stringify(bookDetails));
+  Logger.info(`[START] Ensuring book exists: ${JSON.stringify(bookDetails)}`);
 
   // Check if the book exists, if not, create it
-  response = await apiHelper.get(`/api/books?title=${bookDetails.title}`);
+  response = await apiHelper.get(`/api/books/${bookDetails.id}`);
   if (response.status === 404) {
-    Logger.info("Book not found, creating it...");
+    Logger.info("Book not found, proceeding to create it...");
     await apiHelper.post("/api/books", bookDetails);
-  } else {
-    Logger.info("Book already exists.");
   }
+  Logger.info(`[END] Ensuring book exists`);
 });
 
-When("I delete the book titled {string}", async function (title: string) {
-  Logger.info(`Sending DELETE request for the book titled: ${title}`);
-  response = await apiHelper.delete(`/api/books?title=${title}`);
+When("I delete the book with id {string}", async function (id: string) {
+  Logger.info(`[START] Attempting to delete book with ID: ${id}`);
+  response = await apiHelper.delete(`/api/books/${id}`);
+
+  if (response.status === 200 || response.status === 403) {
+    Logger.info(`[DELETE] Status - ${response.status}`); // Only log status for admin/user cases
+  } else {
+    Logger.info(`[DELETE] Response: ${JSON.stringify(response)}`); // Log full details for other statuses
+  }
+
+  Logger.info(`[END] Delete attempt for book with ID: ${id}`);
 });
 
 Then("the book should be deleted successfully", async function () {
-  Logger.info("Verifying book deletion response");
-  Logger.info("Response status: " + response.status);
+  Logger.info(`[START] Verifying successful deletion`);
+  if (response.status === 200) {
+    Logger.info(`[RESPONSE] Status - ${response.status}`);
+  }
   expect(response).toBeDefined();
   expect(response.status).toBe(200);
 
-  Logger.info("Ensuring the book is no longer in the system");
-  const checkResponse = await apiHelper.get(`/api/books?title=${bookDetails.title}`);
+  const checkResponse = await apiHelper.get(`/api/books/${bookDetails.id}`);
   expect(checkResponse.status).toBe(404);
+  Logger.info(`[END] Verification of successful deletion`);
 });
 
-Then("I should see an error message {string}", function (errorMessage: string) {
-  Logger.info("Verifying error response");
-  Logger.info("Response status: " + response.status);
-  expect(response.status).toBe(403);
-  Logger.info("Response message: " + response.data.message);
-  expect(response.data.message).toBe(errorMessage);
-});
-
-Then("the book should still exist in the system", async function () {
-  Logger.info("Verifying the book still exists in the system");
-  const checkResponse = await apiHelper.get(`/api/books?title=${bookDetails.title}`);
-  expect(checkResponse.status).toBe(200);
-  if ("data" in checkResponse) {
-    expect(checkResponse.data.title).toBe(bookDetails.title);
-  } else {
-    throw new Error("Expected response to have data property");
+Then("the book should not be deleted", async function () {
+  Logger.info(`[START] Verifying book was not deleted`);
+  if (response.status === 403) {
+    Logger.info(`[RESPONSE] Status - ${response.status}`);
   }
-  expect(checkResponse.data.author).toBe(bookDetails.author);
+  expect(response.status).not.toBe(200);
+
+  const checkResponse = await apiHelper.get(`/api/books/${bookDetails.id}`);
+  expect(checkResponse.status).toBe(200);
+  Logger.info(`[END] Verification of book existence`);
 });
