@@ -15,6 +15,7 @@ export class ClaimModule extends BasePage {
    readonly assignEventDropdown: Locator;
    readonly assignCurrencyDropdown: Locator;
    readonly assignRemarksField: Locator;
+   readonly employeeClaimsButton: Locator;
 
 
    constructor(page: Page) {
@@ -30,6 +31,7 @@ export class ClaimModule extends BasePage {
     this.assignEventDropdown = this.page.locator('//*[@id="app"]/div[1]/div[2]/div[2]/div/div/form/div[2]/div/div[1]/div/div[2]/div/div');
     this.assignCurrencyDropdown = this.page.locator('//*[@id="app"]/div[1]/div[2]/div[2]/div/div/form/div[2]/div/div[2]/div/div[2]/div/div');
     this.assignRemarksField = this.page.locator('//*[@id="app"]/div[1]/div[2]/div[2]/div/div/form/div[3]/div/div/div/div[2]/textarea');
+    this.employeeClaimsButton = this.page.locator('//*[@id="app"]/div[1]/div[1]/header/div[2]/nav/ul/li[4]/a');
 
    }
 
@@ -40,6 +42,9 @@ export class ClaimModule extends BasePage {
    async clickAssignClaim() {
     await this.click(this.assignClaimButton, "Assign Claim button");
  }
+ async clickEmployeeClaims() {
+   await this.click(this.employeeClaimsButton, "Employee Claims button");
+}
 
    async selectEventDropdown() {
     Logger.info("Selecting Event Type dropdown");
