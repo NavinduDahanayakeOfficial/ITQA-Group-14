@@ -7,12 +7,14 @@
     "test": "cucumber-js",
     "test:addEmployee": "cucumber-js --tags '@AddEmployee'",
     "test:searchEmployee": "cucumber-js --tags '@SearchEmployee'",
+    "test:submitClaim": "cucumber-js --tags '@SubmitClaim'",
+    "test:assignClaim": "cucumber-js --tags '@AssignClaim'",
     "test:deleteEmployee": "cucumber-js --tags '@DeleteEmployee'",
     "test:searchCandidate": "cucumber-js --tags '@SearchCandidate'",
     "test:addCandidate": "cucumber-js --tags '@ADdCandidate'",
     "test:deleteCandidate": "cucumber-js --tags '@DeleteCandidate'",
        "test:createBookSteps": "cucumber-js --tags '@CreateBook'",
-        "test:duplicateAndIdValidationSteps": "cucumber-js --tags '@CreateBookAdditional'"
+        "test:duplicateAndIdValidationSteps": "cucumber-js --tags '@CreateBookAdditional'",
 
     "test:addKPI": "cucumber-js --tags '@AddKPI'",
     "test:deleteKPI": "cucumber-js --tags '@DeleteKPI'",
