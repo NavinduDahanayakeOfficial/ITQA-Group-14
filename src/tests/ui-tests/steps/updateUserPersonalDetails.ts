@@ -52,7 +52,4 @@ Then("User should see the updated personal details", async function () {
    expect(updatedDetails.gender).toBe(data.gender);
 });
 
-const standardizeDate = (date: string): string => {
-   const [year, month, day] = date.split(/[-\/]/);
-   return `${year}-${month.padStart(2, "0")}-${day.padStart(2, "0")}`;
-};
+

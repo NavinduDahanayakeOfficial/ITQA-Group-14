@@ -197,8 +197,8 @@ export class PersonalInfoSection extends BasePage {
    async fillPersonalInfo(personalInfo: PersonalInfo) {
       await this.page.waitForSelector("//h6[text()='Personal Details']");
       await this.page.waitForSelector("//input[@placeholder='First Name']");
+      await this.page.waitForTimeout(2000);
 
-      
       await this.firstName.fill(personalInfo.firstName);
       await this.middleName.fill(personalInfo.middleName);
       await this.lastName.fill(personalInfo.lastName);
@@ -344,7 +344,6 @@ export class DependentsSection extends BasePage {
 }
 
 interface PersonalInfo {
-
    firstName: string;
    middleName: string;
    lastName: string;
