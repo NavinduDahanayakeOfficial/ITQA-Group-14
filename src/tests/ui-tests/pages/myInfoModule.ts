@@ -105,6 +105,8 @@ export class PersonalInfoSection extends BasePage {
    readonly maritalStatusDropDownBtn: Locator;
    readonly mainSaveBtn: Locator;
 
+   readonly successMessage: Locator;
+
    constructor(page: Page) {
       super(page);
       this.sectionHeader = page.locator("//h6[text()='Personal Details']");
@@ -132,17 +134,23 @@ export class PersonalInfoSection extends BasePage {
       this.dateOfBirth = page.locator(
          "(//input[@placeholder='yyyy-dd-mm'])[2]"
       );
-      this.genderMale = page.locator("(//input[@type='radio'])[1]");
+      this.genderMale = page.locator(
+         "(//input[@type='radio']/following-sibling::span)[1]"
+      );
       this.genderFemale = page.locator("(//input[@type='radio'])[2]");
 
       this.nationalityDropDownBtn = page.locator(
          "(//div[@class='oxd-select-wrapper'])[1]"
       );
       this.maritalStatusDropDownBtn = page.locator(
-         "(//div[@class='oxd-select-wrapper'])[2]"
+         "(//input[@type='radio']/following-sibling::span)[2]"
       );
 
       this.mainSaveBtn = page.locator("(//button[@type='submit'])[1]");
+
+      this.successMessage = this.page.locator(
+         '//p[@class="oxd-text oxd-text--p oxd-text--toast-message oxd-toast-content-text"]'
+      );
    }
 
    async getSectionHeader() {
@@ -201,12 +209,12 @@ export class PersonalInfoSection extends BasePage {
       await this.licenseExpiry.fill(personalInfo.licenseExpiry);
       await this.page.waitForTimeout(1000);
       await this.selectNationality(personalInfo.nationality);
-      await this.page.waitForTimeout(10000);
+      await this.page.waitForTimeout(1000);
       await this.selectMaritalStatus(personalInfo.maritalStatus);
       await this.page.waitForTimeout(1000);
       await this.dateOfBirth.fill(personalInfo.dateOfBirth);
       await this.page.waitForTimeout(1000);
-      await this.selectGender();
+      await this.selectGender(personalInfo.gender);
    }
 
    async selectNationality(nationality: string) {
@@ -266,15 +274,31 @@ export class PersonalInfoSection extends BasePage {
       }
    }
 
-   async selectGender() {
+   async selectGender(gender: string) {
       const currentGender = (await this.genderMale.isChecked())
          ? "Male"
          : "Female";
-      console.log(currentGender);
+      if (currentGender !== gender) {
+         if (gender === "Male") {
+            await this.genderMale.check();
+         } else {
+            await this.genderFemale.check();
+         }
+      }
+      await this.page.waitForTimeout(1000);
    }
 
    async savePersonalInfo() {
       await this.mainSaveBtn.click();
+   }
+
+   async getSuccessMessage() {
+      await this.page.waitForSelector(
+         '//p[@class="oxd-text oxd-text--p oxd-text--toast-message oxd-toast-content-text"]'
+      );
+      const message = await this.successMessage.innerText();
+      Logger.info(`Success Message: ${message}`);
+      return message;
    }
 }
 
