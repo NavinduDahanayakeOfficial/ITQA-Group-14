@@ -1,3 +1,4 @@
+@UI
 @SearchCandidate
 Feature: Search Candidate
   As an admin user
