@@ -1,29 +1,26 @@
+@API
 @DeleteBook
-Feature: Delete a Book
-  As a library user or admin
-  I want to delete a book
-  So that it can be removed from the system
+Feature: Delete a Book by ID
+  As a library user
+  I want to get a book by its ID
+  So that I can view the book details
 
-  Scenario Outline: Successfully deleting a book
-    Given I am authenticated as "<userType>"
-    Given the following book exists in the system:
-      | id  | title   | author   |
-      | <id> | <title> | <author> |
-    When I delete the book with id "<id>"
-    Then the book should be deleted successfully
+  Scenario: Successfully deleting a book by existing ID
+    Given I am authenticated as "admin"
+    When I have th book ID: 7
+    Then the book should be deleted successfully with 200 status code
 
-    Examples:
-      | userType | id | title  | author  |
-      | admin    | 1  | Book1  | Author1 |
+  Scenario: Getting a book by non-existing ID
+    Given I am authenticated as "admin"
+    When I have th book ID: 100
+    Then the book should not be deleted with 404 status code
 
-  Scenario Outline: User should not be allowed to delete a book
-    Given I am authenticated as "<userType>"
-    Given the following book exists in the system:
-      | id  | title   | author   |
-      | <id> | <title> | <author> |
-    When I attempt to delete the book with id "<id>"
-    Then the book should not be deleted
+  Scenario: Successfully getting a book by existing ID
+    Given I am authenticated as "user"
+    When I have th book ID: 7
+    Then the book should not be deleted with 403 status code
 
-    Examples:
-      | userType | id | title  | author  |
-      | user     | 1  | Book1  | Author1 |
+  Scenario: Getting a book by non-existing ID
+    Given I am authenticated as "user"
+    When I have th book ID: 100
+    Then the book should not be deleted with 404 status code
