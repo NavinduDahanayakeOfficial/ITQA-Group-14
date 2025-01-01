@@ -14,6 +14,10 @@
        "test:createBookSteps": "cucumber-js --tags '@CreateBook'",
         "test:duplicateAndIdValidationSteps": "cucumber-js --tags '@CreateBookAdditional'"
 
+    "test:addKPI": "cucumber-js --tags '@AddKPI'",
+    "test:deleteKPI": "cucumber-js --tags '@DeleteKPI'",
+    "test:cancelAddKPI": "cucumber-js --tags '@cancelAddKPI'"
+    
   },
   "keywords": [],
   "author": "",
