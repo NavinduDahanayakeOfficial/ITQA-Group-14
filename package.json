@@ -11,7 +11,9 @@
     "test:searchCandidate": "cucumber-js --tags '@SearchCandidate'",
     "test:addCandidate": "cucumber-js --tags '@ADdCandidate'",
     "test:deleteCandidate": "cucumber-js --tags '@DeleteCandidate'",
-       "test:createBookSteps": "cucumber-js --tags '@CreateBook'"
+       "test:createBookSteps": "cucumber-js --tags '@CreateBook'",
+        "test:duplicateAndIdValidationSteps": "cucumber-js --tags '@CreateBookAdditional'"
+
   },
   "keywords": [],
   "author": "",
