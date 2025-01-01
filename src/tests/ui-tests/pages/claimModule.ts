@@ -11,6 +11,10 @@ export class ClaimModule extends BasePage {
    readonly currencyTypeDropdown: Locator;
    readonly claimSuccessMessage: Locator; 
    readonly assignClaimButton: Locator;
+   readonly employeeNameField: Locator;
+   readonly assignEventDropdown: Locator;
+   readonly assignCurrencyDropdown: Locator;
+   readonly assignRemarksField: Locator;
 
 
    constructor(page: Page) {
@@ -22,6 +26,10 @@ export class ClaimModule extends BasePage {
     this.remarksField = this.page.locator('//*[@id="app"]/div[1]/div[2]/div[2]/div/div/form/div[2]/div/div/div/div[2]/textarea');
     this.claimSuccessMessage = this.page.locator('//div[contains(@class, "success-message")]'); 
     this.assignClaimButton = this.page.locator('//a[normalize-space()="Assign Claim"]'); 
+    this.employeeNameField = this.page.locator('//*[@id="app"]/div[1]/div[2]/div[2]/div/div/form/div[1]/div/div/div/div[2]/div/div/input');
+    this.assignEventDropdown = this.page.locator('//*[@id="app"]/div[1]/div[2]/div[2]/div/div/form/div[2]/div/div[1]/div/div[2]/div/div');
+    this.assignCurrencyDropdown = this.page.locator('//*[@id="app"]/div[1]/div[2]/div[2]/div/div/form/div[2]/div/div[2]/div/div[2]/div/div');
+    this.assignRemarksField = this.page.locator('//*[@id="app"]/div[1]/div[2]/div[2]/div/div/form/div[3]/div/div/div/div[2]/textarea');
 
    }
 
@@ -72,7 +80,33 @@ export class ClaimModule extends BasePage {
     return successMessageText;
  }
  
- 
 
+   async fillEmployeeName(name: string) {
+       Logger.info("Filling employee name");
+       await this.employeeNameField.fill(name);
+   }
+
+   async selectAssignEventDropdown() {
+       Logger.info("Selecting Assign Event Type dropdown");
+       await this.click(this.assignEventDropdown, "Assign Event Type dropdown");
+       await this.page.waitForSelector(".oxd-select-dropdown .oxd-select-option", { state: "visible", timeout: 5000 });
+       await this.page.waitForTimeout(1000);
+       await this.page.locator(".oxd-select-dropdown .oxd-select-option").nth(1).click();
+       Logger.info("Assign Event Type dropdown option selected");
+   }
+
+   async selectAssignCurrencyDropdown() {
+       Logger.info("Selecting Assign Currency dropdown");
+       await this.click(this.assignCurrencyDropdown, "Assign Currency Type dropdown");
+       await this.page.waitForSelector(".oxd-select-dropdown .oxd-select-option", { state: "visible", timeout: 5000 });
+       await this.page.waitForTimeout(1000);
+       await this.page.locator(".oxd-select-dropdown .oxd-select-option").nth(1).click();
+       Logger.info("Assign Currency option selected");
+   }
+
+   async addAssignRemarks(remarks: string) {
+       Logger.info("Adding assign remarks");
+       await this.assignRemarksField.fill(remarks);
+   }
 
 }
