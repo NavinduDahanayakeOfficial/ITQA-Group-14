@@ -103,6 +103,24 @@ export class ClaimModule extends BasePage {
    async fillEmployeeName(name: string) {
        Logger.info("Filling employee name");
        await this.employeeNameField.fill(name);
+
+       // Wait for suggestions to appear
+       await this.page.waitForTimeout(3000);
+
+       // Check for suggestions
+       const suggestions = this.page.locator('.oxd-autocomplete-dropdown .oxd-autocomplete-option');
+       const suggestionCount = await suggestions.count();
+
+       if (suggestionCount === 0) {
+           Logger.error("No matching employee found (No Records Found)");
+           throw new Error("No matching employee found (No Records Found)");
+       }
+
+       // Select the first suggestion
+       const firstSuggestion = suggestions.first();
+       await firstSuggestion.click();
+
+       Logger.info("First suggested name selected");
    }
 
    async selectAssignEventDropdown() {
