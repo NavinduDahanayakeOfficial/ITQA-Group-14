@@ -2,7 +2,7 @@ import { Given, When, Then } from "@cucumber/cucumber";
 import { page } from "../pages/hooks";
 import { expect } from "@playwright/test";
 import { Logger } from "../../../utils/logger";
-import { BuzzModule } from "../pages/buzzMOdule";
+import { BuzzModule } from "../pages/buzzModule";
 
 let buzzModule: BuzzModule;
 
