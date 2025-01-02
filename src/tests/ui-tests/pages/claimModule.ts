@@ -319,4 +319,14 @@ export class ClaimModule extends BasePage {
        return isVisible && headerText?.trim() === "Assign Claim";
    }
 
+   async isEventRequiredVisible() {
+       const eventRequiredLocator = this.page.locator('//*[@id="app"]/div[1]/div[2]/div[2]/div/div/form/div[1]/div/div[1]/div/span');
+       return await eventRequiredLocator.isVisible();
+   }
+
+   async isCurrencyRequiredVisible() {
+       const currencyRequiredLocator = this.page.locator('//*[@id="app"]/div[1]/div[2]/div[2]/div/div/form/div[1]/div/div[2]/div/span');
+       return await currencyRequiredLocator.isVisible();
+   }
+
 }
