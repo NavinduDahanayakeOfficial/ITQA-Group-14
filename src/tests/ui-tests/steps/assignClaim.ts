@@ -53,19 +53,34 @@ Then('User verifies the claim assignment page is displayed', async function () {
 });
 
 Then('User should see a warning message for Employee Name', async function () {
-    Logger.info('Checking for warning message for missing Employee Name');
-    const warningMessage = await page.locator('//*[@id="app"]/div[1]/div[2]/div[2]/div/div/form/div[1]/div/div/div/span').textContent();
-    expect(warningMessage).toContain('required');
+    Logger.info('Checking for "Required" message under Employee Name');
+    const isRequiredVisible = await page.locator('//*[@id="app"]/div[1]/div[2]/div[2]/div/div/form/div[1]/div/div/div/span').isVisible();
+    const requiredText = await page.locator('//*[@id="app"]/div[1]/div[2]/div[2]/div/div/form/div[1]/div/div/div/span').textContent();
+    expect(isRequiredVisible).toBe(true);
+    if (isRequiredVisible) {
+        Logger.info('"Required" message is visible under Employee Name');
+    }
+    expect(requiredText).toContain('Required');
 });
 
 Then('User should see a warning message for Event', async function () {
-    Logger.info('Checking for warning message for missing Event');
-    const warningMessage = await page.locator('//*[@id="app"]/div[1]/div[2]/div[2]/div/div/form/div[2]/div/div[1]/div/span').textContent();
-    expect(warningMessage).toContain('required');
+    Logger.info('Checking for "Required" message under Event');
+    const isRequiredVisible = await page.locator('//*[@id="app"]/div[1]/div[2]/div[2]/div/div/form/div[2]/div/div[1]/div/span').isVisible();
+    const requiredText = await page.locator('//*[@id="app"]/div[1]/div[2]/div[2]/div/div/form/div[2]/div/div[1]/div/span').textContent();
+    expect(isRequiredVisible).toBe(true);
+    if (isRequiredVisible) {
+        Logger.info('"Required" message is visible under Event');
+    }
+    expect(requiredText).toContain('Required');
 });
 
 Then('User should see a warning message for Currency', async function () {
-    Logger.info('Checking for warning message for missing Currency');
-    const warningMessage = await page.locator('//*[@id="app"]/div[1]/div[2]/div[2]/div/div/form/div[2]/div/div[2]/div/span').textContent();
-    expect(warningMessage).toContain('required');
+    Logger.info('Checking for "Required" message under Currency');
+    const isRequiredVisible = await page.locator('//*[@id="app"]/div[1]/div[2]/div[2]/div/div/form/div[2]/div/div[2]/div/span').isVisible();
+    const requiredText = await page.locator('//*[@id="app"]/div[1]/div[2]/div[2]/div/div/form/div[2]/div/div[2]/div/span').textContent();
+    expect(isRequiredVisible).toBe(true);
+    if (isRequiredVisible) {
+        Logger.info('"Required" message is visible under Currency');
+    }
+    expect(requiredText).toContain('Required');
 }); 
