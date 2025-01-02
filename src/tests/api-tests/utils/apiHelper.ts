@@ -15,32 +15,29 @@ export class ApiHelper {
 
    async get(endpoint: string) {
       const context = await request.newContext();
-
-      let response;
-      try {
-         response = await context.get(`${this.baseUrl}${endpoint}`, {
-            headers: {
-               Authorization: this.authHeader,
-            },
-         });
-         const responseData = {
-            status: response.status(),
-            data: await response.json(),
-         };
-
-         Logger.info(`Response Body: ${JSON.stringify(responseData.data, null, 2)}`);
-
-         return responseData;
+  
+        let response;
+        try {
+           response = await context.get(`${this.baseUrl}${endpoint}`, {
+              headers: {
+                 Authorization: this.authHeader,
+              },
+           });
+           const responseData = {
+              status: response.status(),
+              data: await response.json(),
+           };
+  
+        return responseData;
       } catch (error: any) {
-         return {
-            status: response?.status(),
-            error: await response?.text(),
-         };
-
+        return {
+          status: response?.status(),
+          error: await response?.text()
+        };
       } finally {
-         await context.dispose();
+        await context.dispose();
       }
-   }
+    }
 
   async post(endpoint: string, data: any) {
     const context = await request.newContext();

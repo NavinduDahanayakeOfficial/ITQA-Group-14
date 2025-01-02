@@ -1,6 +1,6 @@
 @API
 @GetBookByID
-Feature: Get a Book by ID - Admin
+Feature: Get a Book by ID
   As a library user
   I want to get a book by its ID
   So that I can view the book details
@@ -15,6 +15,11 @@ Feature: Get a Book by ID - Admin
     When I have the following book ID: 100
     Then the book details should not be displayed with 404 status code
 
+  Scenario: Getting a book by invalid ID
+    Given I am authenticated as "admin"
+    When I have the following invalid parameter: "a"
+    Then the book details should not be displayed with 400 status code
+
   Scenario: Successfully getting a book by existing ID
     Given I am authenticated as "user"
     When I have the following book ID: 1
@@ -24,3 +29,8 @@ Feature: Get a Book by ID - Admin
     Given I am authenticated as "user"
     When I have the following book ID: 100
     Then the book details should not be displayed with 404 status code
+
+  Scenario: Getting a book by invalid ID
+    Given I am authenticated as "user"
+    When I have the following invalid parameter: "a"
+    Then the book details should not be displayed with 400 status code
