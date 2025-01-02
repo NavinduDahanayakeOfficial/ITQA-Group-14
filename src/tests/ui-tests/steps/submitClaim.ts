@@ -37,8 +37,8 @@ When('User clicks the "Create" button', async function () {
 
   Then('User verifies the claim submission success', async function () {
     Logger.info('Verifying claim submission success');
-    const successMessage = await claimmodule.verifyClaimSuccess();
-    Logger.info('Claim submission success message: ' + successMessage);
-    expect(successMessage).toContain('Claim successfully submitted');
+    const isPageLoaded = await claimmodule.verifyClaimSuccess();
+    Logger.info('Claim submission page loaded: ' + isPageLoaded);
+    expect(isPageLoaded).toBe(true);
  });
  

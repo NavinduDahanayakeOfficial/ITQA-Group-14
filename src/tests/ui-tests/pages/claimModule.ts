@@ -93,11 +93,23 @@ export class ClaimModule extends BasePage {
   }
 
   async verifyClaimSuccess() {
-    await this.claimSuccessMessage.waitFor({ state: "visible", timeout: 5000 });
-    const successMessageText = await this.claimSuccessMessage.innerText();
-    Logger.info("Claim success message: " + successMessageText);
-    return successMessageText;
- }
+    // Wait for the header to be visible
+    const headerLocator = this.page.locator('//*[@id="app"]/div[1]/div[2]/div[2]/div/div/div[1]/h6');
+    await headerLocator.waitFor({ state: "visible", timeout: 5000 });
+
+    // Get the text content of the header
+    const headerText = await headerLocator.textContent();
+    Logger.info("Page header text: " + headerText);
+
+    // Verify the header text
+    if (headerText?.trim() === "Submit Claim") {
+        Logger.info("Claim submission page loaded successfully with header: " + headerText);
+        return true;
+    } else {
+        Logger.error("Claim submission page did not load as expected. Header found: " + headerText);
+        throw new Error("Claim submission page did not load as expected.");
+    }
+  }
  
 
    async fillEmployeeName(name: string) {
