@@ -258,12 +258,9 @@ export class ClaimModule extends BasePage {
    }
 
    async searchAllCombinations() {
-       // Retrieve event names first
        const eventNames = await this.getEventNameOptions();
-       Logger.info(`Event Name options: ${eventNames.join(', ')}`);
-
-       // Then retrieve statuses
        const statuses = await this.getStatusOptions();
+       Logger.info(`Event Name options: ${eventNames.join(', ')}`);
        Logger.info(`Status options: ${statuses.join(', ')}`);
 
        for (const eventName of eventNames) {
@@ -272,6 +269,14 @@ export class ClaimModule extends BasePage {
                await this.selectEventName(eventName);
                await this.selectStatus(status);
                await this.clickSearchButton();
+
+               // Check for "No Records Found" message
+               const noRecordsVisible = await this.noRecordsMessage.isVisible();
+               if (noRecordsVisible) {
+                   Logger.info(`No records found for Event Name: ${eventName}, Status: ${status}`);
+                   continue; // Skip further processing for this combination
+               }
+
                const resultsMatch = await this.verifySearchResults(eventName, status);
                if (!resultsMatch) {
                    Logger.error(`Search results do not match for Event Name: ${eventName}, Status: ${status}`);
