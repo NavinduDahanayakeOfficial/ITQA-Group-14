@@ -1,0 +1,117 @@
+name: Playwright Tests
+on:
+   push:
+      branches: [working_test, main, working_test_pipeline]
+   pull_request:
+      branches: [working_test, main, working_test_pipeline]
+
+jobs:
+   api-tests:
+      runs-on: ubuntu-latest
+
+      steps:
+         - uses: actions/checkout@v4
+
+         - name: Setup Node.js
+           uses: actions/setup-node@v4
+           with:
+              node-version: "20"
+              cache: "npm"
+
+         - name: Setup Java
+           uses: actions/setup-java@v3
+           with:
+              java-version: "17"
+              distribution: "temurin"
+
+         - name: Install dependencies
+           run: |
+              npm ci
+              npx playwright install --with-deps
+
+         - name: Start API Server
+           run: |
+              nohup java -jar ./src/api/demo-0.0.1-SNAPSHOT.jar &
+              sleep 30
+
+         - name: Run API Tests
+           run: |
+              npm run test:api
+
+         - name: Upload API Test Results
+           if: always()
+           uses: actions/upload-artifact@v3
+           with:
+              name: api-test-results
+              path: |
+                 allure-results/
+                 reports/cucumber-report.html
+
+   ui-tests:
+      runs-on: ubuntu-latest
+      needs: api-tests
+      steps:
+         - uses: actions/checkout@v4
+
+         - name: Setup Node.js
+           uses: actions/setup-node@v4
+           with:
+              node-version: "20"
+              cache: "npm"
+
+         - name: Install dependencies
+           run: |
+              npm ci
+              npx playwright install --with-deps
+
+         - name: Run UI Tests
+           run: |
+              npm run test:ui
+
+         - name: Upload UI Test Results
+           if: always()
+           uses: actions/upload-artifact@v3
+           with:
+              name: ui-test-results
+              path: |
+                 allure-results/
+                 reports/cucumber-report.html
+
+   generate-report:
+      needs: [api-tests, ui-tests]
+      runs-on: ubuntu-latest
+      if: always()
+      steps:
+         - uses: actions/checkout@v4
+
+         - name: Download API Test Results
+           uses: actions/download-artifact@v3
+           with:
+              name: api-test-results
+              path: api-results
+
+         - name: Download UI Test Results
+           uses: actions/download-artifact@v3
+           with:
+              name: ui-test-results
+              path: ui-results
+
+         - name: Generate Combined Report
+           run: |
+              npm install -g allure-commandline
+              mkdir -p combined-results
+              cp -r api-results/allure-results/* combined-results/ || true
+              cp -r ui-results/allure-results/* combined-results/ || true
+              allure generate combined-results -o allure-report --clean
+
+         - name: Upload Combined Report
+           uses: actions/upload-artifact@v3
+           with:
+              name: test-report
+              path: |
+                 allure-report/
+                 api-results/reports/cucumber-report.html
+                 ui-results/reports/cucumber-report.html
+              retention-days: 30
+
+         -
