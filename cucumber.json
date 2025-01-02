@@ -21,5 +21,48 @@
             "html:./reports/cucumber-report.html",
             "allure-cucumberjs/reporter"
         ]
+    },"api": {
+        "formatOptions": {
+            "resultsDir": "allure-results/api",
+            "snippetInterface": "async-await"
+        },
+        "paths": [
+            "src/tests/api-tests/features/**/*.feature"
+        ],
+        "dryRun": false,
+        "require": [
+            "src/tests/api-tests/steps/**/*.ts"
+        ],
+        "requireModule": [
+            "ts-node/register"
+        ],
+        "format": [
+            "progress-bar",
+            "html:./reports/api-report.html",
+            "allure-cucumberjs/reporter"
+        ],
+        "tags": "@API"
+    },
+    "ui": {
+        "formatOptions": {
+            "resultsDir": "allure-results/ui",
+            "snippetInterface": "async-await"
+        },
+        "paths": [
+            "src/tests/ui-tests/features/**/*.feature"
+        ],
+        "dryRun": false,
+        "require": [
+            "src/tests/ui-tests/steps/**/*.ts"
+        ],
+        "requireModule": [
+            "ts-node/register"
+        ],
+        "format": [
+            "progress-bar",
+            "html:./reports/ui-report.html",
+            "allure-cucumberjs/reporter"
+        ],
+        "tags": "@UI"
     }
 }
