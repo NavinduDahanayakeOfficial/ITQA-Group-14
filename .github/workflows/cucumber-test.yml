@@ -70,18 +70,18 @@ jobs:
               npm run test:searchEmployee
               npm run test:deleteEmployee
               npm run test:createTextPost
+              npm run test:editTextPost
               npm run test:deleteTextPost
-              npm run test:editTextPost,
-              npm run test:addCandidate,
-              npm run test:searchCandidate,
-              npm run test:deleteCandidate,
-              npm run test:employeeClaim"",
-              npm run test:assignClaim,
-              npm run test:submitClaim,
-              npm run test:viewUserInfo,
-              npm run test:UpdateUserPersonalDetails,
-              npm run test:applyLeave,
-              npm run test:assignLeave,
+              npm run test:addCandidate
+              npm run test:searchCandidate
+              npm run test:deleteCandidate
+              npm run test:employeeClaim
+              npm run test:assignClaim
+              npm run test:submitClaim
+              npm run test:viewUserInfo
+              npm run test:UpdateUserPersonalDetails
+              npm run test:applyLeave
+              npm run test:assignLeave
 
          - name: Upload UI Test Results
            if: always()
