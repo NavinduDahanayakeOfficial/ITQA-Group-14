@@ -115,4 +115,3 @@ jobs:
                  ui-results/reports/cucumber-report.html
               retention-days: 30
 
-         -
