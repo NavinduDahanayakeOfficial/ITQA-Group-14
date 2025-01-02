@@ -40,6 +40,9 @@ When('User clicks the Search button', async function () {
     await claimModule.clickSearchButton();
 });
 
+When('User searches all combinations from Event Name and Status dropdowns', async function () {
+    await claimModule.searchAllCombinations();
+});
 
 Then('User should be able to see the filtered results', async function () {
     // Get the values we selected (assuming they were stored in the world object)

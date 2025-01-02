@@ -129,57 +129,43 @@ export class ClaimModule extends BasePage {
    }
 
    async selectEventName(eventName: string) {
-      Logger.info(`Attempting to select Event Name: ${eventName}`);
-      await this.click(this.eventNameDropdown, "Event Name dropdown");
-      await this.page.waitForSelector(".oxd-select-dropdown .oxd-select-option", { state: "visible", timeout: 5000 });
-      await this.page.waitForTimeout(1000);
-      
-      // Get all available options
-      const options = await this.page.locator(".oxd-select-dropdown .oxd-select-option").allTextContents();
-      Logger.info("Available dropdown options: " + JSON.stringify(options));
+       Logger.info(`Attempting to select Event Name: ${eventName}`);
+       await this.click(this.eventNameDropdown, "Event Name dropdown");
+       await this.page.waitForSelector(".oxd-select-dropdown .oxd-select-option", { state: "visible", timeout: 5000 });
 
-      // Select the first non-empty option
-      const validOptions = options.filter(option => option.trim() !== '');
-      if (validOptions.length > 0) {
-          const selectedOption = validOptions[1]; // Take the second valid option (usually first is a placeholder)
-          Logger.info(`Selecting option: "${selectedOption}"`);
-          
-          await this.page.locator(`.oxd-select-dropdown .oxd-select-option`).nth(1).click();
-          Logger.info(`Successfully selected: "${selectedOption}"`);
-          
-          this.selectedEventName = selectedOption;
-          return selectedOption; // Return the selected value for verification
-      } else {
-          Logger.error("No valid options found in dropdown");
-          throw new Error("No valid options available in Event Name dropdown");
-      }
+       // Find the index of the desired event name
+       const options = await this.page.locator(".oxd-select-dropdown .oxd-select-option").allTextContents();
+       const index = options.findIndex(option => option.trim() === eventName);
+
+       if (index !== -1) {
+           Logger.info(`Selecting option: "${eventName}" at index ${index}`);
+           await this.page.locator(".oxd-select-dropdown .oxd-select-option").nth(index).click();
+           Logger.info(`Successfully selected: "${eventName}"`);
+           this.selectedEventName = eventName;
+       } else {
+           Logger.error(`Event Name: "${eventName}" not found in dropdown options`);
+           throw new Error(`Event Name: "${eventName}" not found in dropdown options`);
+       }
    }
 
    async selectStatus(status: string) {
-      Logger.info(`Attempting to select Status: ${status}`);
-      await this.click(this.statusDropdown, "Status dropdown");
-      await this.page.waitForSelector(".oxd-select-dropdown .oxd-select-option", { state: "visible", timeout: 5000 });
-      await this.page.waitForTimeout(1000);
-      
-      // Get all available options
-      const options = await this.page.locator(".oxd-select-dropdown .oxd-select-option").allTextContents();
-      Logger.info("Available dropdown options: " + JSON.stringify(options));
+       Logger.info(`Attempting to select Status: ${status}`);
+       await this.click(this.statusDropdown, "Status dropdown");
+       await this.page.waitForSelector(".oxd-select-dropdown .oxd-select-option", { state: "visible", timeout: 5000 });
 
-      // Select the first non-empty option
-      const validOptions = options.filter(option => option.trim() !== '');
-      if (validOptions.length > 0) {
-          const selectedOption = validOptions[1]; // Take the second valid option (usually first is a placeholder)
-          Logger.info(`Selecting option: "${selectedOption}"`);
-          
-          await this.page.locator(`.oxd-select-dropdown .oxd-select-option`).nth(1).click();
-          Logger.info(`Successfully selected: "${selectedOption}"`);
-          
-          this.selectedStatus = selectedOption;
-          return selectedOption; // Return the selected value for verification
-      } else {
-          Logger.error("No valid options found in Status dropdown");
-          throw new Error("No valid options available in Status dropdown");
-      }
+       // Find the index of the desired status
+       const options = await this.page.locator(".oxd-select-dropdown .oxd-select-option").allTextContents();
+       const index = options.findIndex(option => option.trim() === status);
+
+       if (index !== -1) {
+           Logger.info(`Selecting option: "${status}" at index ${index}`);
+           await this.page.locator(".oxd-select-dropdown .oxd-select-option").nth(index).click();
+           Logger.info(`Successfully selected: "${status}"`);
+           this.selectedStatus = status;
+       } else {
+           Logger.error(`Status: "${status}" not found in dropdown options`);
+           throw new Error(`Status: "${status}" not found in dropdown options`);
+       }
    }
 
    async clickSearchButton() {
@@ -245,6 +231,55 @@ export class ClaimModule extends BasePage {
 
    async getSelectedStatus(): Promise<string> {
        return this.selectedStatus || '';
+   }
+
+   async getEventNameOptions(): Promise<string[]> {
+       await this.click(this.eventNameDropdown, "Event Name dropdown");
+       await this.page.waitForSelector(".oxd-select-dropdown .oxd-select-option", { state: "visible", timeout: 5000 });
+       await this.page.waitForTimeout(1000); // Additional wait to ensure content is loaded
+
+       const options = await this.page.locator(".oxd-select-dropdown .oxd-select-option").allTextContents();
+       Logger.info(`Event Name options retrieved: ${JSON.stringify(options)}`);
+
+       // Filter out empty options and the "-- Select --" placeholder
+       return options.filter(option => option.trim() !== '' && option.trim() !== '-- Select --');
+   }
+
+   async getStatusOptions(): Promise<string[]> {
+       await this.click(this.statusDropdown, "Status dropdown");
+       await this.page.waitForSelector(".oxd-select-dropdown .oxd-select-option", { state: "visible", timeout: 5000 });
+       await this.page.waitForTimeout(1000); // Additional wait to ensure content is loaded
+
+       const options = await this.page.locator(".oxd-select-dropdown .oxd-select-option").allTextContents();
+       Logger.info(`Status options retrieved: ${JSON.stringify(options)}`);
+
+       // Filter out empty options and the "-- Select --" placeholder
+       return options.filter(option => option.trim() !== '' && option.trim() !== '-- Select --');
+   }
+
+   async searchAllCombinations() {
+       // Retrieve event names first
+       const eventNames = await this.getEventNameOptions();
+       Logger.info(`Event Name options: ${eventNames.join(', ')}`);
+
+       // Then retrieve statuses
+       const statuses = await this.getStatusOptions();
+       Logger.info(`Status options: ${statuses.join(', ')}`);
+
+       for (const eventName of eventNames) {
+           for (const status of statuses) {
+               Logger.info(`Searching for combination: Event Name - ${eventName}, Status - ${status}`);
+               await this.selectEventName(eventName);
+               await this.selectStatus(status);
+               await this.clickSearchButton();
+               const resultsMatch = await this.verifySearchResults(eventName, status);
+               if (!resultsMatch) {
+                   Logger.error(`Search results do not match for Event Name: ${eventName}, Status: ${status}`);
+               } else {
+                   Logger.info(`Search results verified successfully for Event Name: ${eventName}, Status: ${status}`);
+               }
+           }
+       }
    }
 
 }

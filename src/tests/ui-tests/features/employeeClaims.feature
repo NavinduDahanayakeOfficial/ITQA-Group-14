@@ -6,7 +6,5 @@ Feature: Employee Claims Navigation
     Given User navigates to the "Claim" module
     When User clicks on "Employee Claims"
     Then User should see the Employee Claims page
-    When User selects "Accommodation" from Event Name dropdown
-    And User selects "Initiated" from Status dropdown
-    And User clicks the Search button
-    Then User should be able to see the filtered results
+    When User searches all combinations from Event Name and Status dropdowns
+    Then User should be able to see the filtered results for each combination
