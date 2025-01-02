@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "cucumber-js",
-    "test:ui": "cucumber-js --profile ui --tags \"@UI\" ",
-    "test:api": "cucumber-js --profile api --tags \"@API\" ",
+    "test:ui": "cucumber-js --tags \"@UI\" ",
+    "test:api": "cucumber-js --tags \"@API\" ",
     "test:addEmployee": "cucumber-js --tags '@UI and @AddEmployee'",
     "test:searchEmployee": "cucumber-js --tags '@UI and @SearchEmployee'",
     "test:submitClaim": "cucumber-js --tags @UI and @SubmitClaim'",
