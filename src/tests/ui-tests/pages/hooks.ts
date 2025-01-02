@@ -11,7 +11,7 @@ setDefaultTimeout(60 * 1000);
 
 Before({ tags: "@UI" }, async function () {
    browser = await chromium.launch({
-      headless: false,
+      headless: true,
       args: ["--start-maximized"],
    });
    bCtx = await browser.newContext({ viewport: null, javaScriptEnabled: true });
