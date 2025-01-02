@@ -1,3 +1,4 @@
+@UI
 @DeleteKPI
 Feature: Delete Key Performance Indicators
   As an admin user,
