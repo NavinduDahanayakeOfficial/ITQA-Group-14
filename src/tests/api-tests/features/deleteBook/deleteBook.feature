@@ -1,3 +1,4 @@
+@API
 @DeleteBook
 Feature: Delete a Book by ID
   As a library user
