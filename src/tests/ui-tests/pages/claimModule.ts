@@ -21,7 +21,7 @@ export class ClaimModule extends BasePage {
    readonly searchButton: Locator;
    readonly searchResultsTable: Locator;
    readonly searchResultRows: Locator;
-   readonly noRecordsMessage: Locator;
+
 
    private selectedEventName: string | null = null;
    private selectedStatus: string | null = null;
@@ -45,7 +45,7 @@ export class ClaimModule extends BasePage {
     this.searchButton = this.page.locator('//*[@id="app"]/div[1]/div[2]/div[2]/div[1]/div[2]/form/div[3]/button[2]');
     this.searchResultsTable = this.page.locator('//div[contains(@class, "orangehrm-container")]');
     this.searchResultRows = this.page.locator('//div[contains(@class, "oxd-table-card")]');
-    this.noRecordsMessage = this.page.locator('//span[contains(text(), "No Records Found")]');
+
 
    }
 
@@ -179,14 +179,7 @@ export class ClaimModule extends BasePage {
        // Wait for either results or no records message
        await this.page.waitForTimeout(2000);
        
-       // Check if we have any results
-       const noRecordsExists = await this.noRecordsMessage.isVisible();
-       if (noRecordsExists) {
-           Logger.info("No records found for the search criteria");
-           return false;
-       }
-
-       // Wait for results table
+  
        await this.searchResultsTable.waitFor({ state: 'visible', timeout: 5000 });
        
        // Get all rows using the base XPath
@@ -270,12 +263,6 @@ export class ClaimModule extends BasePage {
                await this.selectStatus(status);
                await this.clickSearchButton();
 
-               // Check for "No Records Found" message
-               const noRecordsVisible = await this.noRecordsMessage.isVisible();
-               if (noRecordsVisible) {
-                   Logger.info(`No records found for Event Name: ${eventName}, Status: ${status}`);
-                   continue; // Skip further processing for this combination
-               }
 
                const resultsMatch = await this.verifySearchResults(eventName, status);
                if (!resultsMatch) {
