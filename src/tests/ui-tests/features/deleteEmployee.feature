@@ -1,3 +1,4 @@
+@UI
 @DeleteEmployee
 Feature: Delete Employee
   As an admin user

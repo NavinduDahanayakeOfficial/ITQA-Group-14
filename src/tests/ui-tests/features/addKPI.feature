@@ -1,3 +1,4 @@
+@UI
 @AddKPI
 Feature: Add Key Performance Indicators 
   As an admin user,

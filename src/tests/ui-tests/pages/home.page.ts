@@ -2,14 +2,13 @@ import { Locator, Page } from "playwright";
 import { BasePage } from "./base.page";
 
 export class HomePage extends BasePage {
-
-    readonly pimModule: Locator;
-    readonly recruitModule: Locator;
-    readonly performanceModule: Locator;
-    readonly buzzModule: Locator;
-    readonly claimModule: Locator;
-    readonly myInfoModule: Locator;
-    readonly leaveModule: Locator;
+  readonly pimModule: Locator;
+  readonly claimModule: Locator;
+  readonly myInfoModule: Locator;
+  readonly recruitModule: Locator;
+  readonly performanceModule: Locator;
+  readonly leaveModule: Locator;
+  readonly buzzModule: Locator;
 
     constructor(page: Page) {
         super(page);
@@ -50,7 +49,6 @@ export class HomePage extends BasePage {
     async clickLeaveModule() {
         await this.click(this.leaveModule, 'Leave Module');
     }
-
 
 }
 
