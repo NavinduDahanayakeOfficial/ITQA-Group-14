@@ -1,4 +1,5 @@
-name: Playwright Tests
+name: Cucumber Tests
+
 on:
    push:
       branches: [working_test, main, working_test_pipeline]
