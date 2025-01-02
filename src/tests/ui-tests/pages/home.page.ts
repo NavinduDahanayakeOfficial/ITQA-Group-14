@@ -8,6 +8,7 @@ export class HomePage extends BasePage {
    readonly recruitModule: Locator;
    readonly performanceModule: Locator;
    readonly leaveModule: Locator;
+   readonly buzzModule: Locator;
 
    constructor(page: Page) {
       super(page);
@@ -21,6 +22,7 @@ export class HomePage extends BasePage {
          '//a[normalize-space()="Performance"]'
       );
       this.leaveModule = this.page.locator('//a[normalize-space()="Leave"]');
+      this.buzzModule = this.page.locator('//a[normalize-space()="Buzz"]');
    }
 
    async clickPimModule() {
@@ -45,4 +47,8 @@ export class HomePage extends BasePage {
    async clickLeaveModule() {
       await this.click(this.leaveModule, "Leave Module");
    }
+   async clickBuzzModule() {
+      await this.click(this.buzzModule, 'Buzz Module');
+      await this.page.waitForTimeout(4000);
+  }
 }
