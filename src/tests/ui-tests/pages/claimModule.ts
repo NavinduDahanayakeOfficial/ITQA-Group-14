@@ -187,6 +187,11 @@ export class ClaimModule extends BasePage {
        const rows = await this.page.locator(`${baseXPath}`).all();
        Logger.info(`Found ${rows.length} results`);
 
+       if (rows.length === 0) {
+           Logger.info('No results found for the selected options');
+           return true; // No results is not an error
+       }
+
        let matchingResults = 0;
        
        // Check each row
@@ -209,12 +214,13 @@ export class ClaimModule extends BasePage {
        }
 
        Logger.info(`Found ${matchingResults} matching results out of ${rows.length} total results`);
-       
-       if (matchingResults === 0) {
-           Logger.error(`No matches found for Event: ${expectedEventName}, Status: ${expectedStatus}`);
+
+       // Show error if there are mismatching rows
+       if (matchingResults !== rows.length) {
+           Logger.error(`Some results do not match the criteria for Event: ${expectedEventName}, Status: ${expectedStatus}`);
            return false;
        }
-       
+
        return true;
    }
 
