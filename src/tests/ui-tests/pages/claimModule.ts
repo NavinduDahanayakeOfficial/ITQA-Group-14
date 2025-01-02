@@ -107,20 +107,20 @@ export class ClaimModule extends BasePage {
        // Wait for suggestions to appear
        await this.page.waitForTimeout(3000);
 
-       // Check for suggestions
-       const suggestions = this.page.locator('.oxd-autocomplete-dropdown .oxd-autocomplete-option');
-       const suggestionCount = await suggestions.count();
-
-       if (suggestionCount === 0) {
-           Logger.error("No matching employee found (No Records Found)");
-           throw new Error("No matching employee found (No Records Found)");
-       }
-
        // Select the first suggestion
-       const firstSuggestion = suggestions.first();
+       const firstSuggestion = this.page.locator('.oxd-autocomplete-dropdown .oxd-autocomplete-option').first();
        await firstSuggestion.click();
 
        Logger.info("First suggested name selected");
+
+       // Check for the presence of the specific element indicating no match
+       const noMatchIndicator = this.page.locator(".oxd-input-group__message");
+       const isNoMatchVisible = await noMatchIndicator.isVisible();
+
+       if (isNoMatchVisible) {
+           Logger.error("No matching employee found (No Records Found)");
+           throw new Error("No matching employee found (No Records Found)");
+       }
    }
 
    async selectAssignEventDropdown() {

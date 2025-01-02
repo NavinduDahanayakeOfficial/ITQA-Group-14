@@ -13,7 +13,7 @@ When('User clicks on "Assign Claim"', async function () {
 
 When('User fills in the Assign Claim details', async function () {
     Logger.info("Filling in the Assign Claim details");
-    await claimmodule.fillEmployeeName("John Doe");
+    await claimmodule.fillEmployeeName("John Doeeeee");
     await claimmodule.selectAssignEventDropdown();
     await claimmodule.selectAssignCurrencyDropdown();
     await claimmodule.addAssignRemarks("Assignment Remarks");
