@@ -298,4 +298,13 @@ export class ClaimModule extends BasePage {
        }
    }
 
+   async verifyAssignClaimPage() {
+       Logger.info("Checking if the Assign Claim page is displayed");
+       const assignClaimHeader = this.page.locator('//*[@id="app"]/div[1]/div[2]/div[2]/div/div/div[1]/h6');
+       const isVisible = await assignClaimHeader.isVisible();
+       const headerText = await assignClaimHeader.textContent();
+       Logger.info(`Assign Claim page header text: ${headerText}`);
+       return isVisible && headerText?.trim() === "Assign Claim";
+   }
+
 }

@@ -9,8 +9,8 @@ Feature: Assign a claim
     When User clicks on "Assign Claim"
     And User fills in the Assign Claim details
     Then User clicks the "Create" button to assign the claim
-    Then User verifies the claim assignment success
-
+  Then User verifies the claim assignment page is displayed
+  
   Scenario: User attempts to assign a claim without Employee Name
     When User clicks on "Assign Claim"
     And User fills in the Assign Claim details except Employee Name

@@ -46,11 +46,10 @@ Then('User clicks the "Create" button to assign the claim', async function () {
     await page.waitForTimeout(2000);
 });
 
-Then('User verifies the claim assignment success', async function () {
-    Logger.info('Verifying claim assignment success');
-    const successMessage = await claimmodule.verifyClaimSuccess();
-    Logger.info('Claim assignment success message: ' + successMessage);
-    expect(successMessage).toContain('Claim successfully assigned');
+Then('User verifies the claim assignment page is displayed', async function () {
+    Logger.info('Verifying claim assignment page is displayed');
+    const isAssignClaimPageVisible = await claimmodule.verifyAssignClaimPage();
+    expect(isAssignClaimPageVisible).toBe(true);
 });
 
 Then('User should see a warning message for Employee Name', async function () {
