@@ -348,7 +348,7 @@ export class PersonalInfoSection extends BasePage {
          return elements.map((element) => (element as HTMLInputElement).innerText);
       });
 
-      if(elements.length === 2) {
+      if (elements.length === 2 && elements[0] ==="Required" && elements[1] ==="Required") {
          return true;
       } else {
          return false;
