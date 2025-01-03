@@ -37,17 +37,18 @@ jobs:
 
          - name: Run API Tests
            run: |
-               npm run test:fetchEmptyBooks || true;
-               npm run test:createBook || true;
-               npm run test:createBookIdAsNumber || true;
-               npm run test:createBookIdAsString || true;
-               npm run test:createDuplicateBook || true;
-               npm run test:fetchAllBooks || true;
-               npm run test:getBookById || true;
-               npm run test:duplicateAndIdValidationSteps || true;
-               npm run test:UpdateBookRecord || true;
-               npm run test:DeleteBook || true;
-              
+              npm run test:fetchEmptyBooks || true;
+              npm run test:createBook || true;
+              npm run test:createBookIdAsNumber || true;
+              npm run test:createBookIdAsString || true;
+              npm run test:createDuplicateBook || true;
+              npm run test:fetchAllBooks || true;
+              npm run test:getBookById || true;
+              npm run test:duplicateAndIdValidationSteps || true;
+              npm run test:UpdateBookRecord || true;
+              npm run test:UpdateBooks || true;
+              npm run test:UpdateBookByID || true;
+              npm run test:DeleteBook || true;
 
          - name: Upload API Test Results
            if: always()
@@ -141,6 +142,3 @@ jobs:
                  api-results/reports/cucumber-report.html
                  ui-results/reports/cucumber-report.html
               retention-days: 30
-
-
-            

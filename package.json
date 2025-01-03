@@ -37,7 +37,10 @@
     "test:createBookIdAsString": "cucumber-js --tags \"@API and @CreateBookIdAsString\"",
     "test:createDuplicateBook": "cucumber-js --tags \"@API and @CreateDuplicateBook\"",
     "test:UpdateBookRecord": "cucumber-js --tags \"@API and @UpdateBookRecord\"",
+    "test:UpdateBooks" : "cucumber-js --tags \"@API and @UpdateBooks\"",
+    "test:UpdateBookByID": "cucumber-js --tags \"@API and @UpdateBookByID\"",
     "test:DeleteBook": "cucumber-js --tags \"@API and @DeleteBook\""
+
   },
   "keywords": [],
   "author": "",
