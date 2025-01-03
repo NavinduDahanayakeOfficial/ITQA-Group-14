@@ -199,10 +199,12 @@ export class PersonalInfoSection extends BasePage {
       await this.page.waitForSelector("//input[@placeholder='First Name']");
       await this.page.waitForTimeout(2000);
 
-      await this.firstName.fill(personalInfo.firstName);
+      
+         await this.firstName.fill(personalInfo.firstName);
       if (personalInfo.middleName)
          await this.middleName.fill(personalInfo.middleName);
-      await this.lastName.fill(personalInfo.lastName);
+      
+         await this.lastName.fill(personalInfo.lastName);
       if (personalInfo.employeeId)
          await this.employeeId.fill(personalInfo.employeeId);
       if (personalInfo.otherId) await this.otherId.fill(personalInfo.otherId);
@@ -323,13 +325,82 @@ export class PersonalInfoSection extends BasePage {
    }
 
    async checkRequiredMessagesAreVisible() {
-      await this.page.waitForSelector("(//span[contains(@class,'oxd-text oxd-text--span oxd-input-field-error-message oxd-input-group__message')])")
+      await this.page.waitForSelector(
+         "(//span[contains(@class,'oxd-text oxd-text--span oxd-input-field-error-message oxd-input-group__message')])"
+      );
 
-      const elements = await this.page.locator("//span[contains(@class,'oxd-text oxd-text--span oxd-input-field-error-message oxd-input-group__message')]").evaluateAll((elements) => {
-         return elements.map((element) => (element as HTMLInputElement).innerText);
+      const elements = await this.page
+         .locator(
+            "//span[contains(@class,'oxd-text oxd-text--span oxd-input-field-error-message oxd-input-group__message')]"
+         )
+         .evaluateAll((elements) => {
+            return elements.map(
+               (element) => (element as HTMLInputElement).innerText
+            );
+         });
+
+      if (
+         elements.length === 2 &&
+         elements[0] === "Required" &&
+         elements[1] === "Required"
+      ) {
+         return true;
+      } else {
+         return false;
+      }
+   }
+
+   async checkInvalidFieldsAreHighlighted() {
+      const employeeIdClassName = await this.employeeId.evaluate((element) => {
+         return (element as HTMLInputElement).className;
       });
 
-      if (elements.length === 2 && elements[0] ==="Required" && elements[1] ==="Required") {
+      const licenseExpiryClassName = await this.licenseExpiry.evaluate(
+         (element) => {
+            return (element as HTMLInputElement).className;
+         }
+      );
+
+      const dateOfBirthClassName = await this.dateOfBirth.evaluate(
+         (element) => {
+            return (element as HTMLInputElement).className;
+         }
+      );
+
+      Logger.info(`Employee Id Class Name: ${employeeIdClassName}`);
+      Logger.info(`License Expiry Class Name: ${licenseExpiryClassName}`);
+      Logger.info(`Date of Birth Class Name: ${dateOfBirthClassName}`);
+
+      if (
+         employeeIdClassName.includes("oxd-input--error") &&
+         licenseExpiryClassName.includes("oxd-input--error") 
+      ) {
+         return true;
+      } else {
+         return false;
+      }
+   }
+
+   async checkInvalidMessagesAreVisible() {
+      await this.page.waitForSelector(
+         "(//span[contains(@class,'oxd-text oxd-text--span oxd-input-field-error-message oxd-input-group__message')])"
+      );
+
+      const elements = await this.page
+         .locator(
+            "//span[contains(@class,'oxd-text oxd-text--span oxd-input-field-error-message oxd-input-group__message')]"
+         )
+         .evaluateAll((elements) => {
+            return elements.map(
+               (element) => (element as HTMLInputElement).innerText
+            );
+         });
+
+      if (
+         elements.length > 2 &&
+         elements[0] === "Should not exceed 10 characters" &&
+         elements[1] === "Should be a valid date in yyyy-dd-mm format" 
+      ) {
          return true;
       } else {
          return false;
