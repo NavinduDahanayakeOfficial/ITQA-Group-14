@@ -9,6 +9,8 @@ let myInfoModule: MyInfoModule;
 let personalInfoSection: PersonalInfoSection;
 
 let data: any;
+let emptyData: any;
+let invalidData: any;
 
 When(
    "User enter the new personal details",
@@ -18,6 +20,28 @@ When(
       Logger.info("Filling in the personal details");
       Logger.info(JSON.stringify(data));
       await personalInfoSection.fillPersonalInfo(data);
+   }
+);
+
+When(
+   "User enter the empty personal details",
+   async function (dataTable: { hashes: () => any }) {
+      personalInfoSection = new PersonalInfoSection(page);
+      emptyData = dataTable.hashes()[0];
+      Logger.info("Filling in the personal details");
+      Logger.info(JSON.stringify(emptyData));
+      await personalInfoSection.fillPersonalInfo(emptyData);
+   }
+);
+
+When(
+   "User enter the invalid personal details",
+   async function (dataTable: { hashes: () => any }) {
+      personalInfoSection = new PersonalInfoSection(page);
+      invalidData = dataTable.hashes()[0];
+      Logger.info("Filling in the personal details");
+      Logger.info(JSON.stringify(invalidData));
+      await personalInfoSection.fillPersonalInfo(invalidData);
    }
 );
 
@@ -68,3 +92,12 @@ Then(
       expect(isErrorMessageAreVisible).toBe(true);
    }
 );
+
+Then("Invalid fields should be highlighted with an error message", async function () {
+   const isInvalidFieldsAreHighlighted = await personalInfoSection.checkInvalidFieldsAreHighlighted();
+   Logger.info("Is invalid fields are highlighted: " + isInvalidFieldsAreHighlighted);
+   expect(isInvalidFieldsAreHighlighted).toBe(true);
+   const isErrorMessageAreVisible = await personalInfoSection.checkInvalidMessagesAreVisible();
+   Logger.info("Is error messages are visible: " + isErrorMessageAreVisible);
+   expect(isErrorMessageAreVisible).toBe(true);
+});
