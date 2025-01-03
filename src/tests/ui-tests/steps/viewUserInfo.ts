@@ -24,14 +24,11 @@ let contactDetailsSection: ContactDetailsSection;
 let emergencyContactsSection: EmergencyContactsSection;
 let dependentsSection: DependentsSection;
 
-Given(
-   'User navigates to the "My Info" module',
-   async function () {
-      Logger.info(`Navigated to the My Info module`);
-      homePage = new HomePage(page);
-      await homePage.clickMyInfoModule();
-   }
-);
+Given('User navigates to the "My Info" module', async function () {
+   Logger.info(`Navigated to the My Info module`);
+   homePage = new HomePage(page);
+   await homePage.clickMyInfoModule();
+});
 
 Given('User on the "My Info" page', async function () {
    myInfoModule = new MyInfoModule(page);
@@ -112,7 +109,41 @@ Then("User should see the {string} section", async function (section: string) {
 
 Then("User should be able to view personal details", async function () {
    console.log("User should be able to view personal details");
-   const personalInfo = await personalInfoSection.getPersonalInfo();
-   Logger.info("Personal Info: " + JSON.stringify(personalInfo));
-   expect(personalInfo).not.toBe(null);
+   const currentPersonalInfo = await personalInfoSection.getPersonalInfo();
+   Logger.info("Current Personal Info: " + JSON.stringify(currentPersonalInfo));
+   const expectedPersonalInfo = {
+      firstName: "John",
+      middleName: "William",
+      lastName: "Doe",
+      employeeId: "444110",
+      otherId: "123456",
+      licenseNumber: "2000304",
+      licenseExpiry: "2022-31-12",
+      nationality: "American",
+      maritalStatus: "Single",
+      dateOfBirth: "1990-15-01",
+      gender: "Male",
+   };
+   Logger.info(
+      "Expected Personal Info: " + JSON.stringify(expectedPersonalInfo)
+   );
+
+   expect(currentPersonalInfo).not.toBe(null);
+   expect(currentPersonalInfo.firstName).toBe(expectedPersonalInfo.firstName);
+   expect(currentPersonalInfo.lastName).toBe(expectedPersonalInfo.lastName);
+   expect(currentPersonalInfo.middleName).toBe(expectedPersonalInfo.middleName);
+   expect(currentPersonalInfo.otherId).toBe(expectedPersonalInfo.otherId);
+   expect(currentPersonalInfo.licenseNumber).toBe(
+      expectedPersonalInfo.licenseNumber
+   );
+   expect(currentPersonalInfo.licenseExpiry).toBe(
+      expectedPersonalInfo.licenseExpiry
+   );
+   expect(currentPersonalInfo.maritalStatus).toBe(
+      expectedPersonalInfo.maritalStatus
+   );
+   expect(currentPersonalInfo.dateOfBirth).toBe(
+      expectedPersonalInfo.dateOfBirth
+   );
+   expect(currentPersonalInfo.gender).toBe(expectedPersonalInfo.gender);
 });
