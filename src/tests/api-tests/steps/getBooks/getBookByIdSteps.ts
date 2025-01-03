@@ -10,9 +10,14 @@ When('I have the following book ID: {int}', async function (id: number) {
    Logger.info("Request Sent");
 });
 
+When('I have the following invalid parameter: {string}', async function (id: string) {
+   response = await apiHelper.get(`/api/books/${id}`);
+   Logger.info("Request Sent");
+});
+
 Then('the book details should be displayed successfully with {int} status code', async function (status: number) {
    expect(response.status).toBeDefined();
-   Logger.info("Status code should be 200.");
+   Logger.info("Status code should be: " + status);
    Logger.info("Status code: " + response.status);
    expect(response.status).toBe(status);
    expect(response.data).toBeDefined();
@@ -21,7 +26,7 @@ Then('the book details should be displayed successfully with {int} status code',
 
 Then('the book details should not be displayed with {int} status code', async function (status: number) {
    expect(response.status).toBeDefined();
-   Logger.info("Status code should be 404.");
+   Logger.info("Status code should be: " + status);
    Logger.info("Status code: " + response.status);
    expect(response.status).toBe(status);
    expect(response.error).toBeDefined();

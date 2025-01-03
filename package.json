@@ -21,7 +21,10 @@
     "test:cancelAddKPI": "cucumber-js --tags '@cancelAddKPI'",
     "test:createDuplicateBook": "cucumber-js --tags '@API and @CreateDuplicateBook'",
     "test:employeeClaims": "cucumber-js --tags '@UI and @EmployeeClaims'",
-    "test:createBookIdAsString": "cucumber-js --tags '@API and @CreateBookIdAsString'"
+    "test:createBookIdAsString": "cucumber-js --tags '@API and @CreateBookIdAsString'",
+    "test:createTextPost": "cucumber-js --tags '@UI and @createTextPost'",
+    "test:deleteTextPost": "cucumber-js --tags '@UI and @deleteTextPost'",
+    "test:editTextPost": "cucumber-js --tags '@UI and @editTextPost'"
   },
   "keywords": [],
   "author": "",

@@ -18,15 +18,13 @@ export class ApiHelper {
     try {
       response = await context.get(`${this.baseUrl}${endpoint}`, {
         headers: {
-          Authorization: this.authHeader
-        }
+          Authorization: this.authHeader,
+        },
       });
       const responseData = {
         status: response.status(),
-        data: await response.json()
+        data: await response.json(),
       };
-
-      Logger.info(`Response Body: ${JSON.stringify(responseData.data, null, 2)}`);
 
       return responseData;
     } catch (error: any) {

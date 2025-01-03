@@ -13,11 +13,16 @@ When("I fetch the list of books when DB is empty", async function () {
 Then("The API should indicate empty array with success response", function () {
     Logger.info("If no books exist, the response status should still be 200");
     Logger.info("Response status: " + response.status);
-    Logger.info(`Response Body: ${JSON.stringify(response.data, null, 2)}`);
     expect(response).toBeDefined();
     expect(response.status).toBe(200);
 
     Logger.info("Response data should be an empty array");
+    Logger.info(`Response Body: ${JSON.stringify(response.data, null, 2)}`);
     expect(response.data).toBeInstanceOf(Array);
-    expect(response.data.length).toBe(0);
+    if (response.data.length === 0) {
+        Logger.info("No books available in the response");
+    } else {
+        Logger.error("Books available in the response");
+    }
+    expect(response.data.length).toBe(0)
 });

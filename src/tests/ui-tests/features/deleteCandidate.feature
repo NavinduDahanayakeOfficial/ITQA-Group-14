@@ -6,8 +6,9 @@ Feature: Delete Candidate
   So that the candidate profile is removed successfully
 
   Background:
-    Given User navigates to the "Recruitment" module
+    Given User navigates to the Recruitment module
 
   Scenario: Successfully deleting a candidate
-    When User clicks the Delete button and confirms the deletion
-    Then User should see a Delete successful message
+    When User clicks the delete icon button
+    And User confirms the deletion
+    Then User should see "Succesfully Deleted" message
