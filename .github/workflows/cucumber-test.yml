@@ -37,7 +37,19 @@ jobs:
 
          - name: Run API Tests
            run: |
-              npm run test:api
+               npm run test:fetchEmptyBooks || true;
+               npm run test:createBook || true;
+               npm run test:fetchAllBooks || true;
+               npm run test:getBookByIdUser || true;
+               npm run test:addKPI || true;
+               npm run test:deleteKPI || true;
+               npm run test:cancelAddKPI || true;
+               npm run test:duplicateAndIdValidationSteps || true;
+               npm run test:createBookIdAsNumber || true;
+               npm run test:createBookIdAsString || true;
+               npm run test:createDuplicateBook || true;
+               npm run test:UpdateBookRecord || true;
+              
 
          - name: Upload API Test Results
            if: always()

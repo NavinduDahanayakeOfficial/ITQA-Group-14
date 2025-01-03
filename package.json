@@ -26,17 +26,17 @@
     "test:editTextPost": "cucumber-js --tags \"@UI and @editTextPost\"",
 
     "test:fetchEmptyBooks": "cucumber-js --tags \"@API and @GetEmptyBooks\"",
+    "test:createBook": "cucumber-js --tags \"@API and @CreateBook\"",
     "test:fetchAllBooks": "cucumber-js --tags \"@API and @GetAllBooks\"",
     "test:getBookByIdUser": "cucumber-js --tags \"@API and @GetBookByID\"",
     "test:addKPI": "cucumber-js --tags \"@API and @AddKPI\"",
     "test:deleteKPI": "cucumber-js --tags \"@API and @DeleteKPI\"",
     "test:cancelAddKPI": "cucumber-js --tags \"@API and @cancelAddKPI\"",
     "test:duplicateAndIdValidationSteps": "cucumber-js --tags \"@API and @CreateBookAdditional\"",
-    "test:createBook": "cucumber-js --tags \"@API and @CreateBook\"",
-    "test:createBookIdAsNumber": "cucumber-js --tags '@API and @CreateBookIdAsNumber'",
-    "test:createBookIdAsString": "cucumber-js --tags '@API and @CreateBookIdAsString'",
-    "test:createDuplicateBook": "cucumber-js --tags '@API and @CreateDuplicateBook'",
-    "test:UpdateBookRecord": "cucumber-js --tags '@API and @UpdateBookRecord'"
+    "test:createBookIdAsNumber": "cucumber-js --tags \"@API and @CreateBookIdAsNumber\"",
+    "test:createBookIdAsString": "cucumber-js --tags \"@API and @CreateBookIdAsString\"",
+    "test:createDuplicateBook": "cucumber-js --tags \"@API and @CreateDuplicateBook\"",
+    "test:UpdateBookRecord": "cucumber-js --tags \"@API and @UpdateBookRecord\""
   },
   "keywords": [],
   "author": "",
