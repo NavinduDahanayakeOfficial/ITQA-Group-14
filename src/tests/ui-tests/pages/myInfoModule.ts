@@ -300,25 +300,6 @@ export class PersonalInfoSection extends BasePage {
       return message;
    }
 
-   async getRequiredFields() {
-      const requiredField1 = await this.page
-         .locator(
-            "(//input[contains(@class,'oxd-input oxd-input--active oxd-input--error')])[1]"
-         )
-         .evaluate((element) => {
-            return (element as HTMLInputElement).placeholder;
-         });
-      const requiredField2 = await this.page
-         .locator(
-            "(//input[contains(@class,'oxd-input oxd-input--active oxd-input--error')])[2]"
-         )
-         .evaluate((element) => {
-            return (element as HTMLInputElement).placeholder;
-         });
-      Logger.info(`Required Fields: ${requiredField1} , ${requiredField2}`);
-      return [requiredField1, requiredField2];
-   }
-
    async checkMissingRequiredFieldsAreHighlighted() {
       const fistNameClassName = await this.firstName.evaluate((element) => {
          return (element as HTMLInputElement).className;
