@@ -142,10 +142,5 @@ jobs:
                  ui-results/reports/cucumber-report.html
               retention-days: 30
 
-         - name: Deploy Allure Report to GitHub Pages
-           uses: peaceiris/actions-gh-pages@v3
-           with:
-              github_token: ${{ secrets.GITHUB_TOKEN }}
-              publish_dir: allure-report/
 
             
