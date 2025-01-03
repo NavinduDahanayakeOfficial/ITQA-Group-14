@@ -31,7 +31,7 @@
     "test:fetchEmptyBooks": "cucumber-js --tags \"@API and @GetEmptyBooks\"",
     "test:createBook": "cucumber-js --tags \"@API and @CreateBook\"",
     "test:fetchAllBooks": "cucumber-js --tags \"@API and @GetAllBooks\"",
-    "test:getBookByIdUser": "cucumber-js --tags \"@API and @GetBookByID\"",
+    "test:getBookById": "cucumber-js --tags \"@API and @GetBookByID\"",
     "test:duplicateAndIdValidationSteps": "cucumber-js --tags \"@API and @CreateBookAdditional\"",
     "test:createBookIdAsNumber": "cucumber-js --tags \"@API and @CreateBookIdAsNumber\"",
     "test:createBookIdAsString": "cucumber-js --tags \"@API and @CreateBookIdAsString\"",
