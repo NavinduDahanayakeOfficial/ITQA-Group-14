@@ -9,4 +9,4 @@ Feature: Validate behavior for ID as a number
     Given I am authenticated as "admin"
     And I have a book with ID as a number
     When I create a book with numeric ID
-    Then the book should be created successfully with status 201
+    Then the book should be created successfully with status 201 and expected body
