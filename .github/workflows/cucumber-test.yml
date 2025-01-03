@@ -78,8 +78,8 @@ jobs:
               npm run test:employeeClaims || true;
               npm run test:assignClaim || true;
               npm run test:submitClaim || true;
-              npm run test:viewUserInfo || true;
               npm run test:UpdateUserPersonalDetails || true;
+              npm run test:viewUserInfo || true;
               npm run test:applyLeave || true;
               npm run test:assignLeave || true;
 
