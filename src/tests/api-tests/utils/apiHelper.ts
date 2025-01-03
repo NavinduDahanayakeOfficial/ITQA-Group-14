@@ -25,9 +25,6 @@ export class ApiHelper {
         status: response.status(),
         data: await response.json()
       };
-
-      Logger.info(`Response Body: ${JSON.stringify(responseData.data, null, 2)}`);
-
       return responseData;
     } catch (error: any) {
       return {
