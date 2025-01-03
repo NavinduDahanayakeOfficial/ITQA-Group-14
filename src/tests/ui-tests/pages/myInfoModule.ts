@@ -200,16 +200,26 @@ export class PersonalInfoSection extends BasePage {
       await this.page.waitForTimeout(2000);
 
       await this.firstName.fill(personalInfo.firstName);
-      await this.middleName.fill(personalInfo.middleName);
+      if (personalInfo.middleName)
+         await this.middleName.fill(personalInfo.middleName);
       await this.lastName.fill(personalInfo.lastName);
-      await this.employeeId.fill(personalInfo.employeeId);
-      await this.otherId.fill(personalInfo.otherId);
-      await this.licenseNumber.fill(personalInfo.licenseNumber);
-      await this.licenseExpiry.fill(personalInfo.licenseExpiry);
-      await this.selectNationality(personalInfo.nationality);
-      await this.selectMaritalStatus(personalInfo.maritalStatus);
-      await this.dateOfBirth.fill(personalInfo.dateOfBirth);
-      await this.selectGender(personalInfo.gender);
+      if (personalInfo.employeeId)
+         await this.employeeId.fill(personalInfo.employeeId);
+      if (personalInfo.otherId) await this.otherId.fill(personalInfo.otherId);
+      if (personalInfo.licenseNumber)
+         await this.licenseNumber.fill(personalInfo.licenseNumber);
+      if (personalInfo.licenseExpiry)
+         await this.licenseExpiry.fill(personalInfo.licenseExpiry);
+      if (personalInfo.nationality)
+         await this.selectNationality(personalInfo.nationality);
+      if (personalInfo.maritalStatus)
+         await this.selectMaritalStatus(personalInfo.maritalStatus);
+      if (personalInfo.dateOfBirth)
+         await this.dateOfBirth.fill(personalInfo.dateOfBirth);
+      if (personalInfo.gender) await this.selectGender(personalInfo.gender);
+
+      await this.page.waitForTimeout(3000);
+      return;
    }
 
    async selectFromDropdown(
@@ -289,6 +299,61 @@ export class PersonalInfoSection extends BasePage {
       Logger.info(`Success Message: ${message}`);
       return message;
    }
+
+   async getRequiredFields() {
+      const requiredField1 = await this.page
+         .locator(
+            "(//input[contains(@class,'oxd-input oxd-input--active oxd-input--error')])[1]"
+         )
+         .evaluate((element) => {
+            return (element as HTMLInputElement).placeholder;
+         });
+      const requiredField2 = await this.page
+         .locator(
+            "(//input[contains(@class,'oxd-input oxd-input--active oxd-input--error')])[2]"
+         )
+         .evaluate((element) => {
+            return (element as HTMLInputElement).placeholder;
+         });
+      Logger.info(`Required Fields: ${requiredField1} , ${requiredField2}`);
+      return [requiredField1, requiredField2];
+   }
+
+   async checkMissingRequiredFieldsAreHighlighted() {
+      const fistNameClassName = await this.firstName.evaluate((element) => {
+         return (element as HTMLInputElement).className;
+      });
+
+      const lastNameClassName = await this.lastName.evaluate((element) => {
+         return (element as HTMLInputElement).className;
+      });
+
+      Logger.info(`First Name Class Name: ${fistNameClassName}`);
+      Logger.info(`Last Name Class Name: ${lastNameClassName}`);
+
+      if (
+         fistNameClassName.includes("oxd-input--error") &&
+         lastNameClassName.includes("oxd-input--error")
+      ) {
+         return true;
+      } else {
+         return false;
+      }
+   }
+
+   async checkRequiredMessagesAreVisible() {
+      await this.page.waitForSelector("(//span[contains(@class,'oxd-text oxd-text--span oxd-input-field-error-message oxd-input-group__message')])")
+
+      const elements = await this.page.locator("//span[contains(@class,'oxd-text oxd-text--span oxd-input-field-error-message oxd-input-group__message')]").evaluateAll((elements) => {
+         return elements.map((element) => (element as HTMLInputElement).innerText);
+      });
+
+      if(elements.length === 2) {
+         return true;
+      } else {
+         return false;
+      }
+   }
 }
 
 export class ContactDetailsSection extends BasePage {
@@ -345,14 +410,14 @@ export class DependentsSection extends BasePage {
 
 interface PersonalInfo {
    firstName: string;
-   middleName: string;
+   middleName?: string;
    lastName: string;
-   employeeId: string;
-   otherId: string;
-   licenseNumber: string;
-   licenseExpiry: string;
-   nationality: string;
-   maritalStatus: string;
-   dateOfBirth: string;
-   gender: string;
+   employeeId?: string;
+   otherId?: string;
+   licenseNumber?: string;
+   licenseExpiry?: string;
+   nationality?: string;
+   maritalStatus?: string;
+   dateOfBirth?: string;
+   gender?: string;
 }
