@@ -1,5 +1,5 @@
 @API
-@CreateDuplicateBook
+@CreateBookIdAsString
 Feature: Validate behavior for ID inclusion and duplicate entries
   As a library admin
   I want to validate book creation behavior for IDs and duplicates
