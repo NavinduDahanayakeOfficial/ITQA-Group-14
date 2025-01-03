@@ -14,4 +14,5 @@ Feature: Add New Candidate
     | firstName | middleName | lastName |      email      |
     |   Kasun   |   Kalhara  |  Perera  | kasun@email.com |
     And User clicks Save button to save candidate
+    And User should see "Successfully Saved" message
     Then User should see the candidate profile

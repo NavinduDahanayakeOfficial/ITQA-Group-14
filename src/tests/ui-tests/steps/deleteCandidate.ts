@@ -5,7 +5,7 @@ import { Logger } from '../../../utils/logger';
 
 let recruitmentModule: RecruitmentModule;
 
-  When('User clicks the delete button', async function () {
+  When('User clicks the delete icon button', async function () {
     recruitmentModule = new RecruitmentModule(page);
     await recruitmentModule.deleteCandidate();
 });
@@ -15,7 +15,8 @@ When('User confirms the deletion', async function () {
   await recruitmentModule.confirmDelete();
 });
 
-Then('User should see a delete successful message', async function () {
+Then('User should see "Succesfully Deleted" message', async function () {
     const message = await recruitmentModule.getSuccessMessage();
+    await page.waitForTimeout(5000);
     Logger.info("Success Message: " + message);
 });
