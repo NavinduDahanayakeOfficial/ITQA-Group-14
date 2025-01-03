@@ -6,7 +6,7 @@ import { Logger } from "../../../../utils/logger";
 let response: any;
 
 
-When('I am updating the book with ID: {int} and title: {string} and author: {string}', async function (id: number, title: string, author: string) {
+When('I am updating a book with ID: {int} and title: {string} and author: {string}', async function (id: number, title: string, author: string) {
     const updatedBookDetails = {
       id: id,
         title: title,
@@ -19,19 +19,6 @@ When('I am updating the book with ID: {int} and title: {string} and author: {str
     Logger.info(`Request body: ${JSON.stringify(updatedBookDetails)}`);
 });
 
-Then('the server should return a {int} status code', async function (status: number) {
-    Logger.info(`Expected status code: ${status}`);
-    expect(response.status).toBeDefined();
-    Logger.info("Actual status code: " + response.status);
-    expect(response.status).toBe(status);
-});
-
-Then('the response should include an error message {string}', function (errorMessage: string) {
-    Logger.info(`Expected error message: ${errorMessage}`);
-    expect(response.data).toBeDefined();
-    Logger.info("Response data: " + JSON.stringify(response.data));
-    expect(response.data.error).toBe(errorMessage);
-});
 
 Then('the response body should contain:', function (table: any) {
     Logger.info("Validating response body...");
