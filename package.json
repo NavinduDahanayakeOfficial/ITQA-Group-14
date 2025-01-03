@@ -24,7 +24,8 @@
     "test:createBookIdAsString": "cucumber-js --tags '@API and @CreateBookIdAsString'",
     "test:createTextPost": "cucumber-js --tags '@UI and @createTextPost'",
     "test:deleteTextPost": "cucumber-js --tags '@UI and @deleteTextPost'",
-    "test:editTextPost": "cucumber-js --tags '@UI and @editTextPost'"
+    "test:editTextPost": "cucumber-js --tags '@UI and @editTextPost'",
+    "test:createBookIdAsNumber": "cucumber-js --tags '@API and @CreateBookIdAsNumber'"
   },
   "keywords": [],
   "author": "",
