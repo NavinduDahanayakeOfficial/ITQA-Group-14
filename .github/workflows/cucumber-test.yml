@@ -75,7 +75,7 @@ jobs:
               npm run test:addCandidate || true;
               npm run test:searchCandidate || true;
               npm run test:deleteCandidate || true;
-              npm run test:employeeClaim || true;
+              npm run test:employeeClaims || true;
               npm run test:assignClaim || true;
               npm run test:submitClaim || true;
               npm run test:viewUserInfo || true;
