@@ -1,4 +1,4 @@
-import { Given, When, Then } from "@cucumber/cucumber";
+import { When, Then } from "@cucumber/cucumber";
 import { page } from "../pages/hooks";
 import { RecruitmentModule } from "../pages/recruitmentmodule";
 import { Logger } from "../../../utils/logger";
@@ -27,7 +27,14 @@ When("User clicks Save button to save candidate", async function () {
   await recruitmentModule.clickSaveButton();
 });
 
+When('User should see "Successfully Saved" message', async function () {
+  const message = await recruitmentModule.getSuccessMessage();
+  Logger.info("Success Message: " + message);
+});
+
 Then("User should see the candidate profile", async function () {
   const candidateName = await recruitmentModule.getCandidateName();
+  const profileUrl = page.url();
+  Logger.info("Candidate Profile URL: " + profileUrl);
   Logger.info("Candidate profile is displayed: " + candidateName);
 });

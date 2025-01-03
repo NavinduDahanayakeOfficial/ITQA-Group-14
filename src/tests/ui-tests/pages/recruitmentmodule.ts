@@ -99,7 +99,6 @@ export class RecruitmentModule extends BasePage {
   async getCandidateName() {
     await this.page.waitForTimeout(10000);
     const candidateName = await this.candidateName.innerText();
-    Logger.info("Employee Name: " + candidateName);
     return candidateName;
   }
 
@@ -116,7 +115,6 @@ export class RecruitmentModule extends BasePage {
 
   async getSuccessMessage() {
     const message = this.successMessage.textContent();
-    await this.page.waitForTimeout(5000);
     return message;
   }
 }
