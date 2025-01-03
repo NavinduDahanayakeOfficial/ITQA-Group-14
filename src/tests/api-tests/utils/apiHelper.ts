@@ -11,31 +11,31 @@ export class ApiHelper {
     this.authHeader = `Basic ${credentials}`;
   }
 
-   async get(endpoint: string) {
-      const context = await request.newContext();
-  
-        let response;
-        try {
-           response = await context.get(`${this.baseUrl}${endpoint}`, {
-              headers: {
-                 Authorization: this.authHeader,
-              },
-           });
-           const responseData = {
-              status: response.status(),
-              data: await response.json(),
-           };
-  
-        return responseData;
-      } catch (error: any) {
-        return {
-          status: response?.status(),
-          error: await response?.text()
-        };
-      } finally {
-        await context.dispose();
-      }
+  async get(endpoint: string) {
+    const context = await request.newContext();
+
+    let response;
+    try {
+      response = await context.get(`${this.baseUrl}${endpoint}`, {
+        headers: {
+          Authorization: this.authHeader,
+        },
+      });
+      const responseData = {
+        status: response.status(),
+        data: await response.json(),
+      };
+
+      return responseData;
+    } catch (error: any) {
+      return {
+        status: response?.status(),
+        error: await response?.text()
+      };
+    } finally {
+      await context.dispose();
     }
+  }
 
   async post(endpoint: string, data: any) {
     const context = await request.newContext();

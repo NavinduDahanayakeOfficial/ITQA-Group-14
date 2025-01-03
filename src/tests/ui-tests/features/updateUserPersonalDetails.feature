@@ -1,5 +1,4 @@
-@UI
-@UpdateUserPersonalDetails
+@UI @UpdateUserPersonalDetails
 Feature: Update User Personal Details
     As an admin user
     User want to update user personal details
@@ -17,4 +16,10 @@ Feature: Update User Personal Details
     Then User should see the success message "Successfully Updated"
     And User should see the updated personal details
 
-    
+  Scenario: Updating user personal details with missing required fields
+    When User enter the new personal details
+      | firstName | lastName |
+      |           |          |
+    Then Required fields should be highlighted with an error message
+
+

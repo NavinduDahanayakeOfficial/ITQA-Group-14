@@ -17,6 +17,7 @@ Then("the API should return a list of books", function () {
    expect(response.status).toBe(200);
 
    Logger.info("Response data should be an array of books");
+   Logger.info(`Response Body: ${JSON.stringify(response.data, null, 2)}`);
    expect(response.data).toBeInstanceOf(Array);
    if (response.data.length > 0) {
       response.data.forEach((book: any) => {
@@ -24,5 +25,7 @@ Then("the API should return a list of books", function () {
          expect(book).toHaveProperty("title");
          expect(book).toHaveProperty("author");
       });
+   } else {
+      Logger.info("No books available in the response");
    }
 });
