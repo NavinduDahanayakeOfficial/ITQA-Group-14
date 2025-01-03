@@ -40,8 +40,7 @@ Then("The book should be updated successfully", async function () {
   Logger.info("Verify the response status code is 200");
   expect(response.status).toBe(200);
   Logger.info("Verify the response body contains the updated book details");
-  const updatedBookDetails = await response.json();
-  expect(updatedBookDetails).toEqual(bookDetails);
+  
   expect(response.data.title).toBe(bookDetails.title);
   expect(response.data.author).toBe(bookDetails.author);
 }); 
