@@ -2,9 +2,9 @@ name: Cucumber Tests
 
 on:
    push:
-      branches: [working_test, main, working_test_pipeline]
+      branches: [working-test, main, working_test_pipeline]
    pull_request:
-      branches: [working_test, main, working_test_pipeline]
+      branches: [working-test, main, working_test_pipeline]
 
 jobs:
    api-tests:
