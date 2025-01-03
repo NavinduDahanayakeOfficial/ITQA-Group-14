@@ -24,8 +24,8 @@ Feature: Update User Personal Details
 
   Scenario: Updating user personal details with invalid data
     When User enter the invalid personal details
-      | employeeId | licenseExpiry | dateOfBirth | Gender |
-      | 12345678910 | 20223112    | 19901501  | male |
+      | lastName | employeeId | licenseExpiry | dateOfBirth |  firstName |
+      | Joe | 12345678910 | 20223112    | 19901501  |  Doe |
     Then Invalid fields should be highlighted with an error message
 
 

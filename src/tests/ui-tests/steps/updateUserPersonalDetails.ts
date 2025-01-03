@@ -94,6 +94,7 @@ Then(
 );
 
 Then("Invalid fields should be highlighted with an error message", async function () {
+   await personalInfoSection.savePersonalInfo();
    const isInvalidFieldsAreHighlighted = await personalInfoSection.checkInvalidFieldsAreHighlighted();
    Logger.info("Is invalid fields are highlighted: " + isInvalidFieldsAreHighlighted);
    expect(isInvalidFieldsAreHighlighted).toBe(true);

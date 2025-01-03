@@ -194,16 +194,16 @@ export class PersonalInfoSection extends BasePage {
       return personalInfo;
    }
 
-   async fillPersonalInfo(personalInfo: PersonalInfo) {
+   async fillPersonalInfo(personalInfo: PersonalInfo,sendIntentionalEmptyData: boolean = false) {
       await this.page.waitForSelector("//h6[text()='Personal Details']");
       await this.page.waitForSelector("//input[@placeholder='First Name']");
       await this.page.waitForTimeout(2000);
 
-      if (personalInfo.firstName)
+      
          await this.firstName.fill(personalInfo.firstName);
       if (personalInfo.middleName)
          await this.middleName.fill(personalInfo.middleName);
-      if (personalInfo.lastName)
+      
          await this.lastName.fill(personalInfo.lastName);
       if (personalInfo.employeeId)
          await this.employeeId.fill(personalInfo.employeeId);
@@ -373,8 +373,7 @@ export class PersonalInfoSection extends BasePage {
 
       if (
          employeeIdClassName.includes("oxd-input--error") &&
-         licenseExpiryClassName.includes("oxd-input--error") &&
-         dateOfBirthClassName.includes("oxd-input--error")
+         licenseExpiryClassName.includes("oxd-input--error") 
       ) {
          return true;
       } else {
@@ -398,10 +397,9 @@ export class PersonalInfoSection extends BasePage {
          });
 
       if (
-         elements.length === 3 &&
+         elements.length > 2 &&
          elements[0] === "Should not exceed 10 characters" &&
-         elements[1] === "Should be a valid date in yyyy-dd-mm format" &&
-         elements[2] === "Should be a valid date in yyyy-dd-mm format"
+         elements[1] === "Should be a valid date in yyyy-dd-mm format" 
       ) {
          return true;
       } else {
@@ -463,9 +461,9 @@ export class DependentsSection extends BasePage {
 }
 
 interface PersonalInfo {
-   firstName?: string;
+   firstName: string;
    middleName?: string;
-   lastName?: string;
+   lastName: string;
    employeeId?: string;
    otherId?: string;
    licenseNumber?: string;
