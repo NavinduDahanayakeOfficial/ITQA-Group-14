@@ -11,10 +11,13 @@ setDefaultTimeout(60 * 1000);
 
 Before({ tags: "@UI" }, async function () {
    browser = await chromium.launch({
-      headless: false,
+      headless: true,
       args: ["--start-maximized"],
    });
-   bCtx = await browser.newContext({ viewport: null, javaScriptEnabled: true });
+   bCtx = await browser.newContext({
+      viewport: { width: 1920, height: 1080 },
+      javaScriptEnabled: true,
+   });
    page = await bCtx.newPage();
 
    const loginpage = new LoginPage(page);
@@ -22,7 +25,7 @@ Before({ tags: "@UI" }, async function () {
    Logger.info("User is logged in");
 });
 
-After({ tags: "@UI" },async function () {
+After({ tags: "@UI" }, async function () {
    await page?.close();
    await bCtx?.close();
    await browser?.close();
