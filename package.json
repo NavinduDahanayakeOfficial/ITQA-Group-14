@@ -33,6 +33,9 @@
     "test:cancelAddKPI": "cucumber-js --tags \"@API and @cancelAddKPI\"",
     "test:duplicateAndIdValidationSteps": "cucumber-js --tags \"@API and @CreateBookAdditional\"",
     "test:createBook": "cucumber-js --tags \"@API and @CreateBook\""
+    "test:createBookIdAsNumber": "cucumber-js --tags '@API and @CreateBookIdAsNumber'"
+    "test:createBookIdAsString": "cucumber-js --tags '@API and @CreateBookIdAsString'"
+    "test:createDuplicateBook": "cucumber-js --tags '@API and @CreateDuplicateBook'",,
   },
   "keywords": [],
   "author": "",
