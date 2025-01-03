@@ -194,7 +194,7 @@ export class PersonalInfoSection extends BasePage {
       return personalInfo;
    }
 
-   async fillPersonalInfo(personalInfo: PersonalInfo,sendIntentionalEmptyData: boolean = false) {
+   async fillPersonalInfo(personalInfo: PersonalInfo) {
       await this.page.waitForSelector("//h6[text()='Personal Details']");
       await this.page.waitForSelector("//input[@placeholder='First Name']");
       await this.page.waitForTimeout(2000);
