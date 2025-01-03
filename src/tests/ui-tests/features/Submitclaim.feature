@@ -1,6 +1,9 @@
 @UI
 @SubmitClaim
 Feature: Submit a claim
+  As an admin user
+  I want to submit claims in the system
+  So that they can be processed and tracked efficiently
 
   Background:
     Given User navigates to the "Claim" module

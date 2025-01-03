@@ -1,6 +1,9 @@
 @UI
 @AssignClaim
 Feature: Assign a claim
+As an admin user
+I want to assign claims to employees
+  So that the claims are processed and tracked efficiently
 
   Background:
     Given User navigates to the "Claim" module
