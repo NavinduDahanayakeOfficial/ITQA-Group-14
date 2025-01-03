@@ -18,7 +18,7 @@ Feature: Create a Book
       | admin    | Book1 | Author1 |
       | user     | Book2 | Author2 |
 
-  Scenario Outline: Validate required fields for creating a new book
+  Scenario Outline: Empty mandatory fields
     Given I am authenticated as "admin"
     Given I have the following book details:
       | title   | author   |
@@ -28,5 +28,20 @@ Feature: Create a Book
 
     Examples:
       | title | author  |
-      |       | Author4 |
+      |       | Author3 |
       | Book4 |         |
+
+  Scenario Outline: Missing mandatory fields
+    Given I am authenticated as "admin"
+    Given I have the following book details:
+      | <field> |
+      | <value> | 
+    When I create a new book
+    Then the book should not be created
+
+  Examples:
+    | field | value |
+    | title | Book5   |
+    | author| Author6 |
+
+    
