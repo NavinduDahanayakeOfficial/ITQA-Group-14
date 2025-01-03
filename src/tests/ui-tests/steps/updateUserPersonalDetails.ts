@@ -52,3 +52,19 @@ Then("User should see the updated personal details", async function () {
    expect(updatedDetails.gender).toBe(data.gender);
 });
 
+Then(
+   "Required fields should be highlighted with an error message",
+   async function () {
+      const isMissingRequiredFieldsAreHighlighted =
+         await personalInfoSection.checkMissingRequiredFieldsAreHighlighted();
+      Logger.info(
+         "Is missing required fields are highlighted: " +
+            isMissingRequiredFieldsAreHighlighted
+      );
+      expect(isMissingRequiredFieldsAreHighlighted).toBe(true);
+      const isErrorMessageAreVisible =
+         await personalInfoSection.checkRequiredMessagesAreVisible();
+      Logger.info("Is error messages are visible: " + isErrorMessageAreVisible);
+      expect(isErrorMessageAreVisible).toBe(true);
+   }
+);
