@@ -373,7 +373,8 @@ export class PersonalInfoSection extends BasePage {
 
       if (
          employeeIdClassName.includes("oxd-input--error") &&
-         licenseExpiryClassName.includes("oxd-input--error") 
+         licenseExpiryClassName.includes("oxd-input--error") &&
+         dateOfBirthClassName.includes("oxd-input--error")
       ) {
          return true;
       } else {
@@ -397,9 +398,10 @@ export class PersonalInfoSection extends BasePage {
          });
 
       if (
-         elements.length > 2 &&
+         elements.length === 3 &&
          elements[0] === "Should not exceed 10 characters" &&
-         elements[1] === "Should be a valid date in yyyy-dd-mm format" 
+         elements[1] === "Should be a valid date in yyyy-dd-mm format" &&
+         elements[2] === "Should be a valid date in yyyy-dd-mm format"
       ) {
          return true;
       } else {
