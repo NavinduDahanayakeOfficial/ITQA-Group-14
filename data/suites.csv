@@ -1,0 +1,136 @@
+"DESCRIPTION","DURATION IN MS","NAME","PARENT SUITE","START TIME","STATUS","STOP TIME","SUB SUITE","SUITE","TEST CLASS","TEST METHOD"
+"As a library user or admin
+  I want to create a new book
+  So that they can be available in the system","99","Missing mandatory fields","","Tue Jan 07 16:37:40 UTC 2025","failed","Tue Jan 07 16:37:40 UTC 2025","","","",""
+"As a library admin
+  I want to validate book creation behavior for IDs and duplicates
+  So that the system handles these cases appropriately","122","Verify behavior when ID is included as String","","Tue Jan 07 16:37:53 UTC 2025","passed","Tue Jan 07 16:37:53 UTC 2025","","","",""
+"As a library user
+  I want to get a book by its ID
+  So that I can view the book details","126","Successfully deleting a book by existing ID","","Tue Jan 07 16:38:49 UTC 2025","failed","Tue Jan 07 16:38:49 UTC 2025","","","",""
+"As a library user
+  I want to get a book by its ID
+  So that I can view the book details","84","Getting a book by invalid ID","","Tue Jan 07 16:38:15 UTC 2025","passed","Tue Jan 07 16:38:15 UTC 2025","","","",""
+"As a library user
+  I want to get a book by its ID
+  So that I can view the book details","88","Getting a book by non-existing ID","","Tue Jan 07 16:38:49 UTC 2025","failed","Tue Jan 07 16:38:49 UTC 2025","","","",""
+"As a library user or admin
+  I want to fetch the list of books
+  So that I can view available books in the system","129","Successfully fetching the list of books as Admin","","Tue Jan 07 16:38:07 UTC 2025","passed","Tue Jan 07 16:38:07 UTC 2025","","","",""
+"As a library user or admin
+  I want to fetch the list of books
+  So that I can view available books in the system","440","Fetching books when no books exist","","Tue Jan 07 16:37:32 UTC 2025","passed","Tue Jan 07 16:37:33 UTC 2025","","","",""
+"As a library user
+  I want to get a book by its ID
+  So that I can view the book details","96","Successfully getting a book by existing ID","","Tue Jan 07 16:38:14 UTC 2025","failed","Tue Jan 07 16:38:14 UTC 2025","","","",""
+"As a library user or admin
+  I want to create a new book
+  So that they can be available in the system","98","Empty mandatory fields","","Tue Jan 07 16:37:40 UTC 2025","failed","Tue Jan 07 16:37:40 UTC 2025","","","",""
+"As a library user or admin
+  I want to update the name and the author
+  of a book that has already been created","93","Successfully updating a new book with only the title","","Tue Jan 07 16:38:28 UTC 2025","passed","Tue Jan 07 16:38:28 UTC 2025","","","",""
+"As a library user or admin
+  I want to update the name and the author
+  of a book that has already been created","131","Successfully updating a new book with both the title and author","","Tue Jan 07 16:38:28 UTC 2025","passed","Tue Jan 07 16:38:28 UTC 2025","","","",""
+"As a library user or admin
+  I want to create a new book
+  So that they can be available in the system","230","Successfully creating a new book","","Tue Jan 07 16:37:39 UTC 2025","passed","Tue Jan 07 16:37:40 UTC 2025","","","",""
+"As a library user or admin
+  I want to update the name and the author
+  of a book that has already been created","98","Successfully updating a new book with only the author","","Tue Jan 07 16:38:28 UTC 2025","failed","Tue Jan 07 16:38:28 UTC 2025","","","",""
+"As a library user or admin
+  I want to handle duplicate book creation
+  So that the system can prevent duplicate entries","208","Creating a book with duplicate details","","Tue Jan 07 16:38:00 UTC 2025","passed","Tue Jan 07 16:38:00 UTC 2025","","","",""
+"As a user who is not authenticated
+  I want to verify that unauthorized users cannot update a book by its ID
+  So that only authenticated users can modify book details","124","Attempting to update a book by ID without authentication","","Tue Jan 07 16:38:35 UTC 2025","failed","Tue Jan 07 16:38:35 UTC 2025","","","",""
+"As a library user
+  I want to get a book by its ID
+  So that I can view the book details","85","Getting a book by non-existing ID","","Tue Jan 07 16:38:14 UTC 2025","failed","Tue Jan 07 16:38:15 UTC 2025","","","",""
+"As a library user or admin
+  I want to create a new book
+  So that they can be available in the system","96","Successfully creating a new book","","Tue Jan 07 16:37:40 UTC 2025","passed","Tue Jan 07 16:37:40 UTC 2025","","","",""
+"As a library admin
+  I want to update a book by its ID
+  So that I can modify the book details","124","Attempting to update a non-existent book ID","","Tue Jan 07 16:38:42 UTC 2025","passed","Tue Jan 07 16:38:42 UTC 2025","","","",""
+"As a library user or admin
+  I want to create a new book
+  So that they can be available in the system","91","Missing mandatory fields","","Tue Jan 07 16:37:40 UTC 2025","failed","Tue Jan 07 16:37:40 UTC 2025","","","",""
+"As a library admin
+  I want to validate book creation behavior when ID is a number
+  So that the system handles numeric IDs appropriately","135","Verify behavior when ID is included as a number","","Tue Jan 07 16:37:47 UTC 2025","broken","Tue Jan 07 16:37:47 UTC 2025","","","",""
+"As a library user
+  I want to get a book by its ID
+  So that I can view the book details","86","Successfully getting a book by existing ID","","Tue Jan 07 16:38:49 UTC 2025","failed","Tue Jan 07 16:38:49 UTC 2025","","","",""
+"As a library user or admin
+  I want to fetch the list of books
+  So that I can view available books in the system","90","Successfully fetching the list of books as User","","Tue Jan 07 16:38:07 UTC 2025","passed","Tue Jan 07 16:38:07 UTC 2025","","","",""
+"As a library user or admin
+  I want to create a new book
+  So that they can be available in the system","91","Empty mandatory fields","","Tue Jan 07 16:37:40 UTC 2025","failed","Tue Jan 07 16:37:40 UTC 2025","","","",""
+"","5749","User assigns a claim with all required fields","","Tue Jan 07 16:42:15 UTC 2025","broken","Tue Jan 07 16:42:21 UTC 2025","","","",""
+"As an admin user
+  User want to add a new employee to the system
+  So that their profile is stored and displayed correctly","22932","Successfully adding a new employee","","Tue Jan 07 16:37:02 UTC 2025","passed","Tue Jan 07 16:37:24 UTC 2025","","","",""
+"As an admin user
+  User wants to search for shortlisted candidates in the recruitment system
+  So that the user can view candidates list","15519","Successfully filtering shortlisted candidates","","Tue Jan 07 16:40:39 UTC 2025","passed","Tue Jan 07 16:40:54 UTC 2025","","","",""
+"As an admin user
+    User want to update user personal details
+    So that they can keep the user information up-to-date","7795","Updating user personal details with missing required fields","","Tue Jan 07 16:38:35 UTC 2025","passed","Tue Jan 07 16:38:43 UTC 2025","","","",""
+"","7749","User submits a claim without selecting an event","","Tue Jan 07 16:42:55 UTC 2025","passed","Tue Jan 07 16:43:03 UTC 2025","","","",""
+"","6890","User attempts to assign a claim without Employee Name","","Tue Jan 07 16:42:21 UTC 2025","passed","Tue Jan 07 16:42:27 UTC 2025","","","",""
+"As an admin user
+    User want to update user personal details
+    So that they can keep the user information up-to-date","8769","Updating user personal details with invalid data","","Tue Jan 07 16:38:43 UTC 2025","passed","Tue Jan 07 16:38:52 UTC 2025","","","",""
+"As an admin user,
+  I want to delete a Key Performance Indicator (KPI)
+  So that it is deleted and displayed correctly.","5050","Successfully delete a KPI for a job title","","Tue Jan 07 16:44:39 UTC 2025","passed","Tue Jan 07 16:44:44 UTC 2025","","","",""
+"","5741","User attempts to assign a claim without Event","","Tue Jan 07 16:42:27 UTC 2025","broken","Tue Jan 07 16:42:33 UTC 2025","","","",""
+"As an admin user
+  I want to delete a text post in the Buzz Newsfeed
+  So that other cannot view the text post and interact with it","11494","Successfully deleting a text post in the Buzz Newsfeed","","Tue Jan 07 16:39:48 UTC 2025","broken","Tue Jan 07 16:40:00 UTC 2025","","","",""
+"As an admin user
+  I want to create a text post in the Buzz Newsfeed
+  So that other users can view the text post and interact with it","11984","Successfully creating a text post in the Buzz Newsfeed","","Tue Jan 07 16:39:14 UTC 2025","passed","Tue Jan 07 16:39:26 UTC 2025","","","",""
+"As an admin user,
+  I want to cancel add a Key Performance Indicator (KPI)
+  So that it is added cancel and displayed correctly.","7276","Successfully cancel add a KPI for a job title","","Tue Jan 07 16:44:51 UTC 2025","passed","Tue Jan 07 16:44:58 UTC 2025","","","",""
+"As an admin user
+    User want to view user information
+    So that they can confirm the user details","2525","Successfully viewing user information","","Tue Jan 07 16:38:58 UTC 2025","passed","Tue Jan 07 16:39:01 UTC 2025","","","",""
+"","5634","User attempts to assign a claim without Currency","","Tue Jan 07 16:42:33 UTC 2025","broken","Tue Jan 07 16:42:39 UTC 2025","","","",""
+"As an admin user
+  User wants to delete a candidate from the system
+  So that the candidate profile is removed successfully","17400","Successfully deleting a candidate","","Tue Jan 07 16:41:01 UTC 2025","passed","Tue Jan 07 16:41:19 UTC 2025","","","",""
+"As an admin user
+  User wants to delete an employee from the system
+  So that the employee profile is removed successfully","27478","Successfully deleting an employee","","Tue Jan 07 16:37:51 UTC 2025","passed","Tue Jan 07 16:38:19 UTC 2025","","","",""
+"","7830","User submits a claim without selecting a currency","","Tue Jan 07 16:43:03 UTC 2025","passed","Tue Jan 07 16:43:11 UTC 2025","","","",""
+"As an admin user
+  User want to add a new candidate to the recruitment
+  So that their profile is stored and displayed correctly","26127","Successfully adding a new candidate by filling the required fields","","Tue Jan 07 16:40:06 UTC 2025","passed","Tue Jan 07 16:40:32 UTC 2025","","","",""
+"As an admin user
+  User wants to search for an employee in the system
+  So that user can view their details and confirm their existence","14407","Successfully searching for an employee","","Tue Jan 07 16:37:31 UTC 2025","passed","Tue Jan 07 16:37:45 UTC 2025","","","",""
+"As an admin user
+  I want to editTextPost a text post in the Buzz Newsfeed
+  So that other cannot view the edited text post and interact with it","10019","Successfully deleting a text post in the Buzz Newsfeed","","Tue Jan 07 16:39:32 UTC 2025","passed","Tue Jan 07 16:39:42 UTC 2025","","","",""
+"As an admin user
+    User want to update user personal details
+    So that they can keep the user information up-to-date","10077","Successfully updating user personal details","","Tue Jan 07 16:38:25 UTC 2025","passed","Tue Jan 07 16:38:35 UTC 2025","","","",""
+"As an admin user
+    User want to view user information
+    So that they can confirm the user details","6576","Successfully switching between sections","","Tue Jan 07 16:39:01 UTC 2025","passed","Tue Jan 07 16:39:07 UTC 2025","","","",""
+"","43624","Navigate to Employee Claims section and search claims","","Tue Jan 07 16:41:25 UTC 2025","passed","Tue Jan 07 16:42:08 UTC 2025","","","",""
+"As an admin user  
+  User wants to assign a leave  
+  So that the employee leave is successfully submitted and recorded in the system","15454","Successfully assign a leave","","Tue Jan 07 16:44:03 UTC 2025","passed","Tue Jan 07 16:44:18 UTC 2025","","","",""
+"As an admin user  
+  User wants to apply for leave  
+  So that the employee leave request is successfully submitted and recorded in the system","32545","Successfully applying for leave","","Tue Jan 07 16:43:24 UTC 2025","broken","Tue Jan 07 16:43:56 UTC 2025","","","",""
+"As an admin user,
+  I want to add a Key Performance Indicator (KPI)
+  So that it is added and displayed correctly.","8374","Successfully add a KPI for a job title","","Tue Jan 07 16:44:25 UTC 2025","passed","Tue Jan 07 16:44:33 UTC 2025","","","",""
+"","6524","User submits a claim without selecting both event and currency","","Tue Jan 07 16:43:11 UTC 2025","passed","Tue Jan 07 16:43:18 UTC 2025","","","",""
+"","10171","User submits a claim","","Tue Jan 07 16:42:45 UTC 2025","passed","Tue Jan 07 16:42:55 UTC 2025","","","",""
