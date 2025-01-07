@@ -6,7 +6,7 @@ import { Logger } from "../../../../utils/logger";
 let response: any;
 
 
-When('I am updating the book with ID: {int} and title: {string} and author: {string}', async function (id: number, title: string, author: string) {
+When('I am updating a book with ID: {int} and title: {string} and author: {string}', async function (id: number, title: string, author: string) {
     const updatedBookDetails = {
       id: id,
         title: title,
