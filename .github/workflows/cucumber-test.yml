@@ -57,7 +57,6 @@ jobs:
               name: api-test-results
               path: |
                  allure-results/
-                 reports/cucumber-report.html
 
    ui-tests:
       runs-on: ubuntu-latest
@@ -104,12 +103,10 @@ jobs:
               name: ui-test-results
               path: |
                  allure-results/
-                 reports/cucumber-report.html
 
-   generate-report:
+   deploy-results:
       needs: [api-tests, ui-tests]
       runs-on: ubuntu-latest
-      if: always()
       steps:
          - uses: actions/checkout@v4
 
@@ -117,28 +114,32 @@ jobs:
            uses: actions/download-artifact@v3
            with:
               name: api-test-results
-              path: api-results
+              path: ./allure-results/api
 
          - name: Download UI Test Results
            uses: actions/download-artifact@v3
            with:
               name: ui-test-results
-              path: ui-results
+              path: ./allure-results/ui
 
-         - name: Generate Combined Report
-           run: |
-              npm install -g allure-commandline
-              mkdir -p combined-results
-              cp -r api-results/allure-results/* combined-results/ || true
-              cp -r ui-results/allure-results/* combined-results/ || true
-              allure generate combined-results -o allure-report --clean
-
-         - name: Upload Combined Report
-           uses: actions/upload-artifact@v3
+         - name: Setup Node.js
+           uses: actions/setup-node@v4
            with:
-              name: test-report
-              path: |
-                 allure-report/
-                 api-results/reports/cucumber-report.html
-                 ui-results/reports/cucumber-report.html
-              retention-days: 30
+              node-version: "20"
+              cache: "npm"
+
+         - name: Install Allure Commandline
+           run: |
+              npm install -g allure-commandline --save-dev
+
+         - name: Generate Allure Report
+           run: |
+              allure generate --clean ./allure-results/api ./allure-results/ui -o ./allure-report
+
+         - name: Deploy to GitHub Pages
+           uses: peaceiris/actions-gh-pages@v3
+           with:
+              github_token: ${{ secrets.GITHUB_TOKEN }}
+              publish_dir: ./allure-report
+
+
